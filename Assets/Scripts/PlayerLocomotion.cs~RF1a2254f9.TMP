@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerLocomotion : MonoBehaviour
+{
+    private PlayerControls inputActions;
+    private Rigidbody rb;
+
+    [SerializeField]
+    private float currentSpeed;
+    [SerializeField]
+    private float maxSpeed;
+    [SerializeField]
+    private float turboSpeed;
+    [SerializeField]
+    private float backingSpeed;
+    [SerializeField]
+    private float acceleration;
+    [SerializeField]
+    private float weight;
+    [SerializeField]
+    private float friction;
+
+    [SerializeField]
+    private Vector2 movementInput;
+
+    public void OnEnable()
+    {
+        inputActions = new PlayerControls();
+        inputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
+    }
+
+    // Start is called before the first frame update
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
+    }
+
+    private void FixedUpdate()
+    {
+        Move(maxSpeed);
+    }
+
+    private void Move(float maxSpeed = 10)
+    {
+        currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * acceleration);
+
+        Vector3 force = transform.forward * (currentSpeed);
+        rb.velocity = force;
+        force.y = rb.velocity.y;
+    }
+}
