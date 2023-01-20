@@ -23,7 +23,7 @@ public class PlayerLocomotion : MonoBehaviour
     private int turboSpeed;
     [SerializeField][Range(10, 100)]
     private int backingSpeed;
-    [SerializeField][Range(1, 5)]
+    [SerializeField][Range(3, 5)]
     private int acceleration;
     [SerializeField][Range(1, 3)]
     private int grip;
@@ -129,7 +129,7 @@ public class PlayerLocomotion : MonoBehaviour
         // If the actual speed is too high, then steering becomes more difficult
         if (isDrifting)
         {
-            steerAmount = realSpeed > 50f / grip ? (realSpeed / (1f / grip * 2.25f) * movementInput.x) : steerAmount = (realSpeed / (0.5f / grip * 2.25f) * movementInput.x);
+            steerAmount = realSpeed > 50f / grip ? (realSpeed / (1f / grip * 2.5f) * movementInput.x) : steerAmount = (realSpeed / (0.5f / grip * 2.5f) * movementInput.x);
         }
         else
         {
