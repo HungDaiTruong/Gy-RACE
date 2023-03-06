@@ -4,65 +4,51 @@ using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour
 {
+    public GameObject vehicle;
+    public GameObject collectionObject;
+    public GameObject lastCheckpoint;
     public bool trigger = false;
-    public GameObject vehicule;
-    public bool last = false;
+    static public int lap = 0;
+    static public int count = 0;
+    static private int checkpointNumber;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        collectionObject = transform.parent.gameObject;
+        foreach (Transform g in transform.GetComponentsInChildren<Transform>())
+        {
+            g.GetComponent<BoxCollider>().enabled = false;
+            checkpointNumber++;
+        }
+        collectionObject.transform.GetChild(0).GetComponent<BoxCollider>().enabled = true;
+        lastCheckpoint = collectionObject.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (vehicule.Collider.OnCollisionEnter() && transform.parent != null)
+        if(count == checkpointNumber)
         {
-            if ((GetComponentInParent<Checkpoint>().trigger && GetComponentInParent<Checkpoint>()) || last)
-            {
-                trigger = true;
-            }
-            else if(!GetComponentInParent<Checkpoint>())
-            {
-                trigger = true;
-                last = false;
-            }
-
-            if (transform.GetChild(0))
-            {
-                last = true;
-            }
-
-            if (last)
-            {
-                Debug.Log(last);
-            }
+            count = 0;
+            lastCheckpoint.GetComponent<BoxCollider>().enabled = true;
+            lap++;
+            trigger = false;
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void OnTriggerExit(Collider collider)
     {
-        if (collision.gameObject == vehicule && transform.parent != null)
+        if(collider.gameObject == vehicle && transform.parent != null)
         {
-            if ((GetComponentInParent<Checkpoint>().trigger && GetComponentInParent<Checkpoint>()) || last)
-                {
-                    trigger = true;
-                }
-                else if(!GetComponentInParent<Checkpoint>())
-                {
-                    trigger = true;
-                    last = false;
-                }
-
-                if (transform.GetChild(0))
-                {
-                    last = true;
-                }
-
-                if (last)
-                {
-                    Debug.Log(last);
-                }
+            count++;
+            trigger = true;
+            collectionObject.transform.GetChild(count-1).GetComponent<BoxCollider>().enabled = false;
+            if (count < checkpointNumber)
+            {
+                collectionObject.transform.GetChild(count).GetComponent<BoxCollider>().enabled = true;
+            }
         }
+        Debug.Log("count : " + count + "lap : " + lap);
     }
 }
