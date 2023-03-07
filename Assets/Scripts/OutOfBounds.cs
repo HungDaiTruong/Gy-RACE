@@ -20,5 +20,6 @@ public class OutOfBounds : MonoBehaviour
     {
         Debug.Log("Out of Bounds");
         UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }

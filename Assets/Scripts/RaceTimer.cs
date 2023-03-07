@@ -45,5 +45,6 @@ public class RaceTimer : MonoBehaviour
     public void GameIsDone()
     {
         UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
