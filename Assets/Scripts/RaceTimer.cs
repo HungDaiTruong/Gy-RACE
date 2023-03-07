@@ -26,8 +26,9 @@ public class RaceTimer : MonoBehaviour
         else
         {
             Debug.Log(time);
-            Debug.Log("Finished");
+            Debug.Log("Race is Finished");
             time = 0;
+            GameIsDone();
         }
     }
 
@@ -39,5 +40,10 @@ public class RaceTimer : MonoBehaviour
         float seconds = Mathf.FloorToInt(currentTime % 60);
 
         timerText.text = string.Format("{0:00}  :  {1:00}", minutes, seconds);
+    }
+
+    public void GameIsDone()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
