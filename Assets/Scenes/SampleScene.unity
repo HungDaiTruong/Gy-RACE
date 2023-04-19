@@ -1441,7 +1441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2113087341049881847, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
       propertyPath: grip
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2113087341049881847, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
       propertyPath: maxSpeed
