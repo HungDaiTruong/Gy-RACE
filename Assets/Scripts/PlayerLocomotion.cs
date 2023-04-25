@@ -112,13 +112,29 @@ public class PlayerLocomotion : MonoBehaviour
         {
             isDrifting = true;
             pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 90f, 0f), Time.deltaTime);
-            rb.AddForce(transform.right * -(currentSpeed * weight) / 5f * Time.deltaTime, ForceMode.Acceleration);
+
+            // Calculate the surface normal and apply the drifting force in that direction
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, -transform.up, out hit))
+            {
+                Vector3 surfaceNormal = hit.normal;
+                Vector3 driftForce = Vector3.Cross(surfaceNormal, Vector3.up).normalized;
+                rb.AddForce(driftForce * -(currentSpeed * weight) / 5f * Time.deltaTime, ForceMode.Acceleration);
+            }
         }
         else if (movementInput.x < 0 && driftInput > 0 && isGrounded && realSpeed > maxSpeed * 0.5f)
         {
             isDrifting = true;
             pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, -90f, 0f), Time.deltaTime);
-            rb.AddForce(transform.right * (currentSpeed * weight) / 5f * Time.deltaTime, ForceMode.Acceleration);
+
+            // Calculate the surface normal and apply the drifting force in that direction
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, -transform.up, out hit))
+            {
+                Vector3 surfaceNormal = hit.normal;
+                Vector3 driftForce = Vector3.Cross(surfaceNormal, Vector3.up).normalized;
+                rb.AddForce(driftForce * (currentSpeed * weight) / 5f * Time.deltaTime, ForceMode.Acceleration);
+            }
         }
         else
         {
