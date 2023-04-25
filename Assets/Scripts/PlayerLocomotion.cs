@@ -92,7 +92,7 @@ public class PlayerLocomotion : MonoBehaviour
         // Apply the current speed values into a forward vector force
         Vector3 force = transform.forward * currentSpeed;
 
-        //force.y = rb.velocity.y;
+        force.y = rb.velocity.y;
         rb.mass = weight;
         // Apply the force to the rigidbody velocity
         if (isGrounded)

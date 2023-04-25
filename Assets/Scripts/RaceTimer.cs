@@ -13,6 +13,7 @@ public class RaceTimer : MonoBehaviour
     void Start()
     {
         timerOn = true;
+        timerText.fontSize = 20;
     }
 
     // Update is called once per frame
