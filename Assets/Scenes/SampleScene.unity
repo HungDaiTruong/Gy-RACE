@@ -2283,42 +2283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2030258296547494977, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2030258296547494977, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2030258296547494977, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113087341049881844, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113087341049881847, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: grip
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113087341049881847, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: maxSpeed
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113087341049881847, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: turboSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113087341049881847, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: acceleration
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113087341049881847, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: backingSpeed
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 7217092918540158920, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
       propertyPath: m_Name
       value: VehicleRoot
@@ -2326,18 +2290,6 @@ PrefabInstance:
     - target: {fileID: 7217092918540158921, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217092918540158921, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217092918540158921, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217092918540158921, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.0000002
       objectReference: {fileID: 0}
     - target: {fileID: 7217092918540158921, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
       propertyPath: m_LocalPosition.x

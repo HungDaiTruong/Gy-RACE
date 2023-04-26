@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CustomizationMenu : MonoBehaviour
 {
-    public Dropdown wheelDropdown;
-    public Dropdown engineDropdown;
-    public Dropdown energyDropdown;
+    public GameObject vehicle;
+
+    public WheelComponentHandler myWheelComponent;
+    public VehicleComponentHandler vehicleHandler;
+
+    public TMP_Dropdown wheelDropdown;
+    public TMP_Dropdown engineDropdown;
+    public TMP_Dropdown energyDropdown;
 
     private int selectedWheelOption;
     private int selectedEngineOption;
@@ -25,6 +31,7 @@ public class CustomizationMenu : MonoBehaviour
     void OnWheelDropdownChanged(int option)
     {
         selectedWheelOption = option;
+        vehicleHandler.SetWheelType(option);
     }
 
     // Event listener for the engine dropdown menu
@@ -39,14 +46,17 @@ public class CustomizationMenu : MonoBehaviour
         selectedEnergyOption = option;
     }
 
-    // Event listener for the apply button
     public void ApplyCustomization()
     {
-        // Apply the selected customization to the vehicle
-        // TODO: Replace with code that updates the vehicle's components
+        // Get a reference to the vehicle component handler script
+        VehicleComponentHandler componentHandler = vehicle.GetComponent<VehicleComponentHandler>();
+
+        // Apply the selected options to the corresponding components
+        componentHandler.SetWheelType(selectedWheelOption);
+        componentHandler.SetEngineType(selectedEngineOption);
+        componentHandler.SetEnergySystemType(selectedEnergyOption);
     }
 
-    // Event listener for the reset button
     public void ResetCustomization()
     {
         // Reset the selected options to their default values
@@ -54,7 +64,12 @@ public class CustomizationMenu : MonoBehaviour
         selectedEngineOption = 0;
         selectedEnergyOption = 0;
 
-        // Apply the default customization to the vehicle
-        // TODO: Replace with code that updates the vehicle's components
+        // Get a reference to the vehicle component handler script
+        VehicleComponentHandler componentHandler = vehicle.GetComponent<VehicleComponentHandler>();
+
+        // Reset the vehicle components to their default values
+        componentHandler.SetWheelType(selectedWheelOption);
+        componentHandler.SetEngineType(selectedEngineOption);
+        componentHandler.SetEnergySystemType(selectedEnergyOption);
     }
 }
