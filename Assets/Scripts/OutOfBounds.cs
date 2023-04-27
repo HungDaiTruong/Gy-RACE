@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OutOfBounds : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class OutOfBounds : MonoBehaviour
     public void OnTriggerEnter(Collider collider)
     {
         Debug.Log("Out of Bounds");
-        UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+        //UnityEditor.EditorApplication.isPlaying = false;
+        SceneManager.LoadScene("MenuScene");
     }
 }

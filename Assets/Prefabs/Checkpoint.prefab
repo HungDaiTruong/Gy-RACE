@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 4998765952192245645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 193.4, y: 21.45, z: 182.3}
-  m_LocalScale: {x: 1, y: 10, z: 25}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 50, z: 75}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -112,5 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicle: {fileID: 0}
   collectionObject: {fileID: 0}
+  lastCheckpoint: {fileID: 0}
   trigger: 0
-  last: 0

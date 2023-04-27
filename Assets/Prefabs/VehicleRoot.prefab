@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2113087341049881844}
   - component: {fileID: 2113087341049881847}
   - component: {fileID: 2113087341049881845}
+  - component: {fileID: 836736173}
   m_Layer: 0
   m_Name: VehicleRoot
   m_TagString: Untagged
@@ -81,7 +82,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 16
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &2113087341049881847
 MonoBehaviour:
@@ -99,17 +100,18 @@ MonoBehaviour:
   wheel: {fileID: 7179576427714746206}
   innerRing: {fileID: 6541931974603305986}
   pod: {fileID: 8875740065706305348}
+  realSpeed: 0
   currentSpeed: 0
-  maxSpeed: 50
-  turboSpeed: 45
-  backingSpeed: 15
-  acceleration: 5
+  maxSpeed: 80
+  turboSpeed: 100
+  backingSpeed: 25
+  acceleration: 3
+  handling: 2
   weight: 1500
-  grip: 5
   isGrounded: 0
   movementInput: {x: 0, y: 0}
   driftInput: 0
-  test: 0
+  isDrifting: 0
 --- !u!135 &2113087341049881845
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -123,6 +125,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.72928
   m_Center: {x: 0, y: 1.72928, z: 0}
+--- !u!114 &836736173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7217092918540158920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d28ab8d0e53b90b49b17db236da723a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelComponent: {fileID: 1160211464}
+  engineComponent: {fileID: 1924276385}
+  energySystemComponent: {fileID: 1926581676}
 --- !u!1001 &7217092919151947957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180,6 +197,69 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+--- !u!1 &468909998582320660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7109394826275667617, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  m_PrefabInstance: {fileID: 7217092919151947957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1924276385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468909998582320660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1215e94e8ecf104da90c05e2d7bc076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0
+  torque: 0
+  fuelEfficiency: 0
+--- !u!1 &5922767619758844365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3898329474413926776, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  m_PrefabInstance: {fileID: 7217092919151947957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1926581676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5922767619758844365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8184a9130110df6419bcc77e553ca02d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCapacity: 0
+  energyConsumption: 0
+  energyRegeneration: 0
+--- !u!1 &6062281996831181325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3461524970777590456, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  m_PrefabInstance: {fileID: 7217092919151947957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1160211464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6062281996831181325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12aab42fa8976424cad7addfbeb52e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  acceleration: 0
+  handling: 0
+  standardWheelMesh: {fileID: -5754084199372789682, guid: 614a65fc9fd1e9a43a5e831638f826d6, type: 3}
+  offRoadWheelMesh: {fileID: -5754084199372789682, guid: 4944261b7f967404ca86011f207c0df1, type: 3}
+  sportsWheelMesh: {fileID: -5754084199372789682, guid: 08e7daccb38dda842bdddfae1a68a02e, type: 3}
 --- !u!4 &6541931974603305986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4531148706442249399, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
