@@ -29,9 +29,9 @@ public class TurboEngine : Engine
     }
 }
 
-public class ElectricEngine : Engine
+public class OmnidirectionalEngine : Engine
 {
-    public ElectricEngine()
+    public OmnidirectionalEngine()
     {
         power = 6f;
         torque = 2f;

@@ -9,6 +9,9 @@ public class CustomizationMenu : MonoBehaviour
     public GameObject vehicle;
 
     public WheelComponentHandler myWheelComponent;
+    public EngineComponentHandler myEngineComponent;
+    public EnergySystemComponentHandler myEnergySystemComponent;
+
     public VehicleComponentHandler vehicleHandler;
 
     public TMP_Dropdown wheelDropdown;
@@ -38,12 +41,14 @@ public class CustomizationMenu : MonoBehaviour
     void OnEngineDropdownChanged(int option)
     {
         selectedEngineOption = option;
+        vehicleHandler.SetEngineType(option);
     }
 
     // Event listener for the energy dropdown menu
     void OnEnergyDropdownChanged(int option)
     {
         selectedEnergyOption = option;
+        vehicleHandler.SetEnergySystemType(option);
     }
 
     public void ApplyCustomization()

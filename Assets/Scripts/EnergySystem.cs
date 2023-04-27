@@ -9,9 +9,9 @@ public abstract class EnergySystem : MonoBehaviour
     public float energyRegeneration;
 }
 
-public class GasolineSystem : EnergySystem
+public class GyroscopicSystem : EnergySystem
 {
-    public GasolineSystem()
+    public GyroscopicSystem()
     {
         energyCapacity = 5f;
         energyConsumption = 3f;
@@ -19,9 +19,9 @@ public class GasolineSystem : EnergySystem
     }
 }
 
-public class HybridSystem : EnergySystem
+public class MagneticSystem : EnergySystem
 {
-    public HybridSystem()
+    public MagneticSystem()
     {
         energyCapacity = 6f;
         energyConsumption = 2f;
@@ -29,9 +29,9 @@ public class HybridSystem : EnergySystem
     }
 }
 
-public class ElectricSystem : EnergySystem
+public class GravitySystem : EnergySystem
 {
-    public ElectricSystem()
+    public GravitySystem()
     {
         energyCapacity = 7f;
         energyConsumption = 1f;

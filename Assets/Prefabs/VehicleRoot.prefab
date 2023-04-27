@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wheelComponent: {fileID: 1160211464}
   engineComponent: {fileID: 1924276385}
-  energySystemComponent: {fileID: 1926581676}
+  energySystemComponent: {fileID: 0}
 --- !u!1001 &7217092919151947957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -217,26 +217,19 @@ MonoBehaviour:
   power: 0
   torque: 0
   fuelEfficiency: 0
---- !u!1 &5922767619758844365 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3898329474413926776, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  standardEngineMesh: {fileID: -5754084199372789682, guid: 21e68f6f0be64f04ea783d14d1054aee, type: 3}
+  turboEngineMesh: {fileID: -5754084199372789682, guid: aacbe731a3bd9d34b8911c0fe21a8947, type: 3}
+  omnidirectionalEngineMesh: {fileID: -5754084199372789682, guid: c38c906f05c07714ebf14e16b30f40bb, type: 3}
+--- !u!23 &2315374168109825919 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4320747216818614326, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
   m_PrefabInstance: {fileID: 7217092919151947957}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1926581676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!23 &3666164205156638853 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6253414306656079920, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  m_PrefabInstance: {fileID: 7217092919151947957}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5922767619758844365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8184a9130110df6419bcc77e553ca02d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energyCapacity: 0
-  energyConsumption: 0
-  energyRegeneration: 0
 --- !u!1 &6062281996831181325 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3461524970777590456, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
@@ -265,13 +258,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4531148706442249399, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
   m_PrefabInstance: {fileID: 7217092919151947957}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &7146473098872939130 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 505842070460371663, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  m_PrefabInstance: {fileID: 7217092919151947957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7179576427714746206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
   m_PrefabInstance: {fileID: 7217092919151947957}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7559619716130852324 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  m_PrefabInstance: {fileID: 7217092919151947957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &376925940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559619716130852324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8184a9130110df6419bcc77e553ca02d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCapacity: 0
+  energyConsumption: 0
+  energyRegeneration: 0
+  innerRingObject: {fileID: 8916890026384900922}
+  outerRingObject: {fileID: 8352442711062309937}
+  engineObject: {fileID: 7146473098872939130}
+  paneObject: {fileID: 3666164205156638853}
+  podObject: {fileID: 2315374168109825919}
+--- !u!23 &8352442711062309937 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  m_PrefabInstance: {fileID: 7217092919151947957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8875740065706305348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6988261341703596047, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
+  m_PrefabInstance: {fileID: 7217092919151947957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8916890026384900922 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2276406856382198671, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}
   m_PrefabInstance: {fileID: 7217092919151947957}
   m_PrefabAsset: {fileID: 0}

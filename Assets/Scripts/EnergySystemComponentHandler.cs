@@ -4,15 +4,58 @@ using UnityEngine;
 
 public class EnergySystemComponentHandler : EnergySystem
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public Renderer innerRingObject;
+    public Renderer outerRingObject;
+    public Renderer engineObject;
+    public Renderer paneObject;
+    public Renderer podObject;
+
+    private void Start()
     {
-        
+        innerRingObject.materials[1].EnableKeyword("_EMISSION");
+        outerRingObject.materials[1].EnableKeyword("_EMISSION");
+        engineObject.materials[1].EnableKeyword("_EMISSION");
+        paneObject.materials[1].EnableKeyword("_EMISSION");
+        podObject.materials[1].EnableKeyword("_EMISSION");
+
+        SetEnergySystemMesh(0);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetEnergySystemMesh(int energySystemType)
     {
-        
+        switch (energySystemType)
+        {
+            case 0:
+                innerRingObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 191) / 100f );
+                outerRingObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 191) / 100f );
+                engineObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 191) / 100f );
+                paneObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 191) / 100f );
+                podObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 191) / 100f );
+                energyCapacity = new GyroscopicSystem().energyCapacity;
+                energyConsumption = new GyroscopicSystem().energyConsumption;
+                energyRegeneration = new GyroscopicSystem().energyRegeneration;
+                break;
+            case 1:
+                innerRingObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 0) / 100f );
+                outerRingObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 0) / 100f );
+                engineObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 0) / 100f );
+                paneObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 0) / 100f );
+                podObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 0) / 100f );
+                energyCapacity = new MagneticSystem().energyCapacity;
+                energyConsumption = new MagneticSystem().energyConsumption;
+                energyRegeneration = new MagneticSystem().energyRegeneration;
+                break;
+            case 2:
+                innerRingObject.materials[1].SetColor("_EmissionColor", new Color(0, 191, 191) / 100f );
+                outerRingObject.materials[1].SetColor("_EmissionColor", new Color(0, 191, 191) / 100f );
+                engineObject.materials[1].SetColor("_EmissionColor", new Color(0, 191, 191) / 100f );
+                paneObject.materials[1].SetColor("_EmissionColor", new Color(0, 191, 191) / 100f );
+                podObject.materials[1].SetColor("_EmissionColor", new Color(0, 191, 191) / 100f );
+                energyCapacity = new GravitySystem().energyCapacity;
+                energyConsumption = new GravitySystem().energyConsumption;
+                energyRegeneration = new GravitySystem().energyRegeneration;
+                break;
+        }
     }
 }
