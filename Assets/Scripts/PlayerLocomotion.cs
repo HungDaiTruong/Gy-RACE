@@ -26,7 +26,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField][Range(3, 5)]
     private int acceleration;
     [SerializeField][Range(1, 3)]
-    private int grip;
+    private int handling;
     [SerializeField]
     private int weight;
     [SerializeField]
@@ -78,15 +78,15 @@ public class PlayerLocomotion : MonoBehaviour
         // If forward/backward then the current speed value of the vehicle works up towards the maximum speed
         if (movementInput.y > 0 && isGrounded)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration * ( grip / 3f ) / 30f));
+            currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration * ( handling / 3f ) / 30f));
         }
         else if(movementInput.y < 0 && isGrounded)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, backingSpeed * movementInput.y, Time.deltaTime * (3f * acceleration * ( grip / 3f ) / 10f));
+            currentSpeed = Mathf.Lerp(currentSpeed, backingSpeed * movementInput.y, Time.deltaTime * (3f * acceleration * ( handling / 3f ) / 10f));
         }
         else
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * grip / 5f);
+            currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
         }
 
         // Apply the current speed values into a forward vector force
@@ -145,11 +145,11 @@ public class PlayerLocomotion : MonoBehaviour
         // If the actual speed is too high, then steering becomes more difficult
         if (isDrifting)
         {
-            steerAmount = realSpeed > 50f / grip ? (realSpeed / (1f / grip * 2.5f) * movementInput.x) : steerAmount = (realSpeed / (0.5f / grip * 2.5f) * movementInput.x);
+            steerAmount = realSpeed > 50f / handling ? (realSpeed / (1f / handling * 2.5f) * movementInput.x) : steerAmount = (realSpeed / (0.5f / handling * 2.5f) * movementInput.x);
         }
         else
         {
-            steerAmount = realSpeed > 50f / grip ? (realSpeed / (5f / grip) * movementInput.x) : steerAmount = (realSpeed / (2f / grip) * movementInput.x);
+            steerAmount = realSpeed > 50f / handling ? (realSpeed / (5f / handling) * movementInput.x) : steerAmount = (realSpeed / (2f / handling) * movementInput.x);
         }
         steerForce = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + steerAmount, transform.eulerAngles.z);
         transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, steerForce, 3 * Time.deltaTime);
