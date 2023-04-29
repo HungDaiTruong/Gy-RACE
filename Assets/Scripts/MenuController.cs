@@ -11,6 +11,8 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
+        vehiclePreview.transform.GetChild(1).gameObject.SetActive(false);
+
 /*        foreach (Canvas canvas in allUI.GetComponentsInChildren<Canvas>())
         {
             canvas.gameObject.SetActive(false);

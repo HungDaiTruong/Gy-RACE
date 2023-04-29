@@ -7,6 +7,7 @@ using TMPro;
 public class CustomizationMenu : MonoBehaviour
 {
     public GameObject vehicle;
+    public PlayerLocomotion playerLocomotion;
 
     public WheelComponentHandler myWheelComponent;
     public EngineComponentHandler myEngineComponent;
@@ -60,6 +61,9 @@ public class CustomizationMenu : MonoBehaviour
         componentHandler.SetWheelType(selectedWheelOption);
         componentHandler.SetEngineType(selectedEngineOption);
         componentHandler.SetEnergySystemType(selectedEnergyOption);
+
+        playerLocomotion.ApplyStats();
+        vehicle.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void ResetCustomization()

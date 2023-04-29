@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RaceTimer : MonoBehaviour
 {
@@ -45,7 +46,11 @@ public class RaceTimer : MonoBehaviour
 
     public void GameIsDone()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+        CheckpointScript.lap = 0;
+        CheckpointScript.count = 0;
+
+        SceneManager.LoadScene("MenuScene");
+        //UnityEditor.EditorApplication.isPlaying = false;
+        //Application.Quit();
     }
 }

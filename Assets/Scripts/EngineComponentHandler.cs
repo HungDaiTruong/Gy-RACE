@@ -23,21 +23,21 @@ public class EngineComponentHandler : Engine
         {
             case 0:
                 currentEngineMesh.mesh = standardEngineMesh.sharedMesh;
-                power = new StandardEngine().power;
-                torque = new StandardEngine().torque;
-                fuelEfficiency = new StandardEngine().fuelEfficiency;
+                acceleration = new StandardEngine().acceleration;
+                turboSpeed = new StandardEngine().turboSpeed;
+                durability = new StandardEngine().durability;
                 break;
             case 1:
                 currentEngineMesh.mesh = turboEngineMesh.sharedMesh;
-                power = new TurboEngine().power;
-                torque = new TurboEngine().torque;
-                fuelEfficiency = new TurboEngine().fuelEfficiency;
+                acceleration = new TurboEngine().acceleration;
+                turboSpeed = new TurboEngine().turboSpeed;
+                durability = new TurboEngine().durability;
                 break;
             case 2:
                 currentEngineMesh.mesh = omnidirectionalEngineMesh.sharedMesh;
-                power = new OmnidirectionalEngine().power;
-                torque = new OmnidirectionalEngine().torque;
-                fuelEfficiency = new OmnidirectionalEngine().fuelEfficiency;
+                acceleration = new OmnidirectionalEngine().acceleration;
+                turboSpeed = new OmnidirectionalEngine().turboSpeed;
+                durability = new OmnidirectionalEngine().durability;
                 break;
         }
     }

@@ -16,6 +16,7 @@ public class CheckpointScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        vehicle = GameObject.FindGameObjectWithTag("Player");
         collectionObject = transform.parent.gameObject;
         foreach (Transform g in transform.GetComponentsInChildren<Transform>())
         {
@@ -24,6 +25,9 @@ public class CheckpointScript : MonoBehaviour
         }
         collectionObject.transform.GetChild(0).GetComponent<BoxCollider>().enabled = true;
         lastCheckpoint = collectionObject.transform.GetChild(0).gameObject;
+
+        vehicle.transform.position = lastCheckpoint.transform.position - new Vector3(-15f, 0, 0);
+        vehicle.transform.rotation = Quaternion.Euler(0, -90f, 0);
     }
 
     // Update is called once per frame

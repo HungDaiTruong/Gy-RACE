@@ -4,18 +4,18 @@ using UnityEngine;
 
 public abstract class Engine : MonoBehaviour
 {
-    public float power;
-    public float torque;
-    public float fuelEfficiency;
+    public float acceleration;
+    public float turboSpeed;
+    public float durability;
 }
 
 public class StandardEngine : Engine
 {
     public StandardEngine()
     {
-        power = 5f;
-        torque = 3f;
-        fuelEfficiency = 2f;
+        acceleration = 3f;
+        turboSpeed = 120f;
+        durability = 3f;
     }
 }
 
@@ -23,9 +23,9 @@ public class TurboEngine : Engine
 {
     public TurboEngine()
     {
-        power = 7f;
-        torque = 4f;
-        fuelEfficiency = 1f;
+        acceleration = 2f;
+        turboSpeed = 150f;
+        durability = 1f;
     }
 }
 
@@ -33,8 +33,8 @@ public class OmnidirectionalEngine : Engine
 {
     public OmnidirectionalEngine()
     {
-        power = 6f;
-        torque = 2f;
-        fuelEfficiency = 5f;
+        acceleration = 5f;
+        turboSpeed = 100f;
+        durability = 2f;
     }
 }
