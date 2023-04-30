@@ -176,7 +176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3944947908455079394}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9999998, y: 4, z: -3.0000007}
+  m_LocalPosition: {x: 1.9999999, y: 4, z: -2.9999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -518,7 +518,7 @@ MonoBehaviour:
   durability: 0
   standardWheelMesh: {fileID: -5754084199372789682, guid: 614a65fc9fd1e9a43a5e831638f826d6, type: 3}
   offRoadWheelMesh: {fileID: -5754084199372789682, guid: 4944261b7f967404ca86011f207c0df1, type: 3}
-  sportsWheelMesh: {fileID: -5754084199372789682, guid: 08e7daccb38dda842bdddfae1a68a02e, type: 3}
+  SmoothWheelMesh: {fileID: -5754084199372789682, guid: 08e7daccb38dda842bdddfae1a68a02e, type: 3}
 --- !u!4 &6541931974603305986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4531148706442249399, guid: bca13a84d36b66041a317bf99ca492cb, type: 3}

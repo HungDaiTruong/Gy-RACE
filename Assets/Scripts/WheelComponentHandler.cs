@@ -7,7 +7,7 @@ public class WheelComponentHandler : Wheel
     // References to the MeshFilters for each type of wheel
     public MeshFilter standardWheelMesh;
     public MeshFilter offRoadWheelMesh;
-    public MeshFilter sportsWheelMesh;
+    public MeshFilter SmoothWheelMesh;
 
     MeshFilter currentWheelMesh;
 
@@ -34,10 +34,10 @@ public class WheelComponentHandler : Wheel
                 handling = new OffRoadWheel().handling;
                 break;
             case 2:
-                currentWheelMesh.mesh = sportsWheelMesh.sharedMesh;
-                speed = new SportsWheel().speed;
-                durability = new SportsWheel().durability;
-                handling = new SportsWheel().handling;
+                currentWheelMesh.mesh = SmoothWheelMesh.sharedMesh;
+                speed = new SmoothWheel().speed;
+                durability = new SmoothWheel().durability;
+                handling = new SmoothWheel().handling;
                 break;
         }
     }

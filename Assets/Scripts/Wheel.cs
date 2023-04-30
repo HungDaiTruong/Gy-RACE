@@ -29,9 +29,9 @@ public class OffRoadWheel : Wheel
     }
 }
 
-public class SportsWheel : Wheel
+public class SmoothWheel : Wheel
 {
-    public SportsWheel()
+    public SmoothWheel()
     {
         speed = 100f;
         handling = 2f;
