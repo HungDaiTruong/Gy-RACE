@@ -10,7 +10,7 @@ enum MenuState
     MainMenu, MapSelector, LevelSelector, CustomSelector
 };
 
-public class MenuController : MonoBehaviour
+public class MenuControllerBis : MonoBehaviour
 {
     [SerializeField]
     private GameObject menuMap;
@@ -51,9 +51,9 @@ public class MenuController : MonoBehaviour
     private MenuState State;
 
 
-    public void changeScene(string _sceneName)
+    public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(_sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void Play()
