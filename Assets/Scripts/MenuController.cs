@@ -13,13 +13,13 @@ public class MenuController : MonoBehaviour
     {
         vehiclePreview.transform.GetChild(1).gameObject.SetActive(false);
 
-/*        foreach (Canvas canvas in allUI.GetComponentsInChildren<Canvas>())
+        foreach (Canvas canvas in allUI.GetComponentsInChildren<Canvas>())
         {
             canvas.gameObject.SetActive(false);
         }
 
         initialMenu.SetActive(true);
-        vehiclePreview.SetActive(false);*/
+        vehiclePreview.SetActive(false);
     }
 
     public void ChangeScene(string sceneName)
@@ -30,5 +30,6 @@ public class MenuController : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
