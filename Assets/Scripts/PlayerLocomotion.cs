@@ -93,11 +93,11 @@ public class PlayerLocomotion : MonoBehaviour
         // If forward/backward then the current speed value of the vehicle works up towards the maximum speed
         if (movementInput.y > 0 && isGrounded)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration * ( handling / 3f ) / 30f));
+            currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 30f));
         }
         else if(movementInput.y < 0 && isGrounded)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, backingSpeed * movementInput.y, Time.deltaTime * (3f * acceleration * ( handling / 3f ) / 10f));
+            currentSpeed = Mathf.Lerp(currentSpeed, backingSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 10f));
         }
         else
         {

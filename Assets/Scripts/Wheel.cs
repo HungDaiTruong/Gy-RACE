@@ -14,7 +14,7 @@ public class StandardWheel : Wheel
     public StandardWheel()
     {
         speed = 90f;
-        handling = 3f;
+        handling = 2f;
         durability = 3f;
     }
 }
@@ -24,7 +24,7 @@ public class OffRoadWheel : Wheel
     public OffRoadWheel()
     {
         speed = 80f;
-        handling = 4f;
+        handling = 3f;
         durability = 5f;
     }
 }
@@ -34,7 +34,7 @@ public class SmoothWheel : Wheel
     public SmoothWheel()
     {
         speed = 100f;
-        handling = 2f;
+        handling = 1f;
         durability = 2f;
     }
 }
