@@ -5,17 +5,17 @@ using UnityEngine;
 public abstract class Wheel : MonoBehaviour
 {
     public float speed;
-    public float acceleration;
     public float handling;
+    public float durability;
 }
 
 public class StandardWheel : Wheel
 {
     public StandardWheel()
     {
-        speed = 5f;
-        acceleration = 3f;
-        handling = 2f;
+        speed = 90f;
+        handling = 3f;
+        durability = 3f;
     }
 }
 
@@ -23,9 +23,9 @@ public class OffRoadWheel : Wheel
 {
     public OffRoadWheel()
     {
-        speed = 4f;
-        acceleration = 2f;
+        speed = 80f;
         handling = 4f;
+        durability = 5f;
     }
 }
 
@@ -33,8 +33,8 @@ public class SportsWheel : Wheel
 {
     public SportsWheel()
     {
-        speed = 7f;
-        acceleration = 4f;
-        handling = 1f;
+        speed = 100f;
+        handling = 2f;
+        durability = 2f;
     }
 }

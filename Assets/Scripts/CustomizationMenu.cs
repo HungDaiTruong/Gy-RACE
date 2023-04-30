@@ -7,8 +7,12 @@ using TMPro;
 public class CustomizationMenu : MonoBehaviour
 {
     public GameObject vehicle;
+    public PlayerLocomotion playerLocomotion;
 
     public WheelComponentHandler myWheelComponent;
+    public EngineComponentHandler myEngineComponent;
+    public EnergySystemComponentHandler myEnergySystemComponent;
+
     public VehicleComponentHandler vehicleHandler;
 
     public TMP_Dropdown wheelDropdown;
@@ -38,12 +42,14 @@ public class CustomizationMenu : MonoBehaviour
     void OnEngineDropdownChanged(int option)
     {
         selectedEngineOption = option;
+        vehicleHandler.SetEngineType(option);
     }
 
     // Event listener for the energy dropdown menu
     void OnEnergyDropdownChanged(int option)
     {
         selectedEnergyOption = option;
+        vehicleHandler.SetEnergySystemType(option);
     }
 
     public void ApplyCustomization()
@@ -55,6 +61,9 @@ public class CustomizationMenu : MonoBehaviour
         componentHandler.SetWheelType(selectedWheelOption);
         componentHandler.SetEngineType(selectedEngineOption);
         componentHandler.SetEnergySystemType(selectedEnergyOption);
+
+        playerLocomotion.ApplyStats();
+        vehicle.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void ResetCustomization()

@@ -10,6 +10,10 @@ public class PlayerLocomotion : MonoBehaviour
     public Transform innerRing;
     public Transform pod;
 
+    public WheelComponentHandler wheelComponentHandler;
+    public EngineComponentHandler engineComponentHandler;
+    public EnergySystemComponentHandler energySystemComponentHandler;
+
     private PlayerControls inputActions;
     private Rigidbody rb;
 
@@ -23,10 +27,14 @@ public class PlayerLocomotion : MonoBehaviour
     private int turboSpeed;
     [SerializeField][Range(10, 100)]
     private int backingSpeed;
-    [SerializeField][Range(3, 5)]
+    [SerializeField][Range(1, 5)]
     private int acceleration;
-    [SerializeField][Range(1, 3)]
+    [SerializeField][Range(1, 5)]
     private int handling;
+    [SerializeField][Range(100, 300)]
+    private int energyCapacity;
+    [SerializeField][Range(10, 30)]
+    private int energyRegeneration;
     [SerializeField]
     private int weight;
     [SerializeField]
@@ -53,6 +61,13 @@ public class PlayerLocomotion : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if(players.Length > 1)
+        {
+            Destroy(players[0]);
+        }
+        DontDestroyOnLoad(gameObject);
+
         rb = GetComponent<Rigidbody>();
     }
 
@@ -159,7 +174,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         // Sends a raycast downward to check if there is ground, if so then rotate the vehicle according to the ground normal
         RaycastHit hit;
-        if(Physics.Raycast(transform.position + new Vector3(0f, 0.2f, 0f), -transform.up, out hit, 1f))
+        if(Physics.Raycast(transform.position + new Vector3(0f, 0.2f, 0f), -transform.up, out hit, 1.5f))
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.up * 2, hit.normal) * transform.rotation, 7.5f * Time.deltaTime);
             isGrounded = true;
@@ -197,5 +212,20 @@ public class PlayerLocomotion : MonoBehaviour
 
         // Rotates the inner ring so it stays upright according to the ground
         innerRing.rotation = Quaternion.LookRotation(pivot.forward, Vector3.up);
+    }
+
+    public void EnableMovements()
+    {
+        rb.constraints = ~RigidbodyConstraints.FreezePosition;
+    }
+
+    public void ApplyStats()
+    {
+        maxSpeed = (int)wheelComponentHandler.speed;
+        handling = (int)wheelComponentHandler.handling;
+        acceleration = (int)engineComponentHandler.acceleration;
+        turboSpeed = (int)engineComponentHandler.turboSpeed;
+        energyCapacity = (int)energySystemComponentHandler.energyCapacity;
+        energyRegeneration = (int)energySystemComponentHandler.energyRegeneration;
     }
 }

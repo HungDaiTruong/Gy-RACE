@@ -5,36 +5,36 @@ using UnityEngine;
 public abstract class EnergySystem : MonoBehaviour
 {
     public float energyCapacity;
-    public float energyConsumption;
+    public float durability;
     public float energyRegeneration;
 }
 
-public class GasolineSystem : EnergySystem
+public class GyroscopicSystem : EnergySystem
 {
-    public GasolineSystem()
+    public GyroscopicSystem()
     {
-        energyCapacity = 5f;
-        energyConsumption = 3f;
-        energyRegeneration = 2f;
+        energyCapacity = 300f;
+        durability = 2f;
+        energyRegeneration = 10f;
     }
 }
 
-public class HybridSystem : EnergySystem
+public class MagneticSystem : EnergySystem
 {
-    public HybridSystem()
+    public MagneticSystem()
     {
-        energyCapacity = 6f;
-        energyConsumption = 2f;
-        energyRegeneration = 4f;
+        energyCapacity = 200f;
+        durability = 3f;
+        energyRegeneration = 20f;
     }
 }
 
-public class ElectricSystem : EnergySystem
+public class GravitySystem : EnergySystem
 {
-    public ElectricSystem()
+    public GravitySystem()
     {
-        energyCapacity = 7f;
-        energyConsumption = 1f;
-        energyRegeneration = 5f;
+        energyCapacity = 100f;
+        durability = 4f;
+        energyRegeneration = 30f;
     }
 }

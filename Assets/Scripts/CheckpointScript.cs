@@ -16,14 +16,22 @@ public class CheckpointScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        vehicle = GameObject.FindGameObjectWithTag("Player");
         collectionObject = transform.parent.gameObject;
-        foreach (Transform g in transform.GetComponentsInChildren<Transform>())
+
+        // Count the child objects of the collectionObject
+        checkpointNumber = collectionObject.transform.childCount;
+
+        // Disable all the checkpoint colliders except the first one
+        for (int i = 1; i < checkpointNumber; i++)
         {
-            g.GetComponent<BoxCollider>().enabled = false;
-            checkpointNumber++;
+            collectionObject.transform.GetChild(i).GetComponent<BoxCollider>().enabled = false;
         }
         collectionObject.transform.GetChild(0).GetComponent<BoxCollider>().enabled = true;
         lastCheckpoint = collectionObject.transform.GetChild(0).gameObject;
+
+        vehicle.transform.position = lastCheckpoint.transform.position - new Vector3(-15f, 0, 0);
+        vehicle.transform.rotation = Quaternion.Euler(0, -90f, 0);
     }
 
     // Update is called once per frame
@@ -31,14 +39,14 @@ public class CheckpointScript : MonoBehaviour
     {
         if(count == checkpointNumber)
         {
-            count = 0;
             lastCheckpoint.GetComponent<BoxCollider>().enabled = true;
             lapped = true;
             trigger = false;
         }
 
-        if(count == 1 && lapped)
+        if(count == 4 && lapped)
         {
+            count = 1;
             lap++;
             lapped = false;
         }
@@ -50,11 +58,8 @@ public class CheckpointScript : MonoBehaviour
         {
             count++;
             trigger = true;
-            collectionObject.transform.GetChild(count-1).GetComponent<BoxCollider>().enabled = false;
-            if (count < checkpointNumber)
-            {
-                collectionObject.transform.GetChild(count).GetComponent<BoxCollider>().enabled = true;
-            }
+            collectionObject.transform.GetChild((count - 1) % 3).GetComponent<BoxCollider>().enabled = false;
+            collectionObject.transform.GetChild(count % 3).GetComponent<BoxCollider>().enabled = true;
         }
         Debug.Log("count : " + count + "lap : " + lap);
     }

@@ -24,19 +24,19 @@ public class WheelComponentHandler : Wheel
             case 0:
                 currentWheelMesh.mesh = standardWheelMesh.sharedMesh;
                 speed = new StandardWheel().speed;
-                acceleration = new StandardWheel().acceleration;
+                durability = new StandardWheel().durability;
                 handling = new StandardWheel().handling;
                 break;
             case 1:
                 currentWheelMesh.mesh = offRoadWheelMesh.sharedMesh;
                 speed = new OffRoadWheel().speed;
-                acceleration = new OffRoadWheel().acceleration;
+                durability = new OffRoadWheel().durability;
                 handling = new OffRoadWheel().handling;
                 break;
             case 2:
                 currentWheelMesh.mesh = sportsWheelMesh.sharedMesh;
                 speed = new SportsWheel().speed;
-                acceleration = new SportsWheel().acceleration;
+                durability = new SportsWheel().durability;
                 handling = new SportsWheel().handling;
                 break;
         }

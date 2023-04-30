@@ -5,8 +5,8 @@ using UnityEngine;
 public class VehicleComponentHandler : MonoBehaviour
 {
     public WheelComponentHandler wheelComponent;
-    public Engine engineComponent;
-    public EnergySystem energySystemComponent;
+    public EngineComponentHandler engineComponent;
+    public EnergySystemComponentHandler energySystemComponent;
 
     public void SetWheelType(int option)
     {
@@ -37,16 +37,19 @@ public class VehicleComponentHandler : MonoBehaviour
         switch (option)
         {
             case 0:
-                engineComponent = GetComponentInChildren<StandardEngine>();
+                engineComponent.SetEngineMesh(0); // use StandardEngine mesh
+                Debug.Log(option);
                 break;
             case 1:
-                engineComponent = GetComponentInChildren<TurboEngine>();
+                engineComponent.SetEngineMesh(1); // use TurboEngine mesh
+                Debug.Log(option);
                 break;
             case 2:
-                engineComponent = GetComponentInChildren<ElectricEngine>();
+                engineComponent.SetEngineMesh(2); // use OmniEngine mesh
+                Debug.Log(option);
                 break;
             default:
-                Debug.LogError("Invalid engine type selected: " + option);
+                Debug.LogError("Invalid engine option selected: " + option);
                 break;
         }
     }
@@ -57,16 +60,19 @@ public class VehicleComponentHandler : MonoBehaviour
         switch (option)
         {
             case 0:
-                energySystemComponent = GetComponentInChildren<GasolineSystem>();
+                energySystemComponent.SetEnergySystemMesh(0); // use Gyroscopic mesh
+                Debug.Log(option);
                 break;
             case 1:
-                energySystemComponent = GetComponentInChildren<HybridSystem>();
+                energySystemComponent.SetEnergySystemMesh(1); // use Magnetic mesh
+                Debug.Log(option);
                 break;
             case 2:
-                energySystemComponent = GetComponentInChildren<ElectricSystem>();
+                energySystemComponent.SetEnergySystemMesh(2); // use Gravity mesh
+                Debug.Log(option);
                 break;
             default:
-                Debug.LogError("Invalid energy system type selected: " + option);
+                Debug.LogError("Invalid engine option selected: " + option);
                 break;
         }
     }
