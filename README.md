@@ -8,20 +8,20 @@ Featuring Hung Dai, Léo, Ruth and Antoine as the contributors.
 Current features :
   
   - Main Menu
-      .Singleplayer mode or Two Player mode
-      .Customization menu for your vehicle with a customizable Wheel, Engine and unique Energy Systems
-      .Map selection 2/5
+      - Singleplayer mode or Two Player mode
+      - Customization menu for your vehicle with a customizable Wheel, Engine and unique Energy Systems
+      - Map selection 2/5
   - Player Menu
-      .Pause Menu, Race timer, Lap and Checkpoint counts
-      .Scoreboard 1/3
+      - Pause Menu, Race timer, Lap and Checkpoint counts
+      - Scoreboard 1/3
   - Vehicle Mecanics
-      .Movement, Steering, Drifting
-      .Speed and Handling according to the selected Wheels
-      .Acceleration and Turbo according to the selected Engines
-      .Energy capacity and regeneration according to the selected Energy Systems
+      - Movement, Steering, Drifting
+      - Speed and Handling according to the selected Wheels
+      - Acceleration and Turbo according to the selected Engines
+      - Energy capacity and regeneration according to the selected Energy Systems
   - Race Mecanics
-      .Checkpoint and Lap systems
-      .Possible shortcuts and Out of Bound system
+      - Checkpoint and Lap systems
+      - Possible shortcuts and Out of Bound system
       
 To do features :
 
