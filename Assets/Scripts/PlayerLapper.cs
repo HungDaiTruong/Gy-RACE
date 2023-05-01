@@ -10,6 +10,7 @@ public class PlayerLapper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // The vehicule's own laps and checkpoints counts
         lap = 1;
         checkpointIndex = 0;
     }

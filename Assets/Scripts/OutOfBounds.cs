@@ -17,6 +17,7 @@ public class OutOfBounds : MonoBehaviour
     {
         Debug.Log("Out of Bounds");
 
+        // If a player reaches the out of bound area, it respawns according to its latest checkpoint's position and rotation
         if (collider.GetComponent<PlayerLapper>())
         {
             PlayerLapper playerLapper = collider.GetComponent<PlayerLapper>();
