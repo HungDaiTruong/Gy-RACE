@@ -54,7 +54,7 @@ public class RaceTimer : MonoBehaviour
         float minutes = Mathf.FloorToInt(currentTime / 60);
         float seconds = Mathf.FloorToInt(currentTime % 60);
 
-        timerText.text = string.Format(" {0:00}  :  {1:00}\n Lap {2}/3\n Checkpoint {3}/3", minutes, seconds, playerLapper.lap, playerLapper.checkpointIndex + 1);
+        timerText.text = string.Format(" {0:00}  :  {1:00}\n Lap {2}/3\n Checkpoint {3}/{4}", minutes, seconds, playerLapper.lap, playerLapper.checkpointIndex + 1, CheckpointScript.checkpointNumber);
         scoreText.text = string.Format("{0:00}  :  {1:00}", minutes, seconds);
     }
 

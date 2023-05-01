@@ -10,7 +10,7 @@ public class OutOfBounds : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        checkpointScript = FindObjectOfType<CheckpointScript>();
     }
 
     public void OnTriggerEnter(Collider collider)

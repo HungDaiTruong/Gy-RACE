@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour
 {
-    public GameObject collectionObject;
     public int checkpointIndex;
-    static private int checkpointNumber;
+    static public int checkpointNumber;
+    public GameObject collectionObject;
 
     // Start is called before the first frame update
     void Start()

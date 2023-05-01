@@ -9,11 +9,21 @@ public class GameManager : MonoBehaviour
     public static bool isPlayable = true;
 
     public GameObject pauseCanvas;
+    public GameObject circuitGroup;
 
     private PlayerControls inputActions;
 
     private bool pauseInput;
     private bool paused = false;
+
+    private void Awake()
+    {
+        GameObject chosenCircuit = GameObject.Find(MenuController.mapSelected);
+        foreach (Transform t in circuitGroup.transform)
+        {
+            t.gameObject.SetActive(t.gameObject == chosenCircuit);
+        }
+    }
 
     public void OnEnable()
     {

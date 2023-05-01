@@ -26,7 +26,7 @@ public class MenuController : MonoBehaviour
     public bool playerTwoReady = false;
 
     [SerializeField]
-    private string mapSelected;
+    public static string mapSelected;
     [SerializeField]
     private string difficultySelected;
 
