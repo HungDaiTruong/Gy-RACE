@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool isPlayable = true;
+
     public GameObject pauseCanvas;
 
     private PlayerControls inputActions;
 
-    private float pauseInput;
+    private bool pauseInput;
     private bool paused = false;
 
     public void OnEnable()
@@ -25,23 +28,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        isPlayable = true;
         pauseCanvas.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        pauseInput = inputActions.Player.Pause.ReadValue<float>();
-    }
+        pauseInput = inputActions.UI.Pause.WasPressedThisFrame();
 
-    private void FixedUpdate()
-    {
         Pausing();
     }
 
     private void Pausing()
     {
-        if(pauseInput > 0)
+        if(pauseInput && isPlayable)
         {
             if (paused)
             {
@@ -66,5 +67,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
         paused = false;
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MenuScene");
     }
 }
