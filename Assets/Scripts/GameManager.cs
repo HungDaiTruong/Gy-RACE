@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Disables all but the selected racing circuit
         GameObject chosenCircuit = GameObject.Find(MenuController.mapSelected);
         foreach (Transform t in circuitGroup.transform)
         {
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     private void Pausing()
     {
+        // Toggles the Pause Menu if the game is deemed playable
         if(pauseInput && isPlayable)
         {
             if (paused)
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        // Stops the game and enable the menu
         Time.timeScale = 0;
         pauseCanvas.SetActive(true);
         paused = true;
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        // Resumes the game and disable the menu
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
         paused = false;
@@ -81,6 +85,7 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
+        // Return to the main menu
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuScene");
     }

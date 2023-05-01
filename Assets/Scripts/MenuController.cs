@@ -89,6 +89,7 @@ public class MenuController : MonoBehaviour
 
     public void ChooseMap(Image image)
     {
+        // The chosen map's value is stored as a string according to its button's name in the menu
         mapSelected = image.gameObject.name;
         chosenMapDisplay.GetComponent<Image>().sprite = image.sprite;
     }
@@ -100,6 +101,7 @@ public class MenuController : MonoBehaviour
 
     public void OnMultiplayerButtonClick()
     {
+        // Method used to setup the multiplayer split screen cameras
         isMultiplayer = true;
 
         cameraPlayer1.GetComponent<Camera>().rect = new Rect(-0.5f, 0f, 1f, 1f);

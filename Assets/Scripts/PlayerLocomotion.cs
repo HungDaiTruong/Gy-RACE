@@ -80,12 +80,14 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Update()
     {
+        // The Player 1 uses ZQSD Shift 
         if(gameObject.tag == "Player")
         {
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player.Drift.ReadValue<float>();
         }
 
+        // The Player 2 uses ARROWS LeftCtrl
         if (gameObject.tag == "Player2")
         {
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
@@ -232,11 +234,13 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void EnableMovements()
     {
+        // Removes the constraints of the displayed menu vehicule
         rb.constraints = ~RigidbodyConstraints.FreezePosition;
     }
 
     public void ApplyStats()
     {
+        // Apply the selected stats from the menu to the playable vehicle
         maxSpeed = (int)wheelComponentHandler.speed;
         handling = (int)wheelComponentHandler.handling;
         acceleration = (int)engineComponentHandler.acceleration;
