@@ -13,18 +13,28 @@ public class RaceTimer : MonoBehaviour
     public TMP_Text scoreText;
     public GameObject scoreboard;
 
+    private PlayerLapper playerLapper;
+
+    private GameObject player1;
+    private GameObject player2;
+
     // Start is called before the first frame update
     void Start()
     {
         scoreboard.SetActive(false);
         timerOn = true;
-        timerText.fontSize = 20;
+        timerText.fontSize = 16;
+
+        playerLapper = transform.parent.GetComponent<PlayerLapper>();
+
+        player1 = GameObject.FindGameObjectWithTag("Player");
+        player2 = GameObject.FindGameObjectWithTag("Player2");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timerOn && !(CheckpointScript.lap == 3 && CheckpointScript.count == 1))
+        if(timerOn && !(playerLapper.lap == 4 && playerLapper.checkpointIndex == 0))
         {
             time += Time.deltaTime;
             UpdateTimer(time);
@@ -44,20 +54,23 @@ public class RaceTimer : MonoBehaviour
         float minutes = Mathf.FloorToInt(currentTime / 60);
         float seconds = Mathf.FloorToInt(currentTime % 60);
 
-        timerText.text = string.Format("{0:00}  :  {1:00}\nLap {2}/3\nCheckpoint {3}/3", minutes, seconds, CheckpointScript.lap, CheckpointScript.count);
+        timerText.text = string.Format(" {0:00}  :  {1:00}\n Lap {2}/3\n Checkpoint {3}/3", minutes, seconds, playerLapper.lap, playerLapper.checkpointIndex + 1);
         scoreText.text = string.Format("{0:00}  :  {1:00}", minutes, seconds);
     }
 
     public void GameIsDone()
     {
         scoreboard.SetActive(true);
-        CheckpointScript.lap = 0;
-        CheckpointScript.count = 0;
+        playerLapper.checkpointIndex = 0;
+        playerLapper.lap = 1;
         Time.timeScale = 0;
+        GameManager.isPlayable = false;
     }
 
     public void MainMenu()
     {
+        playerLapper.checkpointIndex = 0;
+        playerLapper.lap = 1;
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuScene");
     }

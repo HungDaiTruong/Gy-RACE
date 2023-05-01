@@ -61,11 +61,18 @@ public class PlayerLocomotion : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        if(players.Length > 1)
+
+        GameObject[] players1 = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] players2 = GameObject.FindGameObjectsWithTag("Player2");
+        if (players1.Length > 1)
         {
-            Destroy(players[0]);
+            Destroy(players1[0]);
         }
+        if (players2.Length > 1)
+        {
+            Destroy(players2[0]);
+        }
+
         DontDestroyOnLoad(gameObject);
 
         rb = GetComponent<Rigidbody>();
@@ -73,8 +80,17 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Update()
     {
-        movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
-        driftInput = inputActions.Player.Drift.ReadValue<float>();
+        if(gameObject.tag == "Player")
+        {
+            movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
+            driftInput = inputActions.Player.Drift.ReadValue<float>();
+        }
+
+        if (gameObject.tag == "Player2")
+        {
+            movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
+            driftInput = inputActions.Player2.Drift.ReadValue<float>();
+        }
     }
 
     private void FixedUpdate()

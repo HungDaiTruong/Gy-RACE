@@ -63,7 +63,6 @@ public class CustomizationMenu : MonoBehaviour
         componentHandler.SetEnergySystemType(selectedEnergyOption);
 
         playerLocomotion.ApplyStats();
-        vehicle.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void ResetCustomization()

@@ -4,63 +4,44 @@ using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour
 {
-    public GameObject vehicle;
     public GameObject collectionObject;
-    public GameObject lastCheckpoint;
-    public bool trigger = false;
-    static public int lap = 0;
-    static public int count = 0;
+    public int checkpointIndex;
     static private int checkpointNumber;
-    private bool lapped = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        vehicle = GameObject.FindGameObjectWithTag("Player");
         collectionObject = transform.parent.gameObject;
 
-        // Count the child objects of the collectionObject
+        // Count the child objects of the collectionObject for the total amount of checkpoints
         checkpointNumber = collectionObject.transform.childCount;
+        // Index of the checkpoint
+        checkpointIndex = transform.GetSiblingIndex();
 
-        // Disable all the checkpoint colliders except the first one
-        for (int i = 1; i < checkpointNumber; i++)
-        {
-            collectionObject.transform.GetChild(i).GetComponent<BoxCollider>().enabled = false;
-        }
-        collectionObject.transform.GetChild(0).GetComponent<BoxCollider>().enabled = true;
-        lastCheckpoint = collectionObject.transform.GetChild(0).gameObject;
-
-        vehicle.transform.position = lastCheckpoint.transform.position - new Vector3(-15f, 0, 0);
-        vehicle.transform.rotation = Quaternion.Euler(0, -90f, 0);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, 0);
+        player.transform.rotation = Quaternion.Euler(0, -90f, 0);
+        player = GameObject.FindGameObjectWithTag("Player2");
+        player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -5f);
+        player.transform.rotation = Quaternion.Euler(0, -90f, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnTriggerEnter(Collider collider)
     {
-        if(count == checkpointNumber)
+        if(collider.GetComponent<PlayerLapper>())
         {
-            lastCheckpoint.GetComponent<BoxCollider>().enabled = true;
-            lapped = true;
-            trigger = false;
-        }
+            PlayerLapper playerLapper = collider.GetComponent<PlayerLapper>();
 
-        if(count == 4 && lapped)
-        {
-            count = 1;
-            lap++;
-            lapped = false;
-        }
-    }
+            if (playerLapper.checkpointIndex == checkpointNumber - 1 && checkpointIndex == 0)
+            {
+                playerLapper.lap++;
+                playerLapper.checkpointIndex = 0;
+            }
 
-    public void OnTriggerExit(Collider collider)
-    {
-        if(collider.gameObject == vehicle && transform.parent != null)
-        {
-            count++;
-            trigger = true;
-            collectionObject.transform.GetChild((count - 1) % 3).GetComponent<BoxCollider>().enabled = false;
-            collectionObject.transform.GetChild(count % 3).GetComponent<BoxCollider>().enabled = true;
+            if (playerLapper.checkpointIndex == checkpointIndex + 1 || playerLapper.checkpointIndex == checkpointIndex - 1)
+            {
+                playerLapper.checkpointIndex = checkpointIndex;
+            }
         }
-        Debug.Log("count : " + count + "lap : " + lap);
     }
 }
