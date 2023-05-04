@@ -29,11 +29,7 @@ Transform:
   m_GameObject: {fileID: 4998765952192245645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 193.4, y: 21.45, z: 182.3}
-<<<<<<< Updated upstream
   m_LocalScale: {x: 6, y: 100, z: 100}
-=======
-  m_LocalScale: {x: 1, y: 10, z: 25}
->>>>>>> Stashed changes
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,10 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicle: {fileID: 0}
   collectionObject: {fileID: 0}
-<<<<<<< Updated upstream
   lastCheckpoint: {fileID: 0}
   trigger: 0
-=======
-  trigger: 0
-  last: 0
->>>>>>> Stashed changes
