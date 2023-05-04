@@ -4,25 +4,14 @@ using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour
 {
-<<<<<<< Updated upstream
     public int checkpointIndex;
     static public int checkpointNumber;
     public GameObject collectionObject;
-=======
-    public GameObject vehicle;
-    public GameObject collectionObject;
-    public GameObject lastCheckpoint;
-    public bool trigger = false;
-    static public int lap = 0;
-    static public int count = 0;
-    static private int checkpointNumber;
->>>>>>> Stashed changes
 
     // Start is called before the first frame update
     void Start()
     {
         collectionObject = transform.parent.gameObject;
-<<<<<<< Updated upstream
 
         // Count the child objects of the collectionObject for the total amount of checkpoints
         checkpointNumber = collectionObject.transform.childCount;
@@ -57,41 +46,5 @@ public class CheckpointScript : MonoBehaviour
                 playerLapper.checkpointIndex = checkpointIndex;
             }
         }
-=======
-        foreach (Transform g in transform.GetComponentsInChildren<Transform>())
-        {
-            g.GetComponent<BoxCollider>().enabled = false;
-            checkpointNumber++;
-        }
-        collectionObject.transform.GetChild(0).GetComponent<BoxCollider>().enabled = true;
-        lastCheckpoint = collectionObject.transform.GetChild(0).gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(count == checkpointNumber)
-        {
-            count = 0;
-            lastCheckpoint.GetComponent<BoxCollider>().enabled = true;
-            lap++;
-            trigger = false;
-        }
-    }
-
-    public void OnTriggerExit(Collider collider)
-    {
-        if(collider.gameObject == vehicle && transform.parent != null)
-        {
-            count++;
-            trigger = true;
-            collectionObject.transform.GetChild(count-1).GetComponent<BoxCollider>().enabled = false;
-            if (count < checkpointNumber)
-            {
-                collectionObject.transform.GetChild(count).GetComponent<BoxCollider>().enabled = true;
-            }
-        }
-        Debug.Log("count : " + count + "lap : " + lap);
->>>>>>> Stashed changes
     }
 }
