@@ -11,6 +11,7 @@ public class RaceTimer : MonoBehaviour
     public bool timerOn = false;
     public TMP_Text timerText;
     public TMP_Text scoreText;
+    public TMP_Text speedText;
     public GameObject scoreboard;
 
     private PlayerLapper playerLapper;
@@ -39,6 +40,7 @@ public class RaceTimer : MonoBehaviour
         {
             time += Time.deltaTime;
             UpdateTimer(time);
+            Speedometer();
         }
         else
         {
@@ -46,9 +48,10 @@ public class RaceTimer : MonoBehaviour
             Debug.Log("Race is Finished");
             GameIsDone();
         }
+
     }
 
-    void UpdateTimer(float currentTime)
+    private void UpdateTimer(float currentTime)
     {
         // Updates the timer and displays the time, laps and checkpoints counts
         currentTime += 1;
@@ -59,6 +62,12 @@ public class RaceTimer : MonoBehaviour
         timerText.text = string.Format(" {0:00}  :  {1:00}\n Lap {2}/3\n Checkpoint {3}/{4}", minutes, seconds, playerLapper.lap, playerLapper.checkpointIndex + 1, CheckpointScript.checkpointNumber);
         // Value used as a display during the scoreboard
         scoreText.text = string.Format("{0:00}  :  {1:00}", minutes, seconds);
+    }
+
+    private void Speedometer()
+    {
+        int speed = Mathf.Abs((int)transform.parent.GetComponent<PlayerLocomotion>().realSpeed);
+        speedText.SetText(speed.ToString() + " km/h");
     }
 
     public void GameIsDone()
