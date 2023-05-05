@@ -9,7 +9,7 @@ public class RaceTimer : MonoBehaviour
 {
     public float time;
     public bool timerOn = false;
-    public Text timerText;
+    public TMP_Text timerText;
     public TMP_Text scoreText;
     public GameObject scoreboard;
 

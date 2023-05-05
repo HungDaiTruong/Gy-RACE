@@ -20,10 +20,14 @@ public class CheckpointScript : MonoBehaviour
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, 0);
-        player.transform.rotation = Quaternion.Euler(0, -90f, 0);
-        player = GameObject.FindGameObjectWithTag("Player2");
-        player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -5f);
-        player.transform.rotation = Quaternion.Euler(0, -90f, 0);
+        player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+
+        if (GameObject.FindGameObjectWithTag("Player2") != null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player2");
+            player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -5f);
+            player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+        }
     }
 
     public void OnTriggerEnter(Collider collider)
