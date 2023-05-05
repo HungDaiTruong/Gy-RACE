@@ -18,22 +18,26 @@ public class PlayerLocomotion : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField]
-    private float realSpeed;
+    public float realSpeed = 0f;
     [SerializeField]
     private float currentSpeed;
     [SerializeField][Range(10, 100)]
     private int maxSpeed;
-    [SerializeField][Range(15, 150)]
-    private int turboSpeed;
+    [SerializeField][Range(1, 2)]
+    private float turboMultiplier;
     [SerializeField][Range(10, 100)]
     private int backingSpeed;
     [SerializeField][Range(1, 5)]
     private int acceleration;
     [SerializeField][Range(1, 5)]
     private int handling;
+    [SerializeField][Range(0, 300)]
+    public int energy;
     [SerializeField][Range(100, 300)]
-    private int energyCapacity;
-    [SerializeField][Range(10, 30)]
+    public int energyCapacity;
+    [SerializeField][Range(10, 50)]
+    private int energyConsumption;
+    [SerializeField][Range(1, 5)]
     private int energyRegeneration;
     [SerializeField]
     private int weight;
@@ -45,7 +49,11 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private float driftInput;
     [SerializeField]
+    private float turboInput;
+    [SerializeField]
     private bool isDrifting;
+    [SerializeField]
+    private bool isTurboing;
 
     public void OnEnable()
     {
@@ -85,6 +93,7 @@ public class PlayerLocomotion : MonoBehaviour
         {
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player.Drift.ReadValue<float>();
+            turboInput = inputActions.Player.Turbo.ReadValue<float>();
         }
 
         // The Player 2 uses ARROWS LeftCtrl
@@ -92,6 +101,7 @@ public class PlayerLocomotion : MonoBehaviour
         {
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
+            turboInput = inputActions.Player2.Turbo.ReadValue<float>();
         }
     }
 
@@ -101,6 +111,7 @@ public class PlayerLocomotion : MonoBehaviour
         Steer();
         IsGrounded();
         VehicleRotations();
+        EnergyHandler();
     }
 
     private void Move()
@@ -111,15 +122,36 @@ public class PlayerLocomotion : MonoBehaviour
         // If forward/backward then the current speed value of the vehicle works up towards the maximum speed
         if (movementInput.y > 0 && isGrounded)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 30f));
+            if (turboInput > 0 && energy > 0)
+            {
+                isTurboing = true;
+                currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * turboMultiplier, Time.deltaTime * (acceleration / 2f));
+            }
+            else
+            {
+                isTurboing = false;
+                currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 30f));
+            }
         }
         else if(movementInput.y < 0 && isGrounded)
         {
+            isTurboing = false;
             currentSpeed = Mathf.Lerp(currentSpeed, backingSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 10f));
         }
         else
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
+            if (isGrounded)
+            {
+                // If grounded, the vehicle's speed value cannot be built up and decelerates back to the true speed
+                isTurboing = false;
+                currentSpeed = Mathf.Lerp(realSpeed, 0f, Time.deltaTime * handling / 5f);
+            }
+            else
+            {
+                // If airborne, the vehicle can continue to build up it's speed value regardless of the true speed
+                isTurboing = false;
+                currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
+            }
         }
 
         // Apply the current speed values into a forward vector force
@@ -178,7 +210,7 @@ public class PlayerLocomotion : MonoBehaviour
         // If the actual speed is too high, then steering becomes more difficult
         if (isDrifting)
         {
-            steerAmount = realSpeed > 50f / handling ? (realSpeed / (1f / handling * 2.5f) * movementInput.x) : steerAmount = (realSpeed / (0.5f / handling * 2.5f) * movementInput.x);
+            steerAmount = realSpeed > 50f / handling ? (realSpeed / (1f / handling * 3.5f) * movementInput.x) : steerAmount = (realSpeed / (0.5f / handling * 2.5f) * movementInput.x);
         }
         else
         {
@@ -186,6 +218,19 @@ public class PlayerLocomotion : MonoBehaviour
         }
         steerForce = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + steerAmount, transform.eulerAngles.z);
         transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, steerForce, 3 * Time.deltaTime);
+    }
+
+    private void EnergyHandler()
+    {
+        if(isTurboing)
+        {
+            energy = (int)Mathf.Lerp(energy, 0, Time.deltaTime * energyConsumption / 300f);
+        }
+
+        if(isDrifting)
+        {
+            energy = (int)Mathf.Lerp(energy, energyCapacity, Time.deltaTime * energyRegeneration);
+        }
     }
 
     private void IsGrounded()
@@ -221,11 +266,13 @@ public class PlayerLocomotion : MonoBehaviour
         // Tilt the vehicle sideway for a more dynamic steering, the more intense the steering speed, the lower the vehicle tilts
         if (movementInput.x > 0)
         {
-            pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 0f, -currentSpeed * 1.3f), Time.deltaTime);
+            float zRotation = -Mathf.Clamp(currentSpeed * 1.3f, -130, maxSpeed);
+            pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 0f, zRotation), Time.deltaTime);
         }
         else if (movementInput.x < 0)
         {
-            pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 0f, currentSpeed * 1.3f), Time.deltaTime);
+            float zRotation = Mathf.Clamp(currentSpeed * 1.3f, -130, maxSpeed);
+            pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 0f, zRotation), Time.deltaTime);
         }
 
         // Rotates the inner ring so it stays upright according to the ground
@@ -244,8 +291,8 @@ public class PlayerLocomotion : MonoBehaviour
         maxSpeed = (int)wheelComponentHandler.speed;
         handling = (int)wheelComponentHandler.handling;
         acceleration = (int)engineComponentHandler.acceleration;
-        turboSpeed = (int)engineComponentHandler.turboSpeed;
-        energyCapacity = (int)energySystemComponentHandler.energyCapacity;
+        turboMultiplier = engineComponentHandler.turboMultiplier;
+        energyConsumption = (int)energySystemComponentHandler.energyConsumption;
         energyRegeneration = (int)energySystemComponentHandler.energyRegeneration;
     }
 }

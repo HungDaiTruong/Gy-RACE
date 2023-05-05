@@ -24,19 +24,19 @@ public class EngineComponentHandler : Engine
             case 0:
                 currentEngineMesh.mesh = standardEngineMesh.sharedMesh;
                 acceleration = new StandardEngine().acceleration;
-                turboSpeed = new StandardEngine().turboSpeed;
+                turboMultiplier = new StandardEngine().turboMultiplier;
                 durability = new StandardEngine().durability;
                 break;
             case 1:
                 currentEngineMesh.mesh = turboEngineMesh.sharedMesh;
                 acceleration = new TurboEngine().acceleration;
-                turboSpeed = new TurboEngine().turboSpeed;
+                turboMultiplier = new TurboEngine().turboMultiplier;
                 durability = new TurboEngine().durability;
                 break;
             case 2:
                 currentEngineMesh.mesh = omnidirectionalEngineMesh.sharedMesh;
                 acceleration = new OmnidirectionalEngine().acceleration;
-                turboSpeed = new OmnidirectionalEngine().turboSpeed;
+                turboMultiplier = new OmnidirectionalEngine().turboMultiplier;
                 durability = new OmnidirectionalEngine().durability;
                 break;
         }
