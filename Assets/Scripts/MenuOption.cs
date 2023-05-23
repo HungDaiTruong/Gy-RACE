@@ -19,18 +19,16 @@ public class MenuOption : MonoBehaviour
 
     public AudioSource AudioSourceMenu;
 
-    public 
-
     Resolution[] resolutions;
 
     void Start()
     {
-        resolutions =Screen.resolutions;
+        resolutions = Screen.resolutions;
         DropdownResolution.ClearOptions();
 
         List<string> options = new List<string>();
 
-        int ccurrentResolutionIndex = 0;
+        int currentResolutionIndex = 0;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
@@ -40,15 +38,14 @@ public class MenuOption : MonoBehaviour
 
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
-                ccurrentResolutionIndex = i;
+                currentResolutionIndex = i;
 
             }
         }
 
         DropdownResolution.AddOptions(options);
-        DropdownResolution.value = ccurrentResolutionIndex;
+        DropdownResolution.value = currentResolutionIndex;
         DropdownResolution.RefreshShownValue();
-
     }
 
     void Update()
@@ -85,7 +82,4 @@ public class MenuOption : MonoBehaviour
     {
         Screen.fullScreen = isFullscreen;
     }
-
-
-
 }

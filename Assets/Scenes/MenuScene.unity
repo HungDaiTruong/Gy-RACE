@@ -2263,6 +2263,7 @@ Transform:
   - {fileID: 1673453778}
   - {fileID: 53318117}
   - {fileID: 474126518}
+  - {fileID: 1697647505}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2303,7 +2304,6 @@ Transform:
   - {fileID: 1001065960}
   - {fileID: 146282383}
   - {fileID: 2052681957}
-  - {fileID: 1697647505}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6318,17 +6318,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1673453777}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: Option
-        m_Mode: 1
+      - m_Target: {fileID: 2052681956}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &622567678
 MonoBehaviour:
@@ -12036,7 +12036,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.025666624, y: 0}
   m_AnchorMax: {x: 0.9887689, y: 0.8696976}
-  m_AnchoredPosition: {x: -27, y: 110.5}
+  m_AnchoredPosition: {x: -27.000183, y: 110.5}
   m_SizeDelta: {x: 45.435303, y: 128.38147}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031926167
@@ -13906,7 +13906,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.025666624, y: 0.13900001}
   m_AnchorMax: {x: 0.95400006, y: 0.94100004}
-  m_AnchoredPosition: {x: 209.47797, y: -49.72516}
+  m_AnchoredPosition: {x: 209.47797, y: -49.725098}
   m_SizeDelta: {x: -464.8105, y: -171.7759}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209153969
@@ -18274,7 +18274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.025666624, y: 0.13900001}
   m_AnchorMax: {x: 0.95400006, y: 0.94100004}
-  m_AnchoredPosition: {x: 209.47797, y: -49.72516}
+  m_AnchoredPosition: {x: 209.47797, y: -49.725098}
   m_SizeDelta: {x: -464.8105, y: -171.7759}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1606508039
@@ -19570,7 +19570,6 @@ MonoBehaviour:
   mainMenu: {fileID: 212940200}
   mapMenu: {fileID: 2067847369}
   difficultyMenu: {fileID: 726418804}
-  MenuOption: {fileID: 2052681956}
   uiGroup: {fileID: 228550008}
   chosenMapDisplay: {fileID: 190375280}
   isMultiplayer: 0
@@ -19622,8 +19621,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1609570406}
-  m_Father: {fileID: 228550009}
-  m_RootOrder: 9
+  m_Father: {fileID: 222244799}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1697647506
 MonoBehaviour:
@@ -19637,9 +19636,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b56919a064746f47b03ba8adb5259f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOption: {fileID: 0}
-  DropdownResolution: {fileID: 0}
-  DropdownQuality: {fileID: 0}
+  MOption: {fileID: 2052681956}
+  DropdownResolution: {fileID: 1002694316}
+  DropdownQuality: {fileID: 1937833935}
   AudioMixer: {fileID: 24100000, guid: e20ed513953667646b132391505186fe, type: 2}
   AudioMixerMusic: {fileID: 24100000, guid: b47a8c5111bb77b459effeda8d43c9ef, type: 2}
   AudioSourceMenu: {fileID: 0}
@@ -24096,7 +24095,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.025666624, y: 0.13900001}
   m_AnchorMax: {x: 0.95400006, y: 0.94100004}
-  m_AnchoredPosition: {x: 209.47797, y: -49.72516}
+  m_AnchoredPosition: {x: 209.47797, y: -49.725098}
   m_SizeDelta: {x: -464.8105, y: -171.7759}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2052427890
@@ -24242,7 +24241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2052681957
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24306,7 +24305,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.122
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -24325,7 +24324,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
