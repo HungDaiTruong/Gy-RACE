@@ -16,6 +16,7 @@ public class MenuController : MonoBehaviour
     public GameObject mainMenu;
     public GameObject mapMenu;
     public GameObject difficultyMenu;
+    public GameObject MenuOption;
     
     public GameObject uiGroup;
 
@@ -118,6 +119,12 @@ public class MenuController : MonoBehaviour
     public void PlayerTwoReady()
     {
         playerTwoReady = true;
+    }
+
+    public void Option()
+    {
+        MenuOption.SetActive(true);
+
     }
 
     public void Quit()
