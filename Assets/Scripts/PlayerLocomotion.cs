@@ -37,7 +37,7 @@ public class PlayerLocomotion : MonoBehaviour
     public int energyCapacity;
     [SerializeField][Range(10, 50)]
     private int energyConsumption;
-    [SerializeField][Range(1, 5)]
+    [SerializeField][Range(10, 50)]
     private int energyRegeneration;
     [SerializeField]
     private int weight;
@@ -222,14 +222,13 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void EnergyHandler()
     {
-        if(isTurboing)
+        if (isTurboing)
         {
-            energy = (int)Mathf.Lerp(energy, 0, Time.deltaTime * energyConsumption / 300f);
+            energy = (int)Mathf.Clamp(energy - Time.deltaTime * energyConsumption, 0, energyCapacity);
         }
-
-        if(isDrifting)
+        else if (isDrifting)
         {
-            energy = (int)Mathf.Lerp(energy, energyCapacity, Time.deltaTime * energyRegeneration);
+            energy = (int)Mathf.Clamp(energy + Time.deltaTime * energyRegeneration * 5, 0, energyCapacity);
         }
     }
 
