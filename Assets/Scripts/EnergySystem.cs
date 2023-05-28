@@ -15,7 +15,7 @@ public class GyroscopicSystem : EnergySystem
     {
         energyConsumption = 20f;
         durability = 2f;
-        energyRegeneration = 1f;
+        energyRegeneration = 10f;
     }
 }
 
@@ -25,7 +25,7 @@ public class MagneticSystem : EnergySystem
     {
         energyConsumption = 30f;
         durability = 3f;
-        energyRegeneration = 2f;
+        energyRegeneration = 20f;
     }
 }
 
@@ -35,6 +35,6 @@ public class GravitySystem : EnergySystem
     {
         energyConsumption = 50f;
         durability = 4f;
-        energyRegeneration = 3f;
+        energyRegeneration = 30f;
     }
 }

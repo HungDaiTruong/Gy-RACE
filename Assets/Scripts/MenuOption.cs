@@ -8,23 +8,23 @@ using UnityEngine.UI;
 
 public class MenuOption : MonoBehaviour
 {
-    public GameObject MOption;
+    public GameObject mOption;
     bool visible = false;
 
-    public TMP_Dropdown DropdownResolution;
-    public TMP_Dropdown DropdownQuality;
+    public TMP_Dropdown dropdownResolution;
+    public TMP_Dropdown dropdownQuality;
 
-    public AudioMixer AudioMixer;
-    public AudioMixer AudioMixerMusic;
+    public AudioMixer audioMixer;
+    public AudioMixer audioMixerMusic;
 
-    public AudioSource AudioSourceMenu;
+    public AudioSource audioSourceMenu;
 
     Resolution[] resolutions;
 
     void Start()
     {
         resolutions = Screen.resolutions;
-        DropdownResolution.ClearOptions();
+        dropdownResolution.ClearOptions();
 
         List<string> options = new List<string>();
 
@@ -43,9 +43,9 @@ public class MenuOption : MonoBehaviour
             }
         }
 
-        DropdownResolution.AddOptions(options);
-        DropdownResolution.value = currentResolutionIndex;
-        DropdownResolution.RefreshShownValue();
+        dropdownResolution.AddOptions(options);
+        dropdownResolution.value = currentResolutionIndex;
+        dropdownResolution.RefreshShownValue();
     }
 
     void Update()
@@ -63,13 +63,13 @@ public class MenuOption : MonoBehaviour
     //pour le volume 
     public void SetVolumeMenu (float volumeMenu)
     {
-        AudioSourceMenu.volume = volumeMenu;
+        audioSourceMenu.volume = volumeMenu;
         print(volumeMenu);
     }
 
     public void SetVolumeGame(float volumeGame)
     {
-        AudioMixerMusic.SetFloat("volumeMusic", volumeGame);
+        audioMixerMusic.SetFloat("volumeMusic", volumeGame);
     }
 
     //pour la qualité

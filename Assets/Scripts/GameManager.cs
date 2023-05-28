@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour
     public void Option()
     {
         // Return to the option
-        Time.timeScale = 1;
-        SceneManager.LoadScene("MenuOption Canvas");
+        Time.timeScale = 0;
     }
 }
