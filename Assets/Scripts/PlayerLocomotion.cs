@@ -81,7 +81,10 @@ public class PlayerLocomotion : MonoBehaviour
             Destroy(players2[0]);
         }
 
-        DontDestroyOnLoad(gameObject);
+        if (tag != "AI")
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 
         rb = GetComponent<Rigidbody>();
     }
@@ -144,7 +147,7 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 // If grounded, the vehicle's speed value cannot be built up and decelerates back to the true speed
                 isTurboing = false;
-                currentSpeed = Mathf.Lerp(realSpeed, 0f, Time.deltaTime * handling / 5f);
+                currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
             }
             else
             {
