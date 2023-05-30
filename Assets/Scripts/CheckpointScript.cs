@@ -28,13 +28,6 @@ public class CheckpointScript : MonoBehaviour
             player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -5f);
             player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
         }
-
-        if (GameObject.FindGameObjectWithTag("AI") != null)
-        {
-            player = GameObject.FindGameObjectWithTag("AI");
-            player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -10f);
-            player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
-        }
     }
 
     public void OnTriggerEnter(Collider collider)
