@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    // Vehicle parts
     public Transform pivot;
     public Transform wheel;
     public Transform innerRing;
     public Transform pod;
 
+    // Handlers for each customization
     public WheelComponentHandler wheelComponentHandler;
     public EngineComponentHandler engineComponentHandler;
     public EnergySystemComponentHandler energySystemComponentHandler;
@@ -61,7 +63,7 @@ public class PlayerLocomotion : MonoBehaviour
         inputActions.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         inputActions.Disable();
     }
@@ -69,7 +71,7 @@ public class PlayerLocomotion : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-
+        // Check for the number of players and destroys the surplus
         GameObject[] players1 = GameObject.FindGameObjectsWithTag("Player");
         GameObject[] players2 = GameObject.FindGameObjectsWithTag("Player2");
         if (players1.Length > 1)
@@ -81,7 +83,7 @@ public class PlayerLocomotion : MonoBehaviour
             Destroy(players2[0]);
         }
 
-        if (tag != "AI")
+        if (!CompareTag("AI"))
         {
             DontDestroyOnLoad(gameObject);
         }
@@ -91,7 +93,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Update()
     {
-        // The Player 1 uses ZQSD Shift 
+        // The Player 1 uses ZQSD Shift on default
         if(gameObject.tag == "Player")
         {
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
@@ -99,7 +101,7 @@ public class PlayerLocomotion : MonoBehaviour
             turboInput = inputActions.Player.Turbo.ReadValue<float>();
         }
 
-        // The Player 2 uses ARROWS LeftCtrl
+        // The Player 2 uses ARROWS LeftCtrl on default
         if (gameObject.tag == "Player2")
         {
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
@@ -110,13 +112,17 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
-        Steer();
-        IsGrounded();
-        VehicleRotations();
-        EnergyHandler();
+        if (gameObject.tag != "AI")
+        {
+            Move();
+            Steer();
+            IsGrounded();
+            VehicleRotations();
+            EnergyHandler();
+        }
     }
 
+    // Handles forward and backward movement
     private void Move()
     {
         // True speed of the vehicle ingame
@@ -125,17 +131,20 @@ public class PlayerLocomotion : MonoBehaviour
         // If forward/backward then the current speed value of the vehicle works up towards the maximum speed
         if (movementInput.y > 0 && isGrounded)
         {
+            // If the turbo is activated and the player is moving forward
             if (turboInput > 0 && energy > 0)
             {
                 isTurboing = true;
                 currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * turboMultiplier, Time.deltaTime * (acceleration / 2f));
             }
+            // If the turbo isn't activated and the player isn't pressing anything
             else
             {
                 isTurboing = false;
                 currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 30f));
             }
         }
+        // If the player is backing up
         else if(movementInput.y < 0 && isGrounded)
         {
             isTurboing = false;
@@ -170,6 +179,7 @@ public class PlayerLocomotion : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward, Color.blue);
     }
 
+    // Method that handles all the steering and drifting movements
     private void Steer()
     {
         Vector3 steerForce;
@@ -223,14 +233,17 @@ public class PlayerLocomotion : MonoBehaviour
         transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, steerForce, 3 * Time.deltaTime);
     }
 
+    // Method that manages the vehicle's energy levels
     private void EnergyHandler()
     {
         if (isTurboing)
         {
+            // Drains the energy when turboing
             energy = (int)Mathf.Clamp(energy - Time.deltaTime * energyConsumption, 0, energyCapacity);
         }
         else if (isDrifting)
         {
+            // Regenerates the energy when drifting
             energy = (int)Mathf.Clamp(energy + Time.deltaTime * energyRegeneration * 5, 0, energyCapacity);
         }
     }

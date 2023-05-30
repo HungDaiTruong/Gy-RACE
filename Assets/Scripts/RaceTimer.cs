@@ -14,10 +14,18 @@ public class RaceTimer : MonoBehaviour
     public TMP_Text speedText;
     public GameObject scoreboard;
 
+    private PlayerLocomotion playerLocomotion;
     private PlayerLapper playerLapper;
+    [SerializeField]
+    private PlayerLapper[] playerLappers;
 
     private GameObject player1;
     private GameObject player2;
+
+    private void Awake()
+    {
+        playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +43,10 @@ public class RaceTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerLappers = FindObjectsOfType<PlayerLapper>();
+
         // Ends when the 4th lap is starting, for a total of 3 laps
-        if(timerOn && !(playerLapper.lap == 4 && playerLapper.checkpointIndex == 0))
+        if (timerOn && !(playerLapper.lap == 4 && playerLapper.checkpointIndex == 0))
         {
             time += Time.deltaTime;
             UpdateTimer(time);
@@ -46,9 +56,25 @@ public class RaceTimer : MonoBehaviour
         {
             Debug.Log(time);
             Debug.Log("Race is Finished");
-            GameIsDone();
-        }
+            playerLocomotion.OnDisable();
+            bool allFinished = true; // Flag to track if all players have finished
 
+            foreach (PlayerLapper playerLapper in playerLappers)
+            {
+                // Check if any player has not finished all laps
+                if (!(playerLapper.lap == 4 && playerLapper.checkpointIndex == 0))
+                {
+                    allFinished = false;
+                    break;
+                }
+            }
+            //GameIsDone();
+
+            if(allFinished)
+            {
+                GameIsDone();
+            }
+        }
     }
 
     private void UpdateTimer(float currentTime)
@@ -66,6 +92,7 @@ public class RaceTimer : MonoBehaviour
 
     private void Speedometer()
     {
+        // Displays the speed of the vehicle in km/h
         int speed = Mathf.Abs((int)transform.parent.GetComponent<PlayerLocomotion>().realSpeed);
         speedText.SetText(speed.ToString() + " km/h");
     }

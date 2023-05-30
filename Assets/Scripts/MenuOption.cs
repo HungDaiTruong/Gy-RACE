@@ -48,36 +48,33 @@ public class MenuOption : MonoBehaviour
         dropdownResolution.RefreshShownValue();
     }
 
-    void Update()
-    {
-        
-    }
-
-    //pour la resolution 
+    // Sets the resolution
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    //pour le volume 
+    // Sets the menu volume
     public void SetVolumeMenu (float volumeMenu)
     {
         audioSourceMenu.volume = volumeMenu;
         print(volumeMenu);
     }
 
+    // Sets the game volume
     public void SetVolumeGame(float volumeGame)
     {
         audioMixerMusic.SetFloat("volumeMusic", volumeGame);
     }
 
-    //pour la qualité
+    // Sets the quality
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
+    // Toggles fullscreen
     public void SetFullscreen (bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;

@@ -34,7 +34,8 @@ public class PlayerNavMesh : MonoBehaviour
 
     private void Start()
     {
-        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -10f));
+        // Spawns the AI at a certain location behind the first Checkpoint
+        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-25f, 0, -10f));
         navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
     }
 
@@ -116,42 +117,6 @@ public class PlayerNavMesh : MonoBehaviour
             rb.velocity *= Mathf.Max(1f - decelerationRate, 0f);
         }
     }
-
-    /*private void Move()
-    {
-        // True speed of the vehicle in-game
-        float realSpeed = transform.InverseTransformDirection(rb.velocity).z;
-
-        // Calculate the desired speed based on the current conditions
-        if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
-        {
-            currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed, Time.deltaTime * (acceleration / 2f));
-        }
-        else
-        {
-            currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
-        }
-
-        // Calculate the desired direction towards the next waypoint
-        if (movePositionTransform != null)
-        {
-            Vector3 desiredDirection = movePositionTransform.position - transform.position;
-            desiredDirection.y = 0f;
-            desiredDirection.Normalize();
-
-
-            // Calculate the desired velocity based on the current speed and desired direction
-            Vector3 desiredVelocity = desiredDirection * currentSpeed;
-
-
-            // Apply the desired velocity to the Rigidbody for smoother movement
-            rb.velocity = desiredVelocity;
-        }
-
-        // Adjust the NavMeshAgent's speed to match the desired speed
-        navMeshAgent.speed = currentSpeed;
-        navMeshAgent.acceleration = acceleration;
-    }*/
 
     private void VehicleRotations()
     {
