@@ -26,12 +26,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Enables the input registration
     public void OnEnable()
     {
         inputActions = new PlayerControls();
         inputActions.Enable();
     }
 
+    // Disables the input registration
     private void OnDisable()
     {
         inputActions.Disable();
