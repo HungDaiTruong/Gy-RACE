@@ -47,7 +47,7 @@ MonoBehaviour:
   time: 0
   timerOn: 0
   timerText: {fileID: 719546400552441101}
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 1623801088944438467}
   speedText: {fileID: 3731348129816914726}
   scoreboard: {fileID: 6331863173888770704}
 --- !u!1 &256588847355706378
@@ -354,7 +354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2396142828645342086
 Transform:
   m_ObjectHideFlags: 0
@@ -420,7 +420,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2396142828645342087}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &2396142828645342085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1287,12 +1287,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ff3ef0c89333243b878a638069cbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movePositionTransform: {fileID: 0}
   pivot: {fileID: 6125226200005139444}
   wheel: {fileID: 3066735118384922859}
   innerRing: {fileID: 1433373485451174839}
-  maxSpeed: 80
+  maxSpeed: 60
   acceleration: 2
-  handling: 2
+  handling: 3
   steeringSensitivity: 0.8
 --- !u!195 &6088567985031558014
 NavMeshAgent:
@@ -1304,7 +1305,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.72928
-  m_Speed: 80
+  m_Speed: 50
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 10
@@ -1713,7 +1714,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1282970903}
         m_TargetAssemblyTypeName: RaceTimer, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1

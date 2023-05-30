@@ -34,7 +34,7 @@ public class PlayerNavMesh : MonoBehaviour
 
     private void Start()
     {
-        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-20f, 0, 0f));
+        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -10f));
         navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
     }
 
@@ -110,12 +110,12 @@ public class PlayerNavMesh : MonoBehaviour
         // Apply the steering rotation to the agent's transform
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, handling * Time.deltaTime);
 
-        // Adjust the agent's velocity based on the deceleration rate
-        rb.velocity *= Mathf.Max(1f - decelerationRate, 0f);
+        // Adjust the agent's velocity based on the deceleration rate (if it is a valid value)
+        if (!float.IsNaN(decelerationRate) && !float.IsInfinity(decelerationRate))
+        {
+            rb.velocity *= Mathf.Max(1f - decelerationRate, 0f);
+        }
     }
-
-
-
 
     /*private void Move()
     {
