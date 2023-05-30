@@ -1291,9 +1291,9 @@ MonoBehaviour:
   pivot: {fileID: 6125226200005139444}
   wheel: {fileID: 3066735118384922859}
   innerRing: {fileID: 1433373485451174839}
-  maxSpeed: 50
+  maxSpeed: 60
   acceleration: 2
-  handling: 2
+  handling: 3
   steeringSensitivity: 0.8
 --- !u!195 &6088567985031558014
 NavMeshAgent:

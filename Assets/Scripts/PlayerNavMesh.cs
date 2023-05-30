@@ -34,7 +34,7 @@ public class PlayerNavMesh : MonoBehaviour
 
     private void Start()
     {
-        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-20f, 0, 0f));
+        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -10f));
         navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
     }
 
