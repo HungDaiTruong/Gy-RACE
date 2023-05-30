@@ -13945,6 +13945,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2396142828645342084, guid: bcf99871975aa1d45ad6ac6abbce2886, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2396142828645342087, guid: bcf99871975aa1d45ad6ac6abbce2886, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -14102,7 +14106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2566067878536304081, guid: 7810454dc37284b49a3cc2f7180c331a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2566067878536304081, guid: 7810454dc37284b49a3cc2f7180c331a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14143,6 +14147,10 @@ PrefabInstance:
     - target: {fileID: 2942910557390507883, guid: 7810454dc37284b49a3cc2f7180c331a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942910557390507883, guid: 7810454dc37284b49a3cc2f7180c331a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7810454dc37284b49a3cc2f7180c331a, type: 3}
