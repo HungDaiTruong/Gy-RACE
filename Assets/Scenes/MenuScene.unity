@@ -19916,12 +19916,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b56919a064746f47b03ba8adb5259f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mOption: {fileID: 0}
-  dropdownResolution: {fileID: 0}
-  dropdownQuality: {fileID: 0}
-  audioMixer: {fileID: 0}
-  audioMixerMusic: {fileID: 0}
-  audioSourceMenu: {fileID: 0}
+  mOption: {fileID: 2052681956}
+  dropdownResolution: {fileID: 1002694316}
+  dropdownQuality: {fileID: 1937833935}
+  audioMixer: {fileID: 24100000, guid: e20ed513953667646b132391505186fe, type: 2}
+  audioMixerMusic: {fileID: 24100000, guid: e20ed513953667646b132391505186fe, type: 2}
+  audioSourceMenu: {fileID: 1609570407}
 --- !u!1 &1699252963
 GameObject:
   m_ObjectHideFlags: 0
