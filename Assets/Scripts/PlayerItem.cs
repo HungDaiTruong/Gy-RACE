@@ -4,31 +4,32 @@ using UnityEngine;
 
 public class PlayerItem : MonoBehaviour
 {
-    // Add variables for bomb, laser, and shield
+    private GameObject currentItem; // The currently held item
 
-    private void OnTriggerEnter(Collider other)
+    public void ReceiveItem(GameObject itemPrefab)
     {
-        if (other.CompareTag("Item"))
+        if (currentItem != null)
         {
-            // Get the item's script component
-            Item item = other.GetComponent<Item>();
+            // Discard the previous item if one is already held
+            Destroy(currentItem);
+        }
 
-            // Check the type of item and perform the corresponding action
-            switch (item.itemType)
+        currentItem = Instantiate(itemPrefab, transform);
+    }
+
+    public void UseItem()
+    {
+        if (currentItem != null)
+        {
+            // Call the appropriate method on the current item script
+            Item currentItemScript = currentItem.GetComponent<Item>();
+            if (currentItemScript != null)
             {
-                case ItemType.Bomb:
-                    // TODO: Handle bomb item
-                    break;
-                case ItemType.Laser:
-                    // TODO: Handle laser item
-                    break;
-                case ItemType.Shield:
-                    // TODO: Handle shield item
-                    break;
+                currentItemScript.Use();
             }
 
-            // Destroy the item object
-            Destroy(other.gameObject);
+            // Discard the item after using it
+            Destroy(currentItem);
         }
     }
 }

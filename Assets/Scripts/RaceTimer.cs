@@ -18,6 +18,8 @@ public class RaceTimer : MonoBehaviour
     private PlayerLapper playerLapper;
     [SerializeField]
     private PlayerLapper[] playerLappers;
+    [SerializeField]
+    private RaceTimer[] raceTimers;
 
     private GameObject player1;
     private GameObject player2;
@@ -44,9 +46,10 @@ public class RaceTimer : MonoBehaviour
     void Update()
     {
         playerLappers = FindObjectsOfType<PlayerLapper>();
+        raceTimers = FindObjectsOfType<RaceTimer>();
 
         // Ends when the 4th lap is starting, for a total of 3 laps
-        if (timerOn && !(playerLapper.lap == 4 && playerLapper.checkpointIndex == 0))
+        if (timerOn && !(playerLapper.lap >= 4 /*&& playerLapper.checkpointIndex == 0*/))
         {
             time += Time.deltaTime;
             UpdateTimer(time);
@@ -57,12 +60,13 @@ public class RaceTimer : MonoBehaviour
             Debug.Log(time);
             Debug.Log("Race is Finished");
             playerLocomotion.OnDisable();
+
             bool allFinished = true; // Flag to track if all players have finished
 
             foreach (PlayerLapper playerLapper in playerLappers)
             {
                 // Check if any player has not finished all laps
-                if (!(playerLapper.lap == 4 && playerLapper.checkpointIndex == 0))
+                if (!(playerLapper.lap >= 4 /*&& playerLapper.checkpointIndex == 0*/))
                 {
                     allFinished = false;
                     break;
@@ -80,14 +84,15 @@ public class RaceTimer : MonoBehaviour
     private void UpdateTimer(float currentTime)
     {
         // Updates the timer and displays the time, laps and checkpoints counts
-        currentTime += 1;
+        //currentTime += 1;
 
         float minutes = Mathf.FloorToInt(currentTime / 60);
         float seconds = Mathf.FloorToInt(currentTime % 60);
 
         timerText.text = string.Format(" {0:00}  :  {1:00}\n Lap {2}/3\n Checkpoint {3}/{4}", minutes, seconds, playerLapper.lap, playerLapper.checkpointIndex + 1, CheckpointScript.checkpointNumber);
+
         // Value used as a display during the scoreboard
-        scoreText.text = string.Format("{0:00}  :  {1:00}", minutes, seconds);
+        //scoreText.text = string.Format("{0:00}  :  {1:00}", minutes, seconds);
     }
 
     private void Speedometer()
@@ -97,9 +102,75 @@ public class RaceTimer : MonoBehaviour
         speedText.SetText(speed.ToString() + " km/h");
     }
 
+    // Stops the game once the laps are completed
     public void GameIsDone()
     {
-        // Stops the game once the laps are completed
+        // Create a list to store the currentTimer values of all vehicles along with their GameObject names
+        List<(float, string)> vehicleData = new List<(float, string)>();
+
+        // Add the currentTimer and GameObject name of each RaceTimer to the list
+        foreach (RaceTimer raceTimer in raceTimers)
+        {
+            vehicleData.Add((raceTimer.time, raceTimer.transform.parent.gameObject.name));
+        }
+
+        // Sort the vehicleData list based on currentTimer values (ascending order)
+        vehicleData.Sort((a, b) => a.Item1.CompareTo(b.Item1));
+
+        // Calculate the maximum name length among the vehicle names
+        int maxNameLength = 0;
+        foreach (var data in vehicleData)
+        {
+            int nameLength = data.Item2.Length;
+            if (nameLength > maxNameLength)
+            {
+                maxNameLength = nameLength;
+            }
+        }
+
+        // Create a string to hold the formatted timer values, vehicle ranks, names, and times
+        string timerSummary = "";
+
+        // Iterate over the vehicleData list and add the formatted values to the summary string
+        for (int i = 0; i < vehicleData.Count; i++)
+        {
+            float minutes = Mathf.FloorToInt(vehicleData[i].Item1 / 60);
+            float seconds = Mathf.FloorToInt(vehicleData[i].Item1 % 60);
+
+            string rank = (i + 1).ToString();  // Rank starts from 1
+            string vehicleName = vehicleData[i].Item2;
+
+            // Truncate or pad the vehicle name to the maximum name length
+            if (vehicleName.Length > maxNameLength)
+            {
+                vehicleName = vehicleName.Substring(0, maxNameLength);
+            }
+            else
+            {
+                vehicleName = vehicleName.PadRight(maxNameLength);
+            }
+
+            // Format the rank, vehicle name, and time
+            string formattedEntry = string.Format("<mspace=0.7em>{0,-2} {1,-8} {2,2}:{3:00}\n", rank, vehicleName, minutes, seconds);
+
+            timerSummary += formattedEntry;
+        }
+
+        // Check if the number of vehicles is less than 8
+        int remainingSlots = 8 - vehicleData.Count;
+        if (remainingSlots > 0)
+        {
+            // Add empty slots for the remaining vehicles
+            for (int i = 0; i < remainingSlots; i++)
+            {
+                string emptyEntry = string.Format("<mspace=0.7em>{0,-2} {1,-8} {2,5}\n", "", "", "");
+                timerSummary += emptyEntry;
+            }
+        }
+
+        // Set the scoreText to display the timer summary
+        scoreText.text = timerSummary;
+
         scoreboard.SetActive(true);
         playerLapper.checkpointIndex = 0;
         playerLapper.lap = 1;

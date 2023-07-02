@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class ItemBox : MonoBehaviour
 {
-    public GameObject[] items; // Array of item prefabs
+    public GameObject[] itemPrefabs; // Array of item prefabs to choose from
 
-    public void Interact()
+    private void OnTriggerEnter(Collider other)
     {
-        // Generate a random item from the items array
-        int randomIndex = Random.Range(0, items.Length);
-        GameObject randomItem = items[randomIndex];
+        if (other.CompareTag("Player") || other.CompareTag("Player2") || other.CompareTag("AI")) // Check if the collider belongs to the player or AI opponent
+        {
+            PlayerItem playerItem = other.GetComponent<PlayerItem>();
+            if (playerItem != null)
+            {
+                GameObject randomItemPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+                playerItem.ReceiveItem(randomItemPrefab);
+            }
 
-        // Instantiate the random item at the item box's position
-        Instantiate(randomItem, transform.position, Quaternion.identity);
+            // Destroy the item box
+            Destroy(gameObject);
+        }
     }
 }
