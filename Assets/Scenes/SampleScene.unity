@@ -13309,6 +13309,8 @@ MonoBehaviour:
   scoreText: {fileID: 490661149}
   speedText: {fileID: 0}
   scoreboard: {fileID: 353904021}
+  playerLappers: []
+  raceTimers: []
 --- !u!1 &2050799211
 GameObject:
   m_ObjectHideFlags: 0
@@ -13907,6 +13909,18 @@ PrefabInstance:
     - target: {fileID: 2106590149858593724, guid: d6cfeb2f7a5f57d4b8f4fa820a7f8e05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018877350889102575, guid: d6cfeb2f7a5f57d4b8f4fa820a7f8e05, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 244.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018877350889102575, guid: d6cfeb2f7a5f57d4b8f4fa820a7f8e05, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 26.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018877350889102575, guid: d6cfeb2f7a5f57d4b8f4fa820a7f8e05, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 274.8
       objectReference: {fileID: 0}
     - target: {fileID: 6415317736181560158, guid: d6cfeb2f7a5f57d4b8f4fa820a7f8e05, type: 3}
       propertyPath: m_NavMeshLayer

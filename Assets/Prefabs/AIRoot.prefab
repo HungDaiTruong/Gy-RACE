@@ -50,6 +50,8 @@ MonoBehaviour:
   scoreText: {fileID: 1623801088944438467}
   speedText: {fileID: 3731348129816914726}
   scoreboard: {fileID: 6331863173888770704}
+  playerLappers: []
+  raceTimers: []
 --- !u!1 &256588847355706378
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +626,7 @@ GameObject:
   - component: {fileID: 6269127344042455599}
   - component: {fileID: 7398458355016320223}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: Panel Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -722,9 +724,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 360
+    m_Left: -300
     m_Right: 0
-    m_Top: 165
+    m_Top: 323
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 30
@@ -1095,23 +1097,23 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 5
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

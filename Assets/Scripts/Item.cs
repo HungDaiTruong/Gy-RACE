@@ -2,14 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
+public abstract class Item : MonoBehaviour
 {
-    Bomb,
-    Laser,
-    Shield
-}
-
-public class Item : MonoBehaviour
-{
-    public ItemType itemType;
+    public abstract void Use();
 }
