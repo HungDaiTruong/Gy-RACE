@@ -7,8 +7,10 @@ public class PlayerNavMesh : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     private PlayerLapper playerLapper;
+    
 
     [SerializeField]
+    
     private Transform movePositionTransform;
     private CheckpointScript checkpointScript;
 

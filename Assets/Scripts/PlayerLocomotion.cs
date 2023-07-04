@@ -18,6 +18,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private PlayerControls inputActions;
     private Rigidbody rb;
+    private float malusSpeed = 1;
 
     [SerializeField]
     public float realSpeed = 0f;
@@ -47,6 +48,9 @@ public class PlayerLocomotion : MonoBehaviour
     private bool isGrounded;
 
     [SerializeField]
+    private AccidentEventNotif notifAccidentSystem;
+
+    [SerializeField]
     private Vector2 movementInput;
     [SerializeField]
     private float driftInput;
@@ -56,6 +60,8 @@ public class PlayerLocomotion : MonoBehaviour
     private bool isDrifting;
     [SerializeField]
     private bool isTurboing;
+    [SerializeField]
+    private float useItem;
 
     public void OnEnable()
     {
@@ -99,6 +105,7 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player.Drift.ReadValue<float>();
             turboInput = inputActions.Player.Turbo.ReadValue<float>();
+            useItem = inputActions.Player.Item.ReadValue<float>();
         }
 
         // The Player 2 uses ARROWS LeftCtrl on default
@@ -107,7 +114,10 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
             turboInput = inputActions.Player2.Turbo.ReadValue<float>();
+            useItem = inputActions.Player2.Item.ReadValue<float>();
         }
+
+        
     }
 
     private void FixedUpdate()
@@ -120,6 +130,22 @@ public class PlayerLocomotion : MonoBehaviour
             VehicleRotations();
             EnergyHandler();
         }
+    }
+
+    public void setMalusSlowness(float duration)
+    {
+        malusSpeed = 0.5f;
+        notifAccidentSystem.AttentionNotif.SetActive(true);
+        StartCoroutine(DelayMalusSlowness(duration));
+
+    }
+    private IEnumerator DelayMalusSlowness(float duration)
+    {
+        
+        yield return new WaitForSeconds(duration/3);
+
+        notifAccidentSystem.AttentionNotif.SetActive(false);
+        malusSpeed = 1;
     }
 
     // Handles forward and backward movement
@@ -165,9 +191,13 @@ public class PlayerLocomotion : MonoBehaviour
                 currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
             }
         }
+        if (useItem>0) {
+            gameObject.GetComponent<Inventory>().useCloud();
+            gameObject.GetComponent<Inventory>().useShield();
+        }
 
         // Apply the current speed values into a forward vector force
-        Vector3 force = transform.forward * currentSpeed;
+        Vector3 force = transform.forward * currentSpeed*malusSpeed;
 
         force.y = rb.velocity.y;
         rb.mass = weight;
