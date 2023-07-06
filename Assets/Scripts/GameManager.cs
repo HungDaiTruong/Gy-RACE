@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
         {
             t.gameObject.SetActive(t.gameObject == chosenCircuit);
         }
+
+        DestroyItems();
     }
 
     // Enables the input registration
@@ -87,6 +89,8 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
+        DestroyItems();
+
         // Return to the main menu
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuScene");
@@ -96,5 +100,14 @@ public class GameManager : MonoBehaviour
     {
         // Return to the option
         Time.timeScale = 0;
+    }
+
+    private void DestroyItems()
+    {
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+        foreach (GameObject item in items)
+        {
+            Destroy(item);
+        }
     }
 }

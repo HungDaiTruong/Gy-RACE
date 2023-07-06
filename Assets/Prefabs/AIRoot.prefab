@@ -1155,6 +1155,7 @@ GameObject:
   - component: {fileID: 5677541588283174314}
   - component: {fileID: 6088567985031558015}
   - component: {fileID: 6088567985031558014}
+  - component: {fileID: 4085476351483294468}
   m_Layer: 0
   m_Name: AIRoot
   m_TagString: AI
@@ -1229,12 +1230,15 @@ MonoBehaviour:
   energyConsumption: 50
   energyRegeneration: 1
   weight: 1500
-  isGrounded: 0
   movementInput: {x: 0, y: 0}
   driftInput: 0
   turboInput: 0
+  itemInput: 0
   isDrifting: 0
   isTurboing: 0
+  isGrounded: 0
+  isSlowed: 0
+  isShielded: 0
 --- !u!135 &6088567985031557952
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1319,6 +1323,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4085476351483294468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3244142227192729725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bba7bf0e99dc5d47b457ea038457910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItem: {fileID: 0}
 --- !u!1 &4059846639753012718
 GameObject:
   m_ObjectHideFlags: 0

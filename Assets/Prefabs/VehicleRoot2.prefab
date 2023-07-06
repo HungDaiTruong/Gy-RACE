@@ -2007,6 +2007,7 @@ GameObject:
   - component: {fileID: 4309709403268641876}
   - component: {fileID: 4334791398453369574}
   - component: {fileID: 3691612594601101544}
+  - component: {fileID: 4572409517815066837}
   m_Layer: 0
   m_Name: VehicleRoot2
   m_TagString: Player2
@@ -2180,6 +2181,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyImage: {fileID: 2487598229755673171}
+--- !u!114 &4572409517815066837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6910608821374265137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bba7bf0e99dc5d47b457ea038457910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItem: {fileID: 0}
 --- !u!1 &7000819865276079798
 GameObject:
   m_ObjectHideFlags: 0

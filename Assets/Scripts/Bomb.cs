@@ -9,5 +9,11 @@ public class Bomb : Item
         Debug.Log("Using bomb!");
         // Implement the logic for using the bomb item
     }
+
+    public override void EndUse()
+    {
+        Debug.Log("Bomb item ended!");
+        // Implement the logic to end the bomb item's use
+    }
 }
 

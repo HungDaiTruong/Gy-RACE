@@ -16,15 +16,19 @@ public class PlayerLocomotion : MonoBehaviour
     public EngineComponentHandler engineComponentHandler;
     public EnergySystemComponentHandler energySystemComponentHandler;
 
+    // Player's item script
+    private PlayerItem playerItem;
+
     private PlayerControls inputActions;
     private Rigidbody rb;
 
+    [Header("Vehicle Stats")]
     [SerializeField]
     public float realSpeed = 0f;
     [SerializeField]
-    private float currentSpeed;
+    public float currentSpeed;
     [SerializeField][Range(10, 100)]
-    private int maxSpeed;
+    public int maxSpeed;
     [SerializeField][Range(1, 2)]
     private float turboMultiplier;
     [SerializeField][Range(10, 100)]
@@ -43,9 +47,10 @@ public class PlayerLocomotion : MonoBehaviour
     private int energyRegeneration;
     [SerializeField]
     private int weight;
-    [SerializeField]
-    private bool isGrounded;
 
+    [Space(20)]
+
+    [Header("Player Inputs")]
     [SerializeField]
     private Vector2 movementInput;
     [SerializeField]
@@ -53,9 +58,21 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private float turboInput;
     [SerializeField]
+    private bool itemInput;
+    [SerializeField]
     private bool isDrifting;
     [SerializeField]
     private bool isTurboing;
+
+    [Space(20)]
+
+    [Header("Vehicle Status")]
+    [SerializeField]
+    private bool isGrounded;
+    [SerializeField]
+    public bool isSlowed;
+    [SerializeField]
+    public bool isShielded;
 
     public void OnEnable()
     {
@@ -89,6 +106,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody>();
+        playerItem = GetComponent<PlayerItem>();
     }
 
     private void Update()
@@ -99,6 +117,7 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player.Drift.ReadValue<float>();
             turboInput = inputActions.Player.Turbo.ReadValue<float>();
+            itemInput = inputActions.Player.Item.WasPressedThisFrame();
         }
 
         // The Player 2 uses ARROWS LeftCtrl on default
@@ -107,6 +126,7 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
             turboInput = inputActions.Player2.Turbo.ReadValue<float>();
+            itemInput = inputActions.Player.Item.WasPressedThisFrame();
         }
     }
 
@@ -119,6 +139,7 @@ public class PlayerLocomotion : MonoBehaviour
             IsGrounded();
             VehicleRotations();
             EnergyHandler();
+            ItemHandler();
         }
     }
 
@@ -248,6 +269,14 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
+    private void ItemHandler()
+    {
+        if(itemInput)
+        {
+            playerItem.UseItem();
+        }
+    }
+
     private void IsGrounded()
     {
         // Sends a raycast downward to check if there is ground, if so then rotate the vehicle according to the ground normal
@@ -264,6 +293,29 @@ public class PlayerLocomotion : MonoBehaviour
             isGrounded = false;
         }
         Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0f), -transform.up, Color.red, 10f);
+    }
+
+    public IEnumerator IsSlowed()
+    {
+        if (!isShielded)
+        {
+            isSlowed = true;
+            int previousMaxSpeed = 0;
+
+            if (previousMaxSpeed != maxSpeed)
+            {
+                previousMaxSpeed = maxSpeed;
+            }
+
+            currentSpeed /= 4;
+            realSpeed /= 4;
+            maxSpeed /= 2;
+
+            yield return new WaitForSeconds(5f);
+
+            isSlowed = false;
+            maxSpeed = previousMaxSpeed;
+        }
     }
 
     private void VehicleRotations()
