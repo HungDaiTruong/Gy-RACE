@@ -9,7 +9,7 @@ public class WheelComponentHandler : Wheel
     public MeshFilter offRoadWheelMesh;
     public MeshFilter SmoothWheelMesh;
 
-    MeshFilter currentWheelMesh;
+    private MeshFilter currentWheelMesh;
 
     private void Start()
     {

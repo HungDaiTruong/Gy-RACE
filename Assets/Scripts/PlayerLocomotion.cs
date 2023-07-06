@@ -5,35 +5,42 @@ using UnityEngine.InputSystem;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    // Vehicle parts
     public Transform pivot;
     public Transform wheel;
     public Transform innerRing;
     public Transform pod;
 
+    // Handlers for each customization
     public WheelComponentHandler wheelComponentHandler;
     public EngineComponentHandler engineComponentHandler;
     public EnergySystemComponentHandler energySystemComponentHandler;
 
     private PlayerControls inputActions;
     private Rigidbody rb;
+    private float malusSpeed = 1;
 
     [SerializeField]
-    private float realSpeed;
+    public float realSpeed = 0f;
     [SerializeField]
     private float currentSpeed;
     [SerializeField][Range(10, 100)]
     private int maxSpeed;
-    [SerializeField][Range(15, 150)]
-    private int turboSpeed;
+    [SerializeField][Range(1, 2)]
+    private float turboMultiplier;
     [SerializeField][Range(10, 100)]
     private int backingSpeed;
     [SerializeField][Range(1, 5)]
     private int acceleration;
     [SerializeField][Range(1, 5)]
     private int handling;
+    [SerializeField][Range(0, 300)]
+    public int energy;
     [SerializeField][Range(100, 300)]
-    private int energyCapacity;
-    [SerializeField][Range(10, 30)]
+    public int energyCapacity;
+    [SerializeField][Range(10, 50)]
+    private int energyConsumption;
+    [SerializeField][Range(10, 50)]
     private int energyRegeneration;
     [SerializeField]
     private int weight;
@@ -41,11 +48,20 @@ public class PlayerLocomotion : MonoBehaviour
     private bool isGrounded;
 
     [SerializeField]
+    private AccidentEventNotif notifAccidentSystem;
+
+    [SerializeField]
     private Vector2 movementInput;
     [SerializeField]
     private float driftInput;
     [SerializeField]
+    private float turboInput;
+    [SerializeField]
     private bool isDrifting;
+    [SerializeField]
+    private bool isTurboing;
+    [SerializeField]
+    private float useItem;
 
     public void OnEnable()
     {
@@ -53,7 +69,7 @@ public class PlayerLocomotion : MonoBehaviour
         inputActions.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         inputActions.Disable();
     }
@@ -61,7 +77,7 @@ public class PlayerLocomotion : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-
+        // Check for the number of players and destroys the surplus
         GameObject[] players1 = GameObject.FindGameObjectsWithTag("Player");
         GameObject[] players2 = GameObject.FindGameObjectsWithTag("Player2");
         if (players1.Length > 1)
@@ -73,36 +89,66 @@ public class PlayerLocomotion : MonoBehaviour
             Destroy(players2[0]);
         }
 
-        DontDestroyOnLoad(gameObject);
+        if (!CompareTag("AI"))
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 
         rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        // The Player 1 uses ZQSD Shift 
+        // The Player 1 uses ZQSD Shift on default
         if(gameObject.tag == "Player")
         {
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player.Drift.ReadValue<float>();
+            turboInput = inputActions.Player.Turbo.ReadValue<float>();
+            useItem = inputActions.Player.Item.ReadValue<float>();
         }
 
-        // The Player 2 uses ARROWS LeftCtrl
+        // The Player 2 uses ARROWS LeftCtrl on default
         if (gameObject.tag == "Player2")
         {
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
+            turboInput = inputActions.Player2.Turbo.ReadValue<float>();
+            useItem = inputActions.Player2.Item.ReadValue<float>();
         }
+
+        
     }
 
     private void FixedUpdate()
     {
-        Move();
-        Steer();
-        IsGrounded();
-        VehicleRotations();
+        if (gameObject.tag != "AI")
+        {
+            Move();
+            Steer();
+            IsGrounded();
+            VehicleRotations();
+            EnergyHandler();
+        }
     }
 
+    public void setMalusSlowness(float duration)
+    {
+        malusSpeed = 0.5f;
+        notifAccidentSystem.AttentionNotif.SetActive(true);
+        StartCoroutine(DelayMalusSlowness(duration));
+
+    }
+    private IEnumerator DelayMalusSlowness(float duration)
+    {
+        
+        yield return new WaitForSeconds(duration/3);
+
+        notifAccidentSystem.AttentionNotif.SetActive(false);
+        malusSpeed = 1;
+    }
+
+    // Handles forward and backward movement
     private void Move()
     {
         // True speed of the vehicle ingame
@@ -111,19 +157,47 @@ public class PlayerLocomotion : MonoBehaviour
         // If forward/backward then the current speed value of the vehicle works up towards the maximum speed
         if (movementInput.y > 0 && isGrounded)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 30f));
+            // If the turbo is activated and the player is moving forward
+            if (turboInput > 0 && energy > 0)
+            {
+                isTurboing = true;
+                currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * turboMultiplier, Time.deltaTime * (acceleration / 2f));
+            }
+            // If the turbo isn't activated and the player isn't pressing anything
+            else
+            {
+                isTurboing = false;
+                currentSpeed = Mathf.Lerp(currentSpeed, maxSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 30f));
+            }
         }
+        // If the player is backing up
         else if(movementInput.y < 0 && isGrounded)
         {
+            isTurboing = false;
             currentSpeed = Mathf.Lerp(currentSpeed, backingSpeed * movementInput.y, Time.deltaTime * (3f * acceleration / 10f));
         }
         else
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
+            if (isGrounded)
+            {
+                // If grounded, the vehicle's speed value cannot be built up and decelerates back to the true speed
+                isTurboing = false;
+                currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
+            }
+            else
+            {
+                // If airborne, the vehicle can continue to build up it's speed value regardless of the true speed
+                isTurboing = false;
+                currentSpeed = Mathf.Lerp(currentSpeed, 0f, Time.deltaTime * handling / 5f);
+            }
+        }
+        if (useItem>0) {
+            gameObject.GetComponent<Inventory>().useCloud();
+            gameObject.GetComponent<Inventory>().useShield();
         }
 
         // Apply the current speed values into a forward vector force
-        Vector3 force = transform.forward * currentSpeed;
+        Vector3 force = transform.forward * currentSpeed*malusSpeed;
 
         force.y = rb.velocity.y;
         rb.mass = weight;
@@ -135,6 +209,7 @@ public class PlayerLocomotion : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward, Color.blue);
     }
 
+    // Method that handles all the steering and drifting movements
     private void Steer()
     {
         Vector3 steerForce;
@@ -178,7 +253,7 @@ public class PlayerLocomotion : MonoBehaviour
         // If the actual speed is too high, then steering becomes more difficult
         if (isDrifting)
         {
-            steerAmount = realSpeed > 50f / handling ? (realSpeed / (1f / handling * 2.5f) * movementInput.x) : steerAmount = (realSpeed / (0.5f / handling * 2.5f) * movementInput.x);
+            steerAmount = realSpeed > 50f / handling ? (realSpeed / (1f / handling * 3.5f) * movementInput.x) : steerAmount = (realSpeed / (0.5f / handling * 2.5f) * movementInput.x);
         }
         else
         {
@@ -186,6 +261,21 @@ public class PlayerLocomotion : MonoBehaviour
         }
         steerForce = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + steerAmount, transform.eulerAngles.z);
         transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, steerForce, 3 * Time.deltaTime);
+    }
+
+    // Method that manages the vehicle's energy levels
+    private void EnergyHandler()
+    {
+        if (isTurboing)
+        {
+            // Drains the energy when turboing
+            energy = (int)Mathf.Clamp(energy - Time.deltaTime * energyConsumption, 0, energyCapacity);
+        }
+        else if (isDrifting)
+        {
+            // Regenerates the energy when drifting
+            energy = (int)Mathf.Clamp(energy + Time.deltaTime * energyRegeneration * 5, 0, energyCapacity);
+        }
     }
 
     private void IsGrounded()
@@ -221,11 +311,13 @@ public class PlayerLocomotion : MonoBehaviour
         // Tilt the vehicle sideway for a more dynamic steering, the more intense the steering speed, the lower the vehicle tilts
         if (movementInput.x > 0)
         {
-            pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 0f, -currentSpeed * 1.3f), Time.deltaTime);
+            float zRotation = -Mathf.Clamp(currentSpeed * 1.3f, -130, maxSpeed);
+            pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 0f, zRotation), Time.deltaTime);
         }
         else if (movementInput.x < 0)
         {
-            pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 0f, currentSpeed * 1.3f), Time.deltaTime);
+            float zRotation = Mathf.Clamp(currentSpeed * 1.3f, -130, maxSpeed);
+            pivot.localRotation = Quaternion.Lerp(pivot.localRotation, Quaternion.Euler(0f, 0f, zRotation), Time.deltaTime);
         }
 
         // Rotates the inner ring so it stays upright according to the ground
@@ -244,8 +336,8 @@ public class PlayerLocomotion : MonoBehaviour
         maxSpeed = (int)wheelComponentHandler.speed;
         handling = (int)wheelComponentHandler.handling;
         acceleration = (int)engineComponentHandler.acceleration;
-        turboSpeed = (int)engineComponentHandler.turboSpeed;
-        energyCapacity = (int)energySystemComponentHandler.energyCapacity;
+        turboMultiplier = engineComponentHandler.turboMultiplier;
+        energyConsumption = (int)energySystemComponentHandler.energyConsumption;
         energyRegeneration = (int)energySystemComponentHandler.energyRegeneration;
     }
 }

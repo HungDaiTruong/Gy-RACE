@@ -26,12 +26,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Enables the input registration
     public void OnEnable()
     {
         inputActions = new PlayerControls();
         inputActions.Enable();
     }
 
+    // Disables the input registration
     private void OnDisable()
     {
         inputActions.Disable();
@@ -88,5 +90,11 @@ public class GameManager : MonoBehaviour
         // Return to the main menu
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuScene");
+    }
+
+    public void Option()
+    {
+        // Return to the option
+        Time.timeScale = 0;
     }
 }

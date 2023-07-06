@@ -32,7 +32,7 @@ public class EnergySystemComponentHandler : EnergySystem
                 engineObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 191) / 100f );
                 paneObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 191) / 100f );
                 podObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 191) / 100f );
-                energyCapacity = new GyroscopicSystem().energyCapacity;
+                energyConsumption = new GyroscopicSystem().energyConsumption;
                 durability = new GyroscopicSystem().durability;
                 energyRegeneration = new GyroscopicSystem().energyRegeneration;
                 break;
@@ -42,7 +42,7 @@ public class EnergySystemComponentHandler : EnergySystem
                 engineObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 0) / 100f );
                 paneObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 0) / 100f );
                 podObject.materials[1].SetColor("_EmissionColor", new Color(191, 191, 0) / 100f );
-                energyCapacity = new MagneticSystem().energyCapacity;
+                energyConsumption = new MagneticSystem().energyConsumption;
                 durability = new MagneticSystem().durability;
                 energyRegeneration = new MagneticSystem().energyRegeneration;
                 break;
@@ -52,7 +52,7 @@ public class EnergySystemComponentHandler : EnergySystem
                 engineObject.materials[1].SetColor("_EmissionColor", new Color(0, 191, 191) / 100f );
                 paneObject.materials[1].SetColor("_EmissionColor", new Color(0, 191, 191) / 100f );
                 podObject.materials[1].SetColor("_EmissionColor", new Color(0, 191, 191) / 100f );
-                energyCapacity = new GravitySystem().energyCapacity;
+                energyConsumption = new GravitySystem().energyConsumption;
                 durability = new GravitySystem().durability;
                 energyRegeneration = new GravitySystem().energyRegeneration;
                 break;

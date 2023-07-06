@@ -11,6 +11,7 @@ public class CheckpointScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Parent object of all checkpoints
         collectionObject = transform.parent.gameObject;
 
         // Count the child objects of the collectionObject for the total amount of checkpoints
@@ -19,11 +20,16 @@ public class CheckpointScript : MonoBehaviour
         checkpointIndex = transform.GetSiblingIndex();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, 0);
-        player.transform.rotation = Quaternion.Euler(0, -90f, 0);
-        player = GameObject.FindGameObjectWithTag("Player2");
-        player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-15f, 0, -5f);
-        player.transform.rotation = Quaternion.Euler(0, -90f, 0);
+        player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-25f, 0, 0);
+        player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+
+        // Spawn location of Player Two
+        if (GameObject.FindGameObjectWithTag("Player2") != null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player2");
+            player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-25f, 0, -5f);
+            player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+        }
     }
 
     public void OnTriggerEnter(Collider collider)
