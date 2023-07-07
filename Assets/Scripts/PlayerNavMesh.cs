@@ -35,7 +35,7 @@ public class PlayerNavMesh : MonoBehaviour
     private void Start()
     {
         // Spawns the AI at a certain location behind the first Checkpoint
-        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-25f, 0, -10f));
+        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-30f, 0, -10f));
         navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
     }
 

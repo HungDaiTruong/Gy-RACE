@@ -21,9 +21,6 @@ public class RaceTimer : MonoBehaviour
     [SerializeField]
     private RaceTimer[] raceTimers;
 
-    private GameObject player1;
-    private GameObject player2;
-
     private void Awake()
     {
         playerLocomotion = GetComponentInParent<PlayerLocomotion>();
@@ -37,9 +34,6 @@ public class RaceTimer : MonoBehaviour
         timerText.fontSize = 16;
 
         playerLapper = transform.parent.GetComponent<PlayerLapper>();
-
-        player1 = GameObject.FindGameObjectWithTag("Player");
-        player2 = GameObject.FindGameObjectWithTag("Player2");
     }
 
     // Update is called once per frame
