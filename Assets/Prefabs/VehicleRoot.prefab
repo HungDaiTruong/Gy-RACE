@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 100
     OrthographicSize: 5
-    NearClipPlane: 0.3
+    NearClipPlane: 0.1
     FarClipPlane: 2000
     Dutch: 0
     ModeOverride: 0
@@ -1109,6 +1109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ab1aed58308d443a8851506c653bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backTarget: {fileID: 374763091047777243}
 --- !u!1 &3977049697024357805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,6 +1186,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4066118020912929951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 374763091047777243}
+  m_Layer: 0
+  m_Name: CameraBackTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &374763091047777243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4066118020912929951}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7217092918540158921}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &4725904988146648373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,6 +1712,7 @@ Transform:
   - {fileID: 3214939703854315208}
   - {fileID: 5811456207061644131}
   - {fileID: 7706864117125264246}
+  - {fileID: 374763091047777243}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1768,12 +1801,16 @@ MonoBehaviour:
   energyConsumption: 50
   energyRegeneration: 1
   weight: 1500
-  isGrounded: 0
   movementInput: {x: 0, y: 0}
   driftInput: 0
   turboInput: 0
+  itemInput: 0
+  lookingBackInput: 0
   isDrifting: 0
   isTurboing: 0
+  isGrounded: 0
+  isSlowed: 0
+  isShielded: 0
 --- !u!135 &2113087341049881845
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1841,6 +1878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bba7bf0e99dc5d47b457ea038457910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentItem: {fileID: 0}
 --- !u!1 &8158795604678794881
 GameObject:
   m_ObjectHideFlags: 0

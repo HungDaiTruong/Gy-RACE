@@ -6,8 +6,10 @@ public class Shield : Item
 {
     private float remainingDuration; // Remaining duration of the shield
 
-    private void Update()
+    private void FixedUpdate()
     {
+        transform.rotation = transform.parent.GetChild(0).rotation;
+
         if (remainingDuration > 0f)
         {
             remainingDuration -= Time.deltaTime;
@@ -23,7 +25,7 @@ public class Shield : Item
         PlayerLocomotion playerLocomotion = GetComponentInParent<PlayerLocomotion>();
         playerLocomotion.isShielded = true;
 
-        remainingDuration = duration; // Set the remaining duration to the total duration*
+        remainingDuration = duration; // Set the remaining duration to the total duration
 
         Debug.Log("Using shield!");
     }

@@ -100,6 +100,9 @@ public class GameManager : MonoBehaviour
     {
         // Return to the option
         Time.timeScale = 0;
+
+        MenuOption menuOption = FindObjectOfType<MenuOption>();
+        menuOption.transform.GetChild(1).gameObject.SetActive(!menuOption.transform.GetChild(1).gameObject.activeSelf);
     }
 
     private void DestroyItems()

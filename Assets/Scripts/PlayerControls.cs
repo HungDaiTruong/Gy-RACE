@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Camera"",
+                    ""type"": ""Button"",
+                    ""id"": ""d68f90d9-e961-46e1-b322-8339bf8beb8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4146d82-500c-4794-b39f-a82e9dc63807"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -190,6 +210,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Item"",
                     ""type"": ""Button"",
                     ""id"": ""a05c90d0-8bc0-4836-9811-44bcbb8b8a08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Camera"",
+                    ""type"": ""Button"",
+                    ""id"": ""0fdf3c75-63e9-4529-a030-fb32e9fd8b8b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -284,6 +313,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1ef2237-c347-40ad-a25f-0b5aa3e7cfc3"",
+                    ""path"": ""<Keyboard>/rightShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -324,12 +364,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Turbo = m_Player.FindAction("Turbo", throwIfNotFound: true);
         m_Player_Drift = m_Player.FindAction("Drift", throwIfNotFound: true);
         m_Player_Item = m_Player.FindAction("Item", throwIfNotFound: true);
+        m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Movement = m_Player2.FindAction("Movement", throwIfNotFound: true);
         m_Player2_Turbo = m_Player2.FindAction("Turbo", throwIfNotFound: true);
         m_Player2_Drift = m_Player2.FindAction("Drift", throwIfNotFound: true);
         m_Player2_Item = m_Player2.FindAction("Item", throwIfNotFound: true);
+        m_Player2_Camera = m_Player2.FindAction("Camera", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -398,6 +440,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Turbo;
     private readonly InputAction m_Player_Drift;
     private readonly InputAction m_Player_Item;
+    private readonly InputAction m_Player_Camera;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -406,6 +449,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Turbo => m_Wrapper.m_Player_Turbo;
         public InputAction @Drift => m_Wrapper.m_Player_Drift;
         public InputAction @Item => m_Wrapper.m_Player_Item;
+        public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -427,6 +471,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Item.started += instance.OnItem;
             @Item.performed += instance.OnItem;
             @Item.canceled += instance.OnItem;
+            @Camera.started += instance.OnCamera;
+            @Camera.performed += instance.OnCamera;
+            @Camera.canceled += instance.OnCamera;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -443,6 +490,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Item.started -= instance.OnItem;
             @Item.performed -= instance.OnItem;
             @Item.canceled -= instance.OnItem;
+            @Camera.started -= instance.OnCamera;
+            @Camera.performed -= instance.OnCamera;
+            @Camera.canceled -= instance.OnCamera;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -468,6 +518,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player2_Turbo;
     private readonly InputAction m_Player2_Drift;
     private readonly InputAction m_Player2_Item;
+    private readonly InputAction m_Player2_Camera;
     public struct Player2Actions
     {
         private @PlayerControls m_Wrapper;
@@ -476,6 +527,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Turbo => m_Wrapper.m_Player2_Turbo;
         public InputAction @Drift => m_Wrapper.m_Player2_Drift;
         public InputAction @Item => m_Wrapper.m_Player2_Item;
+        public InputAction @Camera => m_Wrapper.m_Player2_Camera;
         public InputActionMap Get() { return m_Wrapper.m_Player2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -497,6 +549,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Item.started += instance.OnItem;
             @Item.performed += instance.OnItem;
             @Item.canceled += instance.OnItem;
+            @Camera.started += instance.OnCamera;
+            @Camera.performed += instance.OnCamera;
+            @Camera.canceled += instance.OnCamera;
         }
 
         private void UnregisterCallbacks(IPlayer2Actions instance)
@@ -513,6 +568,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Item.started -= instance.OnItem;
             @Item.performed -= instance.OnItem;
             @Item.canceled -= instance.OnItem;
+            @Camera.started -= instance.OnCamera;
+            @Camera.performed -= instance.OnCamera;
+            @Camera.canceled -= instance.OnCamera;
         }
 
         public void RemoveCallbacks(IPlayer2Actions instance)
@@ -582,6 +640,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnTurbo(InputAction.CallbackContext context);
         void OnDrift(InputAction.CallbackContext context);
         void OnItem(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {
@@ -589,6 +648,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnTurbo(InputAction.CallbackContext context);
         void OnDrift(InputAction.CallbackContext context);
         void OnItem(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

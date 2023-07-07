@@ -5,23 +5,40 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuOption : MonoBehaviour
 {
     public GameObject mOption;
-    bool visible = false;
 
     public TMP_Dropdown dropdownResolution;
     public TMP_Dropdown dropdownQuality;
+    public Slider volumeSlider;
 
     public AudioMixer audioMixer;
-    public AudioMixer audioMixerMusic;
 
-    public AudioSource audioSourceMenu;
+    public AudioSource audioSource;
+
+    public AudioClip[] audioClips;
 
     Resolution[] resolutions;
 
-    void Start()
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
     {
         resolutions = Screen.resolutions;
         dropdownResolution.ClearOptions();
@@ -46,6 +63,9 @@ public class MenuOption : MonoBehaviour
         dropdownResolution.AddOptions(options);
         dropdownResolution.value = currentResolutionIndex;
         dropdownResolution.RefreshShownValue();
+
+        volumeSlider.onValueChanged.AddListener(SetVolume);
+        volumeSlider.GraphicUpdateComplete();
     }
 
     // Sets the resolution
@@ -56,16 +76,9 @@ public class MenuOption : MonoBehaviour
     }
 
     // Sets the menu volume
-    public void SetVolumeMenu (float volumeMenu)
+    public void SetVolume (float volume)
     {
-        audioSourceMenu.volume = volumeMenu;
-        print(volumeMenu);
-    }
-
-    // Sets the game volume
-    public void SetVolumeGame(float volumeGame)
-    {
-        audioMixerMusic.SetFloat("volumeMusic", volumeGame);
+        audioSource.volume = volume;
     }
 
     // Sets the quality
@@ -78,5 +91,32 @@ public class MenuOption : MonoBehaviour
     public void SetFullscreen (bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Perform actions when a new scene is loaded
+        
+        if(scene.name == "SampleScene")
+        {
+            audioSource.clip = audioClips[1];
+            audioSource.volume = volumeSlider.value;
+            audioSource.Play();
+        }
+        else
+        {
+            // Check for the number of iterations
+            MenuOption[] iterations = FindObjectsOfType<MenuOption>();
+
+            if (iterations.Length > 1)
+            {
+                iterations[1].volumeSlider.value = iterations[0].volumeSlider.value;
+                Destroy(iterations[0].gameObject);
+            }
+
+            audioSource.clip = audioClips[0];
+            audioSource.volume = volumeSlider.value;
+            audioSource.Play();
+        }
     }
 }

@@ -2263,7 +2263,6 @@ Transform:
   - {fileID: 1673453778}
   - {fileID: 53318117}
   - {fileID: 474126518}
-  - {fileID: 1697647505}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2303,7 +2302,6 @@ Transform:
   - {fileID: 2085273381}
   - {fileID: 1001065960}
   - {fileID: 146282383}
-  - {fileID: 2052681957}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18806,7 +18804,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e473bc3426c71764891038e05b062c5d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -19934,10 +19932,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2052681962}
+      - m_Target: {fileID: 1697647506}
         m_TargetAssemblyTypeName: MenuOption, Assembly-CSharp
-        m_MethodName: SetVolumeMenu
-        m_Mode: 0
+        m_MethodName: SetVolume
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -20014,7 +20012,7 @@ GameObject:
   - component: {fileID: 1697647505}
   - component: {fileID: 1697647506}
   m_Layer: 0
-  m_Name: Music
+  m_Name: MusicAndOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20033,8 +20031,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1609570406}
-  m_Father: {fileID: 222244799}
-  m_RootOrder: 3
+  - {fileID: 2052681957}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1697647506
 MonoBehaviour:
@@ -20051,9 +20050,12 @@ MonoBehaviour:
   mOption: {fileID: 2052681956}
   dropdownResolution: {fileID: 1002694316}
   dropdownQuality: {fileID: 1937833935}
+  volumeSlider: {fileID: 1663489139}
   audioMixer: {fileID: 24100000, guid: e20ed513953667646b132391505186fe, type: 2}
-  audioMixerMusic: {fileID: 24100000, guid: e20ed513953667646b132391505186fe, type: 2}
-  audioSourceMenu: {fileID: 1609570407}
+  audioSource: {fileID: 1609570407}
+  audioClips:
+  - {fileID: 8300000, guid: e473bc3426c71764891038e05b062c5d, type: 3}
+  - {fileID: 8300000, guid: 1d893fe7f21469847a18af53b004f37e, type: 3}
 --- !u!1 &1699252963
 GameObject:
   m_ObjectHideFlags: 0
@@ -23224,7 +23226,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2052681962}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuOption, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 0
@@ -24646,7 +24648,6 @@ GameObject:
   - component: {fileID: 2052681961}
   - component: {fileID: 2052681960}
   - component: {fileID: 2052681959}
-  - component: {fileID: 2052681962}
   m_Layer: 0
   m_Name: MenuOption Canvas
   m_TagString: Untagged
@@ -24661,7 +24662,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052681956}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -24676,8 +24677,8 @@ RectTransform:
   - {fileID: 2052427889}
   - {fileID: 1209153968}
   - {fileID: 1606508038}
-  m_Father: {fileID: 228550009}
-  m_RootOrder: 8
+  m_Father: {fileID: 1697647505}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -24745,24 +24746,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &2052681962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052681956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b56919a064746f47b03ba8adb5259f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mOption: {fileID: 2052681956}
-  dropdownResolution: {fileID: 1002694316}
-  dropdownQuality: {fileID: 1937833935}
-  audioMixer: {fileID: 24100000, guid: e20ed513953667646b132391505186fe, type: 2}
-  audioMixerMusic: {fileID: 24100000, guid: e20ed513953667646b132391505186fe, type: 2}
-  audioSourceMenu: {fileID: 1609570407}
 --- !u!1 &2059242326
 GameObject:
   m_ObjectHideFlags: 0

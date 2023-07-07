@@ -28,7 +28,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     public float currentSpeed;
     [SerializeField][Range(10, 100)]
-    public int maxSpeed;
+    public float maxSpeed;
     [SerializeField][Range(1, 2)]
     private float turboMultiplier;
     [SerializeField][Range(10, 100)]
@@ -48,7 +48,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private int weight;
 
-    [Space(20)]
+    [Space(10)]
 
     [Header("Player Inputs")]
     [SerializeField]
@@ -60,11 +60,13 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private bool itemInput;
     [SerializeField]
+    public bool lookingBackInput;
+    [SerializeField]
     private bool isDrifting;
     [SerializeField]
     private bool isTurboing;
 
-    [Space(20)]
+    [Space(10)]
 
     [Header("Vehicle Status")]
     [SerializeField]
@@ -118,6 +120,7 @@ public class PlayerLocomotion : MonoBehaviour
             driftInput = inputActions.Player.Drift.ReadValue<float>();
             turboInput = inputActions.Player.Turbo.ReadValue<float>();
             itemInput = inputActions.Player.Item.WasPressedThisFrame();
+            lookingBackInput = inputActions.Player.Camera.WasPressedThisFrame();
         }
 
         // The Player 2 uses ARROWS LeftCtrl on default
@@ -127,6 +130,7 @@ public class PlayerLocomotion : MonoBehaviour
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
             turboInput = inputActions.Player2.Turbo.ReadValue<float>();
             itemInput = inputActions.Player.Item.WasPressedThisFrame();
+            lookingBackInput = inputActions.Player2.Camera.WasPressedThisFrame();
         }
     }
 
@@ -300,21 +304,15 @@ public class PlayerLocomotion : MonoBehaviour
         if (!isShielded)
         {
             isSlowed = true;
-            int previousMaxSpeed = 0;
 
-            if (previousMaxSpeed != maxSpeed)
-            {
-                previousMaxSpeed = maxSpeed;
-            }
-
-            currentSpeed /= 4;
-            realSpeed /= 4;
-            maxSpeed /= 2;
+            currentSpeed /= 4f;
+            realSpeed /= 4f;
+            maxSpeed /= 2f;
 
             yield return new WaitForSeconds(5f);
 
             isSlowed = false;
-            maxSpeed = previousMaxSpeed;
+            maxSpeed *= 2f;
         }
     }
 
