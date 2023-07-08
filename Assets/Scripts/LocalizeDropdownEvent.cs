@@ -6,7 +6,8 @@ using TMPro;
 
 public class LocalizeDropdownEvent : MonoBehaviour
 {
-    [SerializeField] private List<LocalizedString> dropdownOptions;
+    [SerializeField]
+    private List<LocalizedString> dropdownOptions;
     private TMP_Dropdown tmpDropdown;
 
     private void Awake()

@@ -11,6 +11,7 @@ Current features :
       - Singleplayer mode or Two Player mode
       - Customization menu for your vehicle with a customizable Wheel, Engine and unique Energy Systems
       - Map selection 2/5
+      - Localization
   - Player Menu
       - Pause Menu, Race timer, Lap and Checkpoint counts
       - Scoreboard 1/2
@@ -28,7 +29,6 @@ Current features :
       
 To do features :
 
-  - Localization
   - Organize the Time Trial and Tournament modes
   - AI difficulty
   - Finish the Options screen
