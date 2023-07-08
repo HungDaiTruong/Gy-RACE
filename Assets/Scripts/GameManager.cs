@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject pauseCanvas;
     public GameObject circuitGroup;
+    private MenuOption menuOption;
 
     private PlayerControls inputActions;
 
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
     {
         isPlayable = true;
         pauseCanvas.SetActive(false);
+
+        menuOption = FindObjectOfType<MenuOption>();
     }
 
     // Update is called once per frame
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
         // Resumes the game and disable the menu
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
+        menuOption.transform.GetChild(1).gameObject.SetActive(false);
         paused = false;
     }
 
@@ -101,8 +105,7 @@ public class GameManager : MonoBehaviour
         // Return to the option
         Time.timeScale = 0;
 
-        MenuOption menuOption = FindObjectOfType<MenuOption>();
-        menuOption.transform.GetChild(1).gameObject.SetActive(!menuOption.transform.GetChild(1).gameObject.activeSelf);
+        menuOption.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     private void DestroyItems()
