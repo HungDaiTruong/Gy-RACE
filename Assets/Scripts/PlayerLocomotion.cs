@@ -58,7 +58,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private float turboInput;
     [SerializeField]
-    private bool itemInput;
+    private float itemInput;
     [SerializeField]
     public bool lookingBackInput;
     [SerializeField]
@@ -119,7 +119,7 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player.Drift.ReadValue<float>();
             turboInput = inputActions.Player.Turbo.ReadValue<float>();
-            itemInput = inputActions.Player.Item.WasPressedThisFrame();
+            itemInput = inputActions.Player.Item.ReadValue<float>();
             lookingBackInput = inputActions.Player.Camera.WasPressedThisFrame();
         }
 
@@ -129,7 +129,7 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
             turboInput = inputActions.Player2.Turbo.ReadValue<float>();
-            itemInput = inputActions.Player.Item.WasPressedThisFrame();
+            itemInput = inputActions.Player.Item.ReadValue<float>();
             lookingBackInput = inputActions.Player2.Camera.WasPressedThisFrame();
         }
     }
@@ -275,7 +275,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void ItemHandler()
     {
-        if(itemInput)
+        if(itemInput > 0)
         {
             playerItem.UseItem();
         }
