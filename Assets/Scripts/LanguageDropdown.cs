@@ -21,6 +21,11 @@ public class LanguageDropdown : MonoBehaviour
         languageDropdown.onValueChanged.AddListener(SetLocale);
     }
 
+    void Update()
+    {
+        languageDropdown.onValueChanged.AddListener(SetLocale);
+    }
+
     void SetLocale(int option)
     {
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[option];
