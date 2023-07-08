@@ -13,22 +13,26 @@ Current features :
       - Map selection 2/5
   - Player Menu
       - Pause Menu, Race timer, Lap and Checkpoint counts
-      - Scoreboard 1/3
-  - Vehicle Mecanics
+      - Scoreboard 1/2
+  - Vehicle Mechanics
       - Movement, Steering, Drifting
       - Speed and Handling according to the selected Wheels
       - Acceleration and Turbo according to the selected Engines
       - Energy capacity and regeneration according to the selected Energy Systems
-  - Race Mecanics
+      - Front and Back camera
+  - Race Mechanics
       - Checkpoint and Lap systems
       - Possible shortcuts and Out of Bound system
+      - AI Opponents
+      - Randomized items 
       
 To do features :
 
-  - Credits and Options screens
-  - Energy Systems mecanics
-  - Complete tracks, vehicle parts and racing mecanics
-  - AI opponents
-  - Randomized items
+  - Localization
+  - Organize the Time Trial and Tournament modes
+  - AI difficulty
+  - Finish the Options screen
+  - Energy Systems mechanics
+  - Complete tracks and racing mechanics
   - Online Leaderboard and/or Shop
   
