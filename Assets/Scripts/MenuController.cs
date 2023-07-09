@@ -28,7 +28,9 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     public static string mapSelected;
     [SerializeField]
-    private string difficultySelected;
+    public static string difficultySelected;
+    [SerializeField]
+    public static string modeSelected;
 
     void Start()
     {
@@ -103,6 +105,12 @@ public class MenuController : MonoBehaviour
     {
         // Select the difficulty according to the buttons' names
         difficultySelected = button.name;
+    }
+
+    public void ChooseGameMode(Button button)
+    {
+        // Select the difficulty according to the buttons' names
+        modeSelected = button.name;
     }
 
     public void OnMultiplayerButtonClick()

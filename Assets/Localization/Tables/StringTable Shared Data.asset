@@ -201,6 +201,26 @@ MonoBehaviour:
     m_Key: Main Menu
     m_Metadata:
       m_Items: []
+  - m_Id: 315561799020544
+    m_Key: Choose Your Game Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400021705945088
+    m_Key: Scoreboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400128157380608
+    m_Key: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400160872951808
+    m_Key: Position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400452096061440
+    m_Key: Username
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

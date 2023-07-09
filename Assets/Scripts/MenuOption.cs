@@ -13,6 +13,7 @@ public class MenuOption : MonoBehaviour
 
     public TMP_Dropdown dropdownResolution;
     public TMP_Dropdown dropdownQuality;
+    public Toggle fullScreenToggle;
     public Slider volumeSlider;
 
     public AudioMixer audioMixer;
@@ -64,8 +65,12 @@ public class MenuOption : MonoBehaviour
         dropdownResolution.value = currentResolutionIndex;
         dropdownResolution.RefreshShownValue();
 
+        fullScreenToggle.onValueChanged.AddListener(SetFullscreen);
+
         volumeSlider.onValueChanged.AddListener(SetVolume);
         volumeSlider.GraphicUpdateComplete();
+
+
     }
 
     // Sets the resolution
@@ -90,7 +95,15 @@ public class MenuOption : MonoBehaviour
     // Toggles fullscreen
     public void SetFullscreen (bool isFullscreen)
     {
-        Screen.fullScreen = isFullscreen;
+        if (isFullscreen)
+        {
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        }
+        else
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+        Debug.Log(Screen.fullScreenMode);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
