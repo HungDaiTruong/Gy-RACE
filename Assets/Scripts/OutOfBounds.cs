@@ -10,13 +10,14 @@ public class OutOfBounds : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        checkpointScript = FindObjectOfType<CheckpointScript>();
     }
 
     public void OnTriggerEnter(Collider collider)
     {
         Debug.Log("Out of Bounds");
 
+        // If a player reaches the out of bound area, it respawns according to its latest checkpoint's position and rotation
         if (collider.GetComponent<PlayerLapper>())
         {
             PlayerLapper playerLapper = collider.GetComponent<PlayerLapper>();

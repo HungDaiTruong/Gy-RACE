@@ -26,12 +26,13 @@ public class MenuController : MonoBehaviour
     public bool playerTwoReady = false;
 
     [SerializeField]
-    private string mapSelected;
+    public static string mapSelected;
     [SerializeField]
     private string difficultySelected;
 
     void Start()
     {
+        // Deactivate all the unecessary UI and components of the vehicles in the menu
         vehiclePreviewPlayer1.transform.GetChild(1).gameObject.SetActive(false);
         vehiclePreviewPlayer1.transform.GetChild(2).gameObject.SetActive(false);
         vehiclePreviewPlayer1.transform.GetChild(3).gameObject.SetActive(false);
@@ -45,19 +46,23 @@ public class MenuController : MonoBehaviour
         vehiclePreviewPlayer1.SetActive(false);
         vehiclePreviewPlayer2.SetActive(false);
 
+        // Set the camera to no-split
         cameraPlayer2.SetActive(false);
         cameraPlayer1.GetComponent<Camera>().rect = new Rect(0f, 0f, 1f, 1f);
 
+        // Deactivate all the UIs
         foreach (Canvas canvas in uiGroup.GetComponentsInChildren<Canvas>())
         {
             canvas.gameObject.SetActive(false);
         }
 
+        // Activate the main UI
         mainMenu.SetActive(true);
     }
 
     public void ChangeScene(string sceneName)
     {
+        // If solo then activate the Player One else activate both Players
         if (!isMultiplayer)
         {
             SceneManager.LoadScene(sceneName);
@@ -89,17 +94,20 @@ public class MenuController : MonoBehaviour
 
     public void ChooseMap(Image image)
     {
+        // The chosen map's value is stored as a string according to its button's name in the menu
         mapSelected = image.gameObject.name;
         chosenMapDisplay.GetComponent<Image>().sprite = image.sprite;
     }
 
     public void ChooseDifficulty(Button button)
     {
+        // Select the difficulty according to the buttons' names
         difficultySelected = button.name;
     }
 
     public void OnMultiplayerButtonClick()
     {
+        // Method used to setup the multiplayer split screen cameras
         isMultiplayer = true;
 
         cameraPlayer1.GetComponent<Camera>().rect = new Rect(-0.5f, 0f, 1f, 1f);
@@ -110,11 +118,13 @@ public class MenuController : MonoBehaviour
 
     public void PlayerOneReady()
     {
+        // Player One applied the customization
         playerOneReady = true;
     }
 
     public void PlayerTwoReady()
     {
+        // Player Two applied the customization
         playerTwoReady = true;
     }
 
