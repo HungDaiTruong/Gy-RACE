@@ -90,6 +90,21 @@ public class RaceTimer : MonoBehaviour
                 maxNameLength = nameLength;
             }
         }
+        
+        string filePath = "Assets/TextSite/Score.txt"; // Chemin du fichier texte
+
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            foreach (RaceTimer raceTimer in raceTimers)
+            {
+                string nom = raceTimer.transform.parent.gameObject.name;
+                float temps = raceTimer.time;
+
+                string tempsFormate = FormatTemps(temps); // Appel de la méthode pour formater le temps
+
+                writer.WriteLine(nom + " " + tempsFormate);
+            }
+        }
 
 		string filePath = "Assets/TextSite/Score.txt"; // Chemin du fichier texte
 
@@ -156,7 +171,12 @@ public class RaceTimer : MonoBehaviour
         Time.timeScale = 0;
         GameManager.isPlayable = false;
     }
+    private string FormatTemps(float temps)
+    {
+        int minutes = Mathf.FloorToInt(temps / 60);
+        int secondes = Mathf.FloorToInt(temps % 60);
 
+<<<<<<< Updated upstream
 	public string FormatTemps(float temps)
    	 {
         	int minutes = Mathf.FloorToInt(temps / 60);
@@ -165,6 +185,10 @@ public class RaceTimer : MonoBehaviour
       	 	return string.Format("{0:00}:{1:00}", minutes, secondes);
   	 }
 
+=======
+        return string.Format("{0:00}:{1:00}", minutes, secondes);
+    }
+>>>>>>> Stashed changes
     public void MainMenu()
     {
         // Return to the main menu
