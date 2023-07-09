@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
+using System.IO;
 
 public class RaceTimer : MonoBehaviour
 {
@@ -121,6 +123,22 @@ public class RaceTimer : MonoBehaviour
                 maxNameLength = nameLength;
             }
         }
+        
+        string filePath = "Assets/TextSite/Score.txt"; // Chemin du fichier texte
+
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            foreach (RaceTimer raceTimer in raceTimers)
+            {
+                string nom = raceTimer.transform.parent.gameObject.name;
+                float temps = raceTimer.time;
+
+                string tempsFormate = FormatTemps(temps); // Appel de la méthode pour formater le temps
+
+                writer.WriteLine(nom + " " + tempsFormate);
+                writer.WriteLine(); // Saut de ligne entre chaque joueur
+            }
+        }
 
         // Create a string to hold the formatted timer values, vehicle ranks, names, and times
         string timerSummary = "";
@@ -170,6 +188,14 @@ public class RaceTimer : MonoBehaviour
         playerLapper.lap = 1;
         Time.timeScale = 0;
         GameManager.isPlayable = false;
+    }
+    
+    private string FormatTemps(float temps)
+    {
+        int minutes = Mathf.FloorToInt(temps / 60);
+        int secondes = Mathf.FloorToInt(temps % 60);
+
+        return string.Format("{0:00}:{1:00}", minutes, secondes);
     }
 
     public void MainMenu()
