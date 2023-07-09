@@ -136,7 +136,6 @@ public class RaceTimer : MonoBehaviour
                 string tempsFormate = FormatTemps(temps); // Appel de la méthode pour formater le temps
 
                 writer.WriteLine(nom + " " + tempsFormate);
-                writer.WriteLine(); // Saut de ligne entre chaque joueur
             }
         }
 
