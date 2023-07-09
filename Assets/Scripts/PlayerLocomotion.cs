@@ -58,7 +58,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private float turboInput;
     [SerializeField]
-    private float itemInput;
+    private bool itemInput;
     [SerializeField]
     public bool lookingBackInput;
     [SerializeField]
@@ -119,7 +119,7 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player.Drift.ReadValue<float>();
             turboInput = inputActions.Player.Turbo.ReadValue<float>();
-            itemInput = inputActions.Player.Item.ReadValue<float>();
+            itemInput = inputActions.Player.Item.WasPressedThisFrame();
             lookingBackInput = inputActions.Player.Camera.WasPressedThisFrame();
         }
 
@@ -129,9 +129,11 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
             turboInput = inputActions.Player2.Turbo.ReadValue<float>();
-            itemInput = inputActions.Player.Item.ReadValue<float>();
+            itemInput = inputActions.Player.Item.WasPressedThisFrame();
             lookingBackInput = inputActions.Player2.Camera.WasPressedThisFrame();
         }
+
+        ItemHandler();
     }
 
     private void FixedUpdate()
@@ -143,7 +145,6 @@ public class PlayerLocomotion : MonoBehaviour
             IsGrounded();
             VehicleRotations();
             EnergyHandler();
-            ItemHandler();
         }
     }
 
@@ -275,7 +276,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void ItemHandler()
     {
-        if(itemInput > 0)
+        if(itemInput)
         {
             playerItem.UseItem();
         }
@@ -299,7 +300,7 @@ public class PlayerLocomotion : MonoBehaviour
         Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0f), -transform.up, Color.red, 10f);
     }
 
-    public IEnumerator IsSlowed()
+    public IEnumerator IsSlowed(float duration)
     {
         if (!isShielded)
         {
@@ -309,7 +310,7 @@ public class PlayerLocomotion : MonoBehaviour
             realSpeed /= 4f;
             maxSpeed /= 2f;
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(duration);
 
             isSlowed = false;
             maxSpeed *= 2f;

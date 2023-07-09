@@ -23,10 +23,7 @@ public class CameraHandler : MonoBehaviour
     {
         // FOV widens depending on the vehicle's current speed
         playerCamera.m_Lens.FieldOfView = 90f + ((transform.parent.GetComponent<PlayerLocomotion>().realSpeed) / 5);
-    }
 
-    private void FixedUpdate()
-    {
         if (playerLocomotion.lookingBackInput)
         {
             if (playerCamera.Follow != backTarget)

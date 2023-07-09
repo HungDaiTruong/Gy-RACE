@@ -71,7 +71,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 20763028451328
-    m_Localized: Entre ton nom...
+    m_Localized: Entre ton pseudo...
     m_Metadata:
       m_Items: []
   - m_Id: 21625926807552
@@ -200,6 +200,26 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 57774883958784
     m_Localized: Menu Principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 315561799020544
+    m_Localized: Choisis Ton Mode De Jeu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400021705945088
+    m_Localized: Tableau des Scores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400128157380608
+    m_Localized: Temps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400160872951808
+    m_Localized: Position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400452096061440
+    m_Localized: Pseudo
     m_Metadata:
       m_Items: []
   references:

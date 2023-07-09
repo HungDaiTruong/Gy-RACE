@@ -27,7 +27,7 @@ public class Spikes : Item
 
             if (!playerLocomotion.isShielded)
             {
-                StartCoroutine(playerLocomotion.IsSlowed());
+                StartCoroutine(playerLocomotion.IsSlowed(slowDuration));
             }
             else
             {

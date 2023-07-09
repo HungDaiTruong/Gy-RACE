@@ -202,6 +202,26 @@ MonoBehaviour:
     m_Localized: Main Menu
     m_Metadata:
       m_Items: []
+  - m_Id: 315561799020544
+    m_Localized: Choose Your Game Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400021705945088
+    m_Localized: Scoreboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400128157380608
+    m_Localized: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400160872951808
+    m_Localized: Position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400452096061440
+    m_Localized: Username
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

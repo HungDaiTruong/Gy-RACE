@@ -5,35 +5,47 @@ using UnityEngine;
 public class PlayerItem : MonoBehaviour
 {
     [SerializeField]
-    private GameObject currentItem; // The currently held item
+    private List<GameObject> currentItems = new List<GameObject>(); // List to store the currently held items
+    private bool canUseItem = true; // Flag to indicate if the player can pick up items
 
     public void ReceiveItem(GameObject itemPrefab)
     {
-        if (currentItem != null)
+        if (currentItems.Count < 2)
         {
-            // Discard the previous item if one is already held
-            Destroy(currentItem);
-        }
+            GameObject newItem = Instantiate(itemPrefab, transform);
+            newItem.transform.SetParent(transform); // Set the parent to the player's transform
+            newItem.SetActive(false); // Deactivate the item
+            currentItems.Add(newItem);
 
-        currentItem = Instantiate(itemPrefab, transform);
-        currentItem.transform.SetParent(transform); // Set the parent to the player's transform
-        currentItem.SetActive(false); // Deactivate the item
+            StartCoroutine(RandomizeItems());
+        }
     }
 
     public void UseItem()
     {
-        if (currentItem != null)
+        if (currentItems.Count > 0)
         {
-            // Activate the item
-            currentItem.SetActive(true);
+            GameObject itemToUse = currentItems[0];
+            currentItems.RemoveAt(0);
 
-            // Call the appropriate method on the current item script
-            Item currentItemScript = currentItem.GetComponent<Item>();
-            if (currentItemScript != null)
+            // Activate the item
+            itemToUse.SetActive(true);
+
+            // Call the appropriate method on the item's script
+            Item itemScript = itemToUse.GetComponent<Item>();
+            if (itemScript != null)
             {
-                currentItemScript.Use();
-                currentItem = null;
+                itemScript.Use();
             }
         }
+    }
+
+    private IEnumerator RandomizeItems()
+    {
+        canUseItem = false;
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second
+
+        canUseItem = true;
     }
 }

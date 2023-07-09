@@ -112,4 +112,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 600
-  slowDuration: 0
+  slowDuration: 5

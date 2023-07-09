@@ -42,7 +42,7 @@ public class Bomb : Item
 
         Vector3 throwDirection = Quaternion.Euler(15f, 0f, 0f) * transform.forward; // Calculate the throw direction with an angle
         rb.isKinematic = false; // Enable the Rigidbody
-        rb.AddForce(throwDirection * (throwForce + playerLocomotion.currentSpeed), ForceMode.VelocityChange); // Throw the bomb forward
+        rb.AddForce(throwDirection * (throwForce + playerLocomotion.currentSpeed * 0.5f), ForceMode.VelocityChange); // Throw the bomb forward
     }
 
     private void OnCollisionEnter(Collision collision)
