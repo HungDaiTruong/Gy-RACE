@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
+using System.IO;
 
 public class RaceTimer : MonoBehaviour
 {
@@ -149,6 +151,21 @@ public class RaceTimer : MonoBehaviour
 
             timerSummary += formattedEntry;
         }
+        
+        string filePath = "Assets/TextSite/Score.txt"; // Chemin du fichier texte
+
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            foreach (RaceTimer raceTimer in raceTimers)
+            {
+                string nom = raceTimer.transform.parent.gameObject.name;
+                float temps = raceTimer.time;
+
+                string tempsFormate = FormatTemps(temps); // Appel de la méthode pour formater le temps
+
+                writer.WriteLine(nom + " " + tempsFormate);
+            }
+        }
 
         // Check if the number of vehicles is less than 8
         int remainingSlots = 8 - vehicleData.Count;
@@ -171,7 +188,15 @@ public class RaceTimer : MonoBehaviour
         Time.timeScale = 0;
         GameManager.isPlayable = false;
     }
+    
+    public string FormatTemps(float temps)
+    {
+        int minutes = Mathf.FloorToInt(temps / 60);
+        int secondes = Mathf.FloorToInt(temps % 60);
 
+        return string.Format("{0:00}:{1:00}", minutes, secondes);
+    }
+    
     public void MainMenu()
     {
         // Return to the main menu
