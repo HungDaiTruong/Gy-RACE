@@ -53,8 +53,6 @@ public class RaceTimer : MonoBehaviour
         }
         else
         {
-            Debug.Log(time);
-            Debug.Log("Race is Finished");
             playerLocomotion.OnDisable();
 
             bool allFinished = true; // Flag to track if all players have finished
