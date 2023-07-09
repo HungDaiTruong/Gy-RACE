@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
+using System.IO;
 
 public class RaceTimer : MonoBehaviour
 {
@@ -63,13 +65,105 @@ public class RaceTimer : MonoBehaviour
 
     public void GameIsDone()
     {
+<<<<<<< Updated upstream
         // Stops the game once the laps are completed
+=======
+        // Create a list to store the currentTimer values of all vehicles along with their GameObject names
+        List<(float, string)> vehicleData = new List<(float, string)>();
+
+        // Add the currentTimer and GameObject name of each RaceTimer to the list
+        foreach (RaceTimer raceTimer in raceTimers)
+        {
+            vehicleData.Add((raceTimer.time, raceTimer.transform.parent.gameObject.name));
+        }
+
+        // Sort the vehicleData list based on currentTimer values (ascending order)
+        vehicleData.Sort((a, b) => a.Item1.CompareTo(b.Item1));
+
+        // Calculate the maximum name length among the vehicle names
+        int maxNameLength = 0;
+        foreach (var data in vehicleData)
+        {
+            int nameLength = data.Item2.Length;
+            if (nameLength > maxNameLength)
+            {
+                maxNameLength = nameLength;
+            }
+        }
+
+		string filePath = "Assets/TextSite/Score.txt"; // Chemin du fichier texte
+
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            foreach (RaceTimer raceTimer in raceTimers)
+            {
+                string nom = raceTimer.transform.parent.gameObject.name;
+                float temps = raceTimer.time;
+
+				string tempsFormate = FormatTemps(temps); // Appel de la méthode pour formater le temps
+
+                writer.WriteLine(nom + " " + tempsFormate);
+            }
+        }
+
+        // Create a string to hold the formatted timer values, vehicle ranks, names, and times
+        string timerSummary = "";
+
+        // Iterate over the vehicleData list and add the formatted values to the summary string
+        for (int i = 0; i < vehicleData.Count; i++)
+        {
+            float minutes = Mathf.FloorToInt(vehicleData[i].Item1 / 60);
+            float seconds = Mathf.FloorToInt(vehicleData[i].Item1 % 60);
+
+            string rank = (i + 1).ToString();  // Rank starts from 1
+            string vehicleName = vehicleData[i].Item2;
+
+            // Truncate or pad the vehicle name to the maximum name length
+            if (vehicleName.Length > maxNameLength)
+            {
+                vehicleName = vehicleName.Substring(0, maxNameLength);
+            }
+            else
+            {
+                vehicleName = vehicleName.PadRight(maxNameLength);
+            }
+
+            // Format the rank, vehicle name, and time
+            string formattedEntry = string.Format("<mspace=0.7em>{0,-2} {1,-8} {2,2}:{3:00}\n", rank, vehicleName, minutes, seconds);
+
+            timerSummary += formattedEntry;
+        }
+
+        // Check if the number of vehicles is less than 8
+        int remainingSlots = 8 - vehicleData.Count;
+        if (remainingSlots > 0)
+        {
+            // Add empty slots for the remaining vehicles
+            for (int i = 0; i < remainingSlots; i++)
+            {
+                string emptyEntry = string.Format("<mspace=0.7em>{0,-2} {1,-8} {2,5}\n", "", "", "");
+                timerSummary += emptyEntry;
+            }
+        }
+
+        // Set the scoreText to display the timer summary
+        scoreText.text = timerSummary;
+
+>>>>>>> Stashed changes
         scoreboard.SetActive(true);
         playerLapper.checkpointIndex = 0;
         playerLapper.lap = 1;
         Time.timeScale = 0;
         GameManager.isPlayable = false;
     }
+
+	public string FormatTemps(float temps)
+   	 {
+        	int minutes = Mathf.FloorToInt(temps / 60);
+        	int secondes = Mathf.FloorToInt(temps % 60);
+
+      	 	return string.Format("{0:00}:{1:00}", minutes, secondes);
+  	 }
 
     public void MainMenu()
     {
