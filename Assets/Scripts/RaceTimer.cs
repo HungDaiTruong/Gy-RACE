@@ -149,21 +149,6 @@ public class RaceTimer : MonoBehaviour
 
             timerSummary += formattedEntry;
         }
-        
-        string filePath = "Assets/TextSite/Score.txt"; // Chemin du fichier texte
-
-        using (StreamWriter writer = new StreamWriter(filePath, true))
-        {
-            foreach (RaceTimer raceTimer in raceTimers)
-            {
-                string nom = raceTimer.transform.parent.gameObject.name;
-                float temps = raceTimer.time;
-
-                string tempsFormate = FormatTemps(temps); // Appel de la méthode pour formater le temps
-
-                writer.WriteLine(nom + " " + tempsFormate);
-            }
-        }
 
         // Check if the number of vehicles is less than 8
         int remainingSlots = 8 - vehicleData.Count;
@@ -185,6 +170,21 @@ public class RaceTimer : MonoBehaviour
         playerLapper.lap = 1;
         Time.timeScale = 0;
         GameManager.isPlayable = false;
+
+        string filePath = "Assets/TextSite/Score.txt"; // Chemin du fichier texte
+
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            foreach (RaceTimer raceTimer in raceTimers)
+            {
+                string nom = raceTimer.transform.parent.gameObject.name;
+                float temps = raceTimer.time;
+
+                string tempsFormate = FormatTemps(temps); // Appel de la méthode pour formater le temps
+
+                writer.WriteLine(nom + " " + tempsFormate);
+            }
+        }
     }
     
     public string FormatTemps(float temps)
