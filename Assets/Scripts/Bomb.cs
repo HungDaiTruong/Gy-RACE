@@ -61,43 +61,48 @@ public class Bomb : Item
         // Instantiate the explosion effect
         GameObject explosionObject = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-        // Invoke the pull effect after the specified delay
-        StartCoroutine(TriggerPull());
+        // Start the pull effect coroutine
+        StartCoroutine(PullEffect());
 
         // Destroy the explosion effect after the specified duration
-        Destroy(explosionObject, pullDelay + pullDuration);
+        Destroy(explosionObject, pullDuration);
     }
 
-    private IEnumerator TriggerPull()
+    private IEnumerator PullEffect()
     {
-        yield return new WaitForSeconds(pullDelay);
+        float endTime = Time.time + pullDuration;
 
-        // Apply explosive force to nearby objects with specific tags
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-
-        foreach (Collider collider in colliders)
+        while (Time.time < endTime)
         {
-            if (collider.CompareTag("Player") || collider.CompareTag("Player2") || collider.CompareTag("AI"))
-            {
-                Rigidbody otherRb = collider.GetComponent<Rigidbody>();
-                PlayerLocomotion playerLocomotion = collider.GetComponent<PlayerLocomotion>();
+            // Apply explosive force to nearby objects with specific tags
+            Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
-                if (otherRb != null && !playerLocomotion.isShielded)
+            foreach (Collider collider in colliders)
+            {
+                if (collider.CompareTag("Player") || collider.CompareTag("Player2") || collider.CompareTag("AI"))
                 {
-                    Vector3 direction = (collider.transform.position - transform.position).normalized;
-                    otherRb.AddForce(direction * explosionForce, ForceMode.VelocityChange);
-                    otherRb.AddForce(Vector3.up * explosionForce, ForceMode.VelocityChange); 
+                    Rigidbody otherRb = collider.GetComponent<Rigidbody>();
+                    PlayerLocomotion playerLocomotion = collider.GetComponent<PlayerLocomotion>();
+
+                    if (otherRb != null && !playerLocomotion.isShielded)
+                    {
+                        Vector3 direction = (collider.transform.position - transform.position).normalized;
+                        otherRb.AddForce(direction * explosionForce, ForceMode.VelocityChange);
+                        otherRb.AddForce(Vector3.up * explosionForce, ForceMode.VelocityChange);
+                    }
                 }
             }
+
+            yield return null;
         }
 
+        // Disable the bomb's collider and renderer
         GetComponent<Collider>().enabled = false;
         GetComponent<Renderer>().enabled = false;
 
-        yield return new WaitForSeconds(pullDuration);
-
         EndUse();
     }
+
 
     public override void EndUse()
     {

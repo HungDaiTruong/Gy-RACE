@@ -44,41 +44,58 @@ public class MenuOption : MonoBehaviour
         resolutions = Screen.resolutions;
         dropdownResolution.ClearOptions();
 
-        List<string> options = new List<string>();
-
-        int currentResolutionIndex = 0;
+        List<string> resolutionOptions = new List<string>();
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            //Resolution resolution = resolutions[i];
-            string option = resolutions[i].width + "x" + resolutions[i].height;
-            options.Add(option);
-
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-
-            }
+            Resolution res = resolutions[i];
+            string option = res.width + " x " + res.height;
+            resolutionOptions.Add(option);
         }
 
-        dropdownResolution.AddOptions(options);
-        dropdownResolution.value = currentResolutionIndex;
-        dropdownResolution.RefreshShownValue();
+        dropdownResolution.ClearOptions();
+        dropdownResolution.AddOptions(resolutionOptions);
 
         fullScreenToggle.onValueChanged.AddListener(SetFullscreen);
 
         volumeSlider.onValueChanged.AddListener(SetVolume);
         volumeSlider.GraphicUpdateComplete();
-
-
     }
 
     // Sets the resolution
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        int targetWidth = resolution.width;
+        int targetHeight = resolution.height;
+
+        // Calculate target width based on aspect ratio
+        float targetAspectRatio = (float)targetWidth / targetHeight;
+        int commonHeight = 1080; // Choose a common height for the dropdown options
+
+        // Find the closest width that matches the target aspect ratio
+        int closestWidth = 0;
+        float closestAspectRatio = float.MaxValue;
+
+        foreach (Resolution res in resolutions)
+        {
+            float aspectRatio = (float)res.width / res.height;
+
+            if (Mathf.Abs(aspectRatio - targetAspectRatio) < Mathf.Abs(closestAspectRatio - targetAspectRatio))
+            {
+                closestWidth = res.width;
+                closestAspectRatio = aspectRatio;
+            }
+        }
+
+        targetWidth = closestWidth;
+        targetHeight = Mathf.RoundToInt(targetWidth / targetAspectRatio);
+
+        Screen.SetResolution(targetWidth, targetHeight, Screen.fullScreen);
+        Camera.main.aspect = targetAspectRatio;
     }
+
 
     // Sets the menu volume
     public void SetVolume (float volume)

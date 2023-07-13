@@ -6,6 +6,8 @@ public abstract class Item : MonoBehaviour
 {
     public float duration = 5f; // Duration for which the item will persist after being used
 
+    public Sprite itemImage;
+
     public abstract void Use();
 
     public abstract void EndUse();

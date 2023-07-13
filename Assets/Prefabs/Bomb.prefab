@@ -129,9 +129,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 30
+  itemImage: {fileID: 21300000, guid: 25e37656565aa354382d8529e87e0e6a, type: 3}
   explosionPrefab: {fileID: 669838381945105586, guid: e5c2644947b8e384eade6bba8caa2d85, type: 3}
   throwForce: 80
-  explosionForce: 50
+  explosionForce: 3
   explosionRadius: 25
   explosionDelay: 1
   pullDelay: 0.3
