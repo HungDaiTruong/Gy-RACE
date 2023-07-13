@@ -10,8 +10,9 @@ Current features :
   - Main Menu
       - Singleplayer mode or Two Player mode
       - Customization menu for your vehicle with a customizable Wheel, Engine and unique Energy Systems
-      - Map selection 2/5
+      - Map selection with 5 circuits
       - Localization
+      - Scoreboard website
   - Player Menu
       - Pause Menu, Race timer, Lap and Checkpoint counts
       - Scoreboard 1/2
@@ -33,6 +34,4 @@ To do features :
   - AI difficulty
   - Finish the Options screen
   - Energy Systems mechanics
-  - Complete tracks and racing mechanics
-  - Online Leaderboard and/or Shop
   

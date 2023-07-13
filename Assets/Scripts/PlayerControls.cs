@@ -356,7 +356,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""13f1e998-1dc9-4db3-870e-4bef45696240"",
-                    ""path"": ""<Keyboard>/minus"",
+                    ""path"": ""<Keyboard>/numpadMinus"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

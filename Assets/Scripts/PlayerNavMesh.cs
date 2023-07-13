@@ -35,8 +35,21 @@ public class PlayerNavMesh : MonoBehaviour
     private void Start()
     {
         // Spawns the AI at a certain location behind the first Checkpoint
-        navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-30f, 0, -10f));
-        navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+        PlayerNavMesh[] playerNavMeshes = FindObjectsOfType<PlayerNavMesh>();
+        PlayerLapper[] playerLappers = FindObjectsOfType<PlayerLapper>();
+        if (playerLappers.Length > 8)
+        {        
+            if (playerNavMeshes.Length > 6)
+            {
+                Destroy(playerNavMeshes[0].gameObject);
+            }
+        }
+
+        for (int i = 0; i < playerNavMeshes.Length; i++)
+        {
+            navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-30f - (5f * i), 0, -10f));
+            navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+        }
     }
 
     // Update is called once per frame

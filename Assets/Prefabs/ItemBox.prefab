@@ -115,4 +115,4 @@ MonoBehaviour:
   - {fileID: 1437408443837194417, guid: eee45c211e874f54a9a1e670f3bc39f3, type: 3}
   - {fileID: 1750578615719273666, guid: bf384eb51ccbdc14aaa3beedb6f2889e, type: 3}
   - {fileID: 3262121618010305748, guid: 229d3e682e55ba045b356333fc751c74, type: 3}
-  disableDuration: 5
+  disableDuration: 3

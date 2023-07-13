@@ -129,7 +129,7 @@ public class PlayerLocomotion : MonoBehaviour
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
             turboInput = inputActions.Player2.Turbo.ReadValue<float>();
-            itemInput = inputActions.Player.Item.WasPressedThisFrame();
+            itemInput = inputActions.Player2.Item.WasPressedThisFrame();
             lookingBackInput = inputActions.Player2.Camera.WasPressedThisFrame();
         }
 
