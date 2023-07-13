@@ -136,4 +136,4 @@ MonoBehaviour:
   explosionRadius: 25
   explosionDelay: 1
   pullDelay: 0.3
-  pullDuration: 0.7
+  pullDuration: 0.98
