@@ -53,7 +53,6 @@ public class MenuOption : MonoBehaviour
             resolutionOptions.Add(option);
         }
 
-        dropdownResolution.ClearOptions();
         dropdownResolution.AddOptions(resolutionOptions);
 
         fullScreenToggle.onValueChanged.AddListener(SetFullscreen);
@@ -72,7 +71,6 @@ public class MenuOption : MonoBehaviour
 
         // Calculate target width based on aspect ratio
         float targetAspectRatio = (float)targetWidth / targetHeight;
-        int commonHeight = 1080; // Choose a common height for the dropdown options
 
         // Find the closest width that matches the target aspect ratio
         int closestWidth = 0;
