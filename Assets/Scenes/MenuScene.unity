@@ -16370,7 +16370,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1697647506}
         m_TargetAssemblyTypeName: MenuOption, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
@@ -28165,7 +28165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b56919a064746f47b03ba8adb5259f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mOption: {fileID: 2052681956}
   dropdownResolution: {fileID: 1002694316}
   dropdownQuality: {fileID: 1937833935}
   fullScreenToggle: {fileID: 1960310024}
@@ -28175,6 +28174,7 @@ MonoBehaviour:
   audioClips:
   - {fileID: 8300000, guid: e473bc3426c71764891038e05b062c5d, type: 3}
   - {fileID: 8300000, guid: 1d893fe7f21469847a18af53b004f37e, type: 3}
+  currentResolutionIndex: 0
 --- !u!114 &1697647507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32811,16 +32811,22 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: Ultra
+      m_Image: {fileID: 0}
+    - m_Text: Very High
+      m_Image: {fileID: 0}
     - m_Text: High
       m_Image: {fileID: 0}
     - m_Text: Medium
       m_Image: {fileID: 0}
     - m_Text: Low
       m_Image: {fileID: 0}
+    - m_Text: Very Low
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1697647506}
         m_TargetAssemblyTypeName: MenuOption, Assembly-CSharp
         m_MethodName: SetQuality
         m_Mode: 0
@@ -32887,6 +32893,22 @@ MonoBehaviour:
   - m_TableReference:
       m_TableCollectionName: GUID:bc30966567dad0b4cb2f4bbd494a7abf
     m_TableEntryReference:
+      m_KeyId: 2163440121507840
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:bc30966567dad0b4cb2f4bbd494a7abf
+    m_TableEntryReference:
+      m_KeyId: 2163402309857280
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:bc30966567dad0b4cb2f4bbd494a7abf
+    m_TableEntryReference:
       m_KeyId: 36253150965760
       m_Key: 
     m_FallbackState: 0
@@ -32895,7 +32917,7 @@ MonoBehaviour:
   - m_TableReference:
       m_TableCollectionName: GUID:bc30966567dad0b4cb2f4bbd494a7abf
     m_TableEntryReference:
-      m_KeyId: 17539022155776
+      m_KeyId: 2164767144767488
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -32904,6 +32926,14 @@ MonoBehaviour:
       m_TableCollectionName: GUID:bc30966567dad0b4cb2f4bbd494a7abf
     m_TableEntryReference:
       m_KeyId: 36452430737408
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:bc30966567dad0b4cb2f4bbd494a7abf
+    m_TableEntryReference:
+      m_KeyId: 2163350640226304
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
