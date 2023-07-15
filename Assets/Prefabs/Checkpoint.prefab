@@ -110,7 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b09b2af474f354ea721719b17a3bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vehicle: {fileID: 0}
+  checkpointIndex: 0
   collectionObject: {fileID: 0}
-  lastCheckpoint: {fileID: 0}
-  trigger: 0

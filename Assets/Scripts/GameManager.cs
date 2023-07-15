@@ -19,11 +19,21 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Disables all but the selected racing circuit
-        GameObject chosenCircuit = GameObject.Find(MenuController.mapSelected);
-        foreach (Transform t in circuitGroup.transform)
+        // Disables all but the selected racing circuit for the Time Trial Mode
+        if (MenuController.modeSelected == "TT")
         {
-            t.gameObject.SetActive(t.gameObject == chosenCircuit);
+            GameObject chosenCircuit = GameObject.Find(MenuController.mapSelected);
+            foreach (Transform t in circuitGroup.transform)
+            {
+                t.gameObject.SetActive(t.gameObject == chosenCircuit);
+            }
+        }
+        else if (MenuController.modeSelected == "GP")
+        {
+            foreach (Transform t in circuitGroup.transform)
+            {
+                t.gameObject.SetActive(t.gameObject.name == "Mondza");
+            }
         }
 
         DestroyItems();

@@ -8,8 +8,12 @@ using UnityEngine;
 public class CheckpointLayer : EditorWindow
 {
     private bool canPlaceObject;
+    private float setDistance = 0f;
 
     private GameObject checkpointObject;
+    private GameObject itemBoxObject;
+
+    private GameObject objectToSet;
 
     private string objectLabel = "None";
     [MenuItem("Window/CheckpointLayer")]
@@ -21,6 +25,7 @@ public class CheckpointLayer : EditorWindow
     private void OnEnable()
     {
         checkpointObject = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Checkpoint.prefab");
+        itemBoxObject = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/ItemBox.prefab");
         SceneView.duringSceneGui += SetObject;
     }
 
@@ -35,7 +40,17 @@ public class CheckpointLayer : EditorWindow
         if (GUILayout.Button("Checkpoint"))
         {
             canPlaceObject = true;
+            objectToSet = checkpointObject;
+            setDistance = 5f;
             objectLabel = "Checkpoint";
+        }
+        
+        if (GUILayout.Button("ItemBox"))
+        {
+            canPlaceObject = true;
+            objectToSet = itemBoxObject;
+            setDistance = 2.6f;
+            objectLabel = "ItemBox";
         }
 
         GUILayout.Label($"Current object : {objectLabel}");
@@ -53,9 +68,9 @@ public class CheckpointLayer : EditorWindow
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Vector3 hitPos = hit.point;
-                hitPos.y += 5f;
+                hitPos.y += setDistance;
 
-                Instantiate(checkpointObject, hitPos, Quaternion.identity);
+                Instantiate(objectToSet, hitPos, Quaternion.identity);
             }
         }
     }

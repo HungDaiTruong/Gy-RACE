@@ -33,7 +33,7 @@ public class OmnidirectionalEngine : Engine
 {
     public OmnidirectionalEngine()
     {
-        acceleration = 4f;
+        acceleration = 5f;
         turboMultiplier = 1f;
         durability = 2f;
     }
