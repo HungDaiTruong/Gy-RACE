@@ -47,7 +47,10 @@ public class PlayerNavMesh : MonoBehaviour
 
         for (int i = 0; i < playerNavMeshes.Length; i++)
         {
-            navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position - new Vector3(-30f - (5f * i), 0, -10f));
+            playerNavMeshes[i].navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position 
+                + (checkpointScript.collectionObject.transform.GetChild(0).transform.right.normalized * (5f * (i + 3))) 
+                + (checkpointScript.collectionObject.transform.GetChild(0).transform.forward.normalized * (3f * i)));
+
             navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
         }
     }

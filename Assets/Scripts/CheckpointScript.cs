@@ -20,14 +20,17 @@ public class CheckpointScript : MonoBehaviour
         checkpointIndex = transform.GetSiblingIndex();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-25f, 0, 0);
+        player.transform.position = collectionObject.transform.GetChild(0).transform.position
+                + (collectionObject.transform.GetChild(0).transform.right.normalized * 5f)
+                - (collectionObject.transform.GetChild(0).transform.forward.normalized * 3f);
         player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
 
         // Spawn location of Player Two
         if (GameObject.FindGameObjectWithTag("Player2") != null)
         {
             player = GameObject.FindGameObjectWithTag("Player2");
-            player.transform.position = collectionObject.transform.GetChild(0).transform.position - new Vector3(-25f, 0, -5f);
+            player.transform.position = collectionObject.transform.GetChild(0).transform.position
+                + (collectionObject.transform.GetChild(0).transform.right.normalized * 10f);
             player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
         }
     }
