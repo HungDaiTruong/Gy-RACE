@@ -34,9 +34,9 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField][Range(10, 100)]
     private int backingSpeed;
     [SerializeField][Range(1, 5)]
-    private int acceleration;
+    public int acceleration;
     [SerializeField][Range(1, 5)]
-    private int handling;
+    public int handling;
     [SerializeField][Range(0, 300)]
     public int energy;
     [SerializeField][Range(100, 300)]
@@ -202,7 +202,7 @@ public class PlayerLocomotion : MonoBehaviour
         {
             rb.velocity = force;
         }
-        Debug.DrawRay(transform.position, transform.forward, Color.blue);
+        //Debug.DrawRay(transform.position, transform.forward, Color.blue);
     }
 
     // Method that handles all the steering and drifting movements
@@ -297,7 +297,7 @@ public class PlayerLocomotion : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.up * 2, Vector3.up) * transform.rotation, 3f * Time.deltaTime);
             isGrounded = false;
         }
-        Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0f), -transform.up, Color.red, 10f);
+        //Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0f), -transform.up, Color.red, 10f);
     }
 
     public IEnumerator IsSlowed(float duration)

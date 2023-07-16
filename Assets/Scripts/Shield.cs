@@ -26,8 +26,6 @@ public class Shield : Item
         playerLocomotion.isShielded = true;
 
         remainingDuration = duration; // Set the remaining duration to the total duration
-
-        Debug.Log("Using shield!");
     }
 
     public override void EndUse()
@@ -36,8 +34,6 @@ public class Shield : Item
         playerLocomotion.isShielded = false;
 
         Destroy(gameObject);
-
-        Debug.Log("Shield ended!");
     }
 }
 
