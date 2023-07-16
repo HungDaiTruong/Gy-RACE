@@ -35,24 +35,7 @@ public class PlayerNavMesh : MonoBehaviour
     private void Start()
     {
         // Spawns the AI at a certain location behind the first Checkpoint
-        PlayerNavMesh[] playerNavMeshes = FindObjectsOfType<PlayerNavMesh>();
-        PlayerLapper[] playerLappers = FindObjectsOfType<PlayerLapper>();
-        if (playerLappers.Length > 8)
-        {        
-            if (playerNavMeshes.Length > 6)
-            {
-                Destroy(playerNavMeshes[0].gameObject);
-            }
-        }
-
-        for (int i = 0; i < playerNavMeshes.Length; i++)
-        {
-            playerNavMeshes[i].navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position 
-                + (checkpointScript.collectionObject.transform.GetChild(0).transform.right.normalized * (5f * (i + 3))) 
-                + (checkpointScript.collectionObject.transform.GetChild(0).transform.forward.normalized * (3f * i)));
-
-            navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
-        }
+        SpawnNavMeshes();
     }
 
     // Update is called once per frame
@@ -77,6 +60,11 @@ public class PlayerNavMesh : MonoBehaviour
         }
         movePositionTransform = checkpointScript.collectionObject.transform.GetChild((playerLapper.checkpointIndex + 1) % CheckpointScript.checkpointNumber);
         navMeshAgent.SetDestination(movePositionTransform.position);
+    }
+
+    private void ResetGoal()
+    {
+        movePositionTransform = null;
     }
 
     private void Move()
@@ -172,5 +160,36 @@ public class PlayerNavMesh : MonoBehaviour
             return normalizedAngle;
         }
         else return 0;
+    }
+
+    // Spawns the AI at a certain location behind the first Checkpoint
+    public void SpawnNavMeshes()
+    {
+        checkpointScript = FindObjectOfType<CheckpointScript>();
+        PlayerNavMesh[] playerNavMeshes = FindObjectsOfType<PlayerNavMesh>();
+        PlayerLapper[] playerLappers = FindObjectsOfType<PlayerLapper>();
+
+        navMeshAgent.enabled = false;
+
+        ResetGoal();
+
+        if (playerLappers.Length > 8)
+        {
+            if (playerNavMeshes.Length > 6)
+            {
+                Destroy(playerNavMeshes[0].gameObject);
+            }
+        }
+
+        for (int i = 0; i < playerNavMeshes.Length; i++)
+        {
+            playerNavMeshes[i].navMeshAgent.Warp(checkpointScript.collectionObject.transform.GetChild(0).transform.position
+                + (checkpointScript.collectionObject.transform.GetChild(0).transform.right.normalized * (5f * (i + 3)))
+                + (checkpointScript.collectionObject.transform.GetChild(0).transform.forward.normalized * (3f * i)));
+
+            navMeshAgent.transform.rotation = checkpointScript.collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+        }
+
+        navMeshAgent.enabled = true;
     }
 }

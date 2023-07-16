@@ -13,25 +13,16 @@ public class CheckpointScript : MonoBehaviour
     {
         // Parent object of all checkpoints
         collectionObject = transform.parent.gameObject;
-
         // Count the child objects of the collectionObject for the total amount of checkpoints
         checkpointNumber = collectionObject.transform.childCount;
         // Index of the checkpoint
         checkpointIndex = transform.GetSiblingIndex();
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = collectionObject.transform.GetChild(0).transform.position
-                + (collectionObject.transform.GetChild(0).transform.right.normalized * 5f)
-                - (collectionObject.transform.GetChild(0).transform.forward.normalized * 3f);
-        player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+        SpawnPlayers();
 
-        // Spawn location of Player Two
-        if (GameObject.FindGameObjectWithTag("Player2") != null)
+        foreach (PlayerNavMesh pNM in FindObjectsOfType<PlayerNavMesh>())
         {
-            player = GameObject.FindGameObjectWithTag("Player2");
-            player.transform.position = collectionObject.transform.GetChild(0).transform.position
-                + (collectionObject.transform.GetChild(0).transform.right.normalized * 10f);
-            player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+            pNM.SpawnNavMeshes();
         }
     }
 
@@ -54,6 +45,25 @@ public class CheckpointScript : MonoBehaviour
             {
                 playerLapper.checkpointIndex = checkpointIndex;
             }
+        }
+    }
+
+    // Spawns the Players at a certain location behind the first checkpoint
+    public void SpawnPlayers()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = collectionObject.transform.GetChild(0).transform.position
+                + (collectionObject.transform.GetChild(0).transform.right.normalized * 5f)
+                - (collectionObject.transform.GetChild(0).transform.forward.normalized * 3f);
+        player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
+
+        // Spawn location of Player Two
+        if (GameObject.FindGameObjectWithTag("Player2") != null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player2");
+            player.transform.position = collectionObject.transform.GetChild(0).transform.position
+                + (collectionObject.transform.GetChild(0).transform.right.normalized * 10f);
+            player.transform.rotation = collectionObject.transform.GetChild(0).transform.rotation * Quaternion.Euler(0, -90, 0);
         }
     }
 }

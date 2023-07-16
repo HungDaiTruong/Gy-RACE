@@ -237,6 +237,10 @@ MonoBehaviour:
     m_Key: Medium 2
     m_Metadata:
       m_Items: []
+  - m_Id: 2655165105532928
+    m_Key: Next Race
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

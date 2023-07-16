@@ -21,6 +21,8 @@ public class OutOfBounds : MonoBehaviour
             PlayerLapper playerLapper = collider.GetComponent<PlayerLapper>();
             PlayerLocomotion playerLocomotion = collider.GetComponent<PlayerLocomotion>();
 
+            checkpointScript = FindObjectOfType<CheckpointScript>();
+
             collider.transform.position = checkpointScript.collectionObject.transform.GetChild(playerLapper.checkpointIndex).transform.position;
             collider.transform.rotation = checkpointScript.collectionObject.transform.GetChild(playerLapper.checkpointIndex).transform.rotation * Quaternion.Euler(0, -90, 0);
 
