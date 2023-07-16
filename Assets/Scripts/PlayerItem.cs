@@ -53,6 +53,14 @@ public class PlayerItem : MonoBehaviour
         }
     }
 
+    public void ClearItems()
+    {
+        currentItems.Clear();
+        canUseItem = false;
+
+        UpdateItemSlotImages();
+    }
+
     private IEnumerator RandomizeItemImage()
     {
         canUseItem = false;

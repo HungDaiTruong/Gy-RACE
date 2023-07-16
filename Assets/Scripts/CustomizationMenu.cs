@@ -6,6 +6,14 @@ using TMPro;
 
 public class CustomizationMenu : MonoBehaviour
 {
+    [Header("Gamemode booleans")]
+    [SerializeField]
+    private bool isUsedInGP = false;
+    [SerializeField]
+    private bool forPlayerOneGP = false;
+    [SerializeField]
+    private bool forPlayerTwoGP = false;
+
     public GameObject vehicle;
     public PlayerLocomotion playerLocomotion;
 
@@ -29,6 +37,29 @@ public class CustomizationMenu : MonoBehaviour
         wheelDropdown.onValueChanged.AddListener(OnWheelDropdownChanged);
         engineDropdown.onValueChanged.AddListener(OnEngineDropdownChanged);
         energyDropdown.onValueChanged.AddListener(OnEnergyDropdownChanged);
+
+        if(isUsedInGP)
+        {
+            if(forPlayerOneGP)
+            {
+                vehicle = GameObject.FindGameObjectWithTag("Player");
+                playerLocomotion = vehicle.GetComponent<PlayerLocomotion>();
+                vehicleHandler = vehicle.GetComponent<VehicleComponentHandler>();
+                myWheelComponent = vehicleHandler.wheelComponent;
+                myEngineComponent = vehicleHandler.engineComponent;
+                myEnergySystemComponent = vehicleHandler.energySystemComponent;
+            }
+
+            if (forPlayerTwoGP)
+            {
+                vehicle = GameObject.FindGameObjectWithTag("Player2");
+                playerLocomotion = vehicle.GetComponent<PlayerLocomotion>();
+                vehicleHandler = vehicle.GetComponent<VehicleComponentHandler>();
+                myWheelComponent = vehicleHandler.wheelComponent;
+                myEngineComponent = vehicleHandler.engineComponent;
+                myEnergySystemComponent = vehicleHandler.energySystemComponent;
+            }
+        }
     }
 
     // Event listener for the wheel dropdown menu

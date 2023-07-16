@@ -8,11 +8,15 @@ public class CheckpointScript : MonoBehaviour
     static public int checkpointNumber;
     public GameObject collectionObject;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         // Parent object of all checkpoints
         collectionObject = transform.parent.gameObject;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         // Count the child objects of the collectionObject for the total amount of checkpoints
         checkpointNumber = collectionObject.transform.childCount;
         // Index of the checkpoint
