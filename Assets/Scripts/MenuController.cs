@@ -31,6 +31,10 @@ public class MenuController : MonoBehaviour
     public static string difficultySelected;
     [SerializeField]
     public static string modeSelected;
+    [SerializeField]
+    public static bool hasBots;
+    [SerializeField]
+    public static bool hasItems;
 
     void Start()
     {
@@ -134,6 +138,16 @@ public class MenuController : MonoBehaviour
     {
         // Player Two applied the customization
         playerTwoReady = true;
+    }
+
+    public void HasBots(bool value)
+    {
+        hasBots = value;
+    }
+
+    public void HasItems(bool value)
+    {
+        hasItems = value;
     }
 
     public void Quit()
