@@ -40,14 +40,10 @@ public class Spikes : Item
     {
         transform.parent = null;
         remainingDuration = duration; // Set the remaining duration to the total duration
-
-        Debug.Log("Using spikes!");
     }
 
     public override void EndUse()
     {
         Destroy(gameObject);
-
-        Debug.Log("Spikes item ended!");
     }
 }

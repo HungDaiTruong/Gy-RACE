@@ -106,7 +106,6 @@ public class Bomb : Item
 
     public override void EndUse()
     {
-        Debug.Log("Bomb item ended!");
         Destroy(gameObject);
     }
 }

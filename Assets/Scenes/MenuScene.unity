@@ -10157,6 +10157,90 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[10].m_ActionName
       value: UI/Pause[/Keyboard/escape,/Keyboard/minus]
       objectReference: {fileID: 0}
+    - target: {fileID: 7434938175993982800, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938175993982800, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938175993982800, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938175993982800, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938176329610955, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938176329610955, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938176329610955, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938176329610955, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938176651898272, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938176651898272, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938176651898272, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938176651898272, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177112394902, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177288596465, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177288596465, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177288596465, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177288596465, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177688118997, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177688118997, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177688118997, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434938177688118997, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8178445539166235801, guid: 2d6977aeaf669ff46bc0a308e9027416, type: 3}
       propertyPath: m_enableKerning
       value: 0

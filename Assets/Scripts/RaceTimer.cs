@@ -234,6 +234,11 @@ public class RaceTimer : MonoBehaviour
             scoreboard.transform.GetChild(1).gameObject.SetActive(false);
         }
 
+        EnableNextRace();
+    }
+
+    public void EnableNextRace()
+    {
         foreach (RaceTimer rT in FindObjectsOfType<RaceTimer>())
         {
             rT.time = 0;

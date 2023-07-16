@@ -30,11 +30,11 @@ Current features :
       - Checkpoint and Lap systems
       - Possible shortcuts and an out of bound area
       - AI Opponents
+      - AI difficulty : Custom vehicles and item usage
       - Randomized items 
       
 To do features :
 
-  - Finish the Tournament Mode, 75% done
-  - AI difficulty
-  - Energy Systems mechanics - Optional for now
+  - Finish the Grand Prize Mode, 95% done
+  - Energy Systems mechanics - Optional
   

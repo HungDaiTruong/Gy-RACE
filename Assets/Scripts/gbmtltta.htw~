@@ -9,7 +9,6 @@ public class PlayerNavMesh : MonoBehaviour
     private PlayerLapper playerLapper;
     private VehicleComponentHandler vehicleComponentHandler;
     private PlayerLocomotion playerLocomotion;
-    private PlayerItem playerItem;
 
     [SerializeField]
     private Transform movePositionTransform;
@@ -27,8 +26,6 @@ public class PlayerNavMesh : MonoBehaviour
     private Rigidbody rb;
     private float currentSpeed;
 
-    private float delay = 5f;
-
     private void Awake()
     {
         checkpointScript = FindObjectOfType<CheckpointScript>();
@@ -37,7 +34,6 @@ public class PlayerNavMesh : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         vehicleComponentHandler = GetComponent<VehicleComponentHandler>();
-        playerItem = GetComponent<PlayerItem>();
     }
 
     private void Start()
@@ -46,9 +42,6 @@ public class PlayerNavMesh : MonoBehaviour
         RandomizeAIComponents(MenuController.difficultySelected);
         // Spawns the AI at a certain location behind the first Checkpoint
         SpawnNavMeshes();
-
-        // Random Item Usage
-        Invoke(nameof(AIUseItem), delay);
     }
 
     // Update is called once per frame
@@ -82,11 +75,6 @@ public class PlayerNavMesh : MonoBehaviour
 
     private void Move()
     {
-        if (maxSpeed != playerLocomotion.maxSpeed)
-        {
-            maxSpeed = playerLocomotion.maxSpeed;
-        }
-
         // Calculate desired velocity
         Vector3 desiredVelocity = (navMeshAgent.steeringTarget - transform.position).normalized * maxSpeed;
 
@@ -238,15 +226,5 @@ public class PlayerNavMesh : MonoBehaviour
 
         navMeshAgent.acceleration = acceleration;
         navMeshAgent.angularSpeed = handling * 2f;
-    }
-
-    void AIUseItem()
-    {
-        delay = Random.Range(3f, 6f);
-
-        playerItem.UseItem();
-
-        // Trigger the invokation of the next recursive call
-        Invoke(nameof(AIUseItem), delay);
     }
 }
