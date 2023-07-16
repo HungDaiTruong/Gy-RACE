@@ -21,14 +21,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Disables all but the selected racing circuit for the Time Trial Mode
         if (MenuController.modeSelected == "TT")
         {
-            GameObject chosenCircuit = GameObject.Find(MenuController.mapSelected);
-            foreach (Transform t in circuitGroup.transform)
-            {
-                t.gameObject.SetActive(t.gameObject == chosenCircuit);
-            }
+            ActivateTTCircuit();
         }
         else if (MenuController.modeSelected == "GP")
         {
@@ -126,11 +121,40 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Activate the first circuit in the list
     public void ActivateGPCircuit()
     {
         foreach (Transform t in circuitGroup.transform)
         {
             t.gameObject.SetActive(t.GetSiblingIndex() == currentCircuit);
+        }
+    }
+
+    // Activates the chosen circuit, deactivate the AIs or not, deactivate the Item Boxes
+    public void ActivateTTCircuit()
+    {
+        GameObject chosenCircuit = GameObject.Find(MenuController.mapSelected);
+        foreach (Transform t in circuitGroup.transform)
+        {
+            t.gameObject.SetActive(t.gameObject == chosenCircuit);
+        }
+
+        if (!MenuController.hasItems)
+        {
+            ItemBox[] allItemBoxes = FindObjectsOfType<ItemBox>();
+            foreach (ItemBox iB in allItemBoxes)
+            {
+                Destroy(iB.gameObject);
+            }
+        }
+
+        if (!MenuController.hasBots)
+        {
+            PlayerNavMesh[] allBots = FindObjectsOfType<PlayerNavMesh>();
+            foreach (PlayerNavMesh pNM in allBots)
+            {
+                Destroy(pNM.gameObject);
+            }
         }
     }
 }

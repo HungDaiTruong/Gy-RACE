@@ -242,6 +242,18 @@ MonoBehaviour:
     m_Localized: Next Race
     m_Metadata:
       m_Items: []
+  - m_Id: 2903511393071104
+    m_Localized: With Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903566577528832
+    m_Localized: Without Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909884935794688
+    m_Localized: With Bots And Items
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -241,6 +241,18 @@ MonoBehaviour:
     m_Key: Next Race
     m_Metadata:
       m_Items: []
+  - m_Id: 2903511393071104
+    m_Key: With Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903566577528832
+    m_Key: Without Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909884935794688
+    m_Key: With Bots And Items
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

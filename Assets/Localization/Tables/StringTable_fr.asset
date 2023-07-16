@@ -242,6 +242,18 @@ MonoBehaviour:
     m_Localized: Course Suivante
     m_Metadata:
       m_Items: []
+  - m_Id: 2903511393071104
+    m_Localized: Avec Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2903566577528832
+    m_Localized: Sans Bots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909884935794688
+    m_Localized: Avec Bots Et Objets
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
