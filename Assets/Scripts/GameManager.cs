@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private bool pauseInput;
     private bool paused = false;
 
+    public int currentCircuit = 0;
+
     private void Awake()
     {
         // Disables all but the selected racing circuit for the Time Trial Mode
@@ -30,10 +32,7 @@ public class GameManager : MonoBehaviour
         }
         else if (MenuController.modeSelected == "GP")
         {
-            foreach (Transform t in circuitGroup.transform)
-            {
-                t.gameObject.SetActive(t.gameObject.name == "Mondza");
-            }
+            ActivateGPCircuit();
         }
 
         DestroyItems();
@@ -118,12 +117,20 @@ public class GameManager : MonoBehaviour
         menuOption.transform.GetChild(1).gameObject.SetActive(true);
     }
 
-    private void DestroyItems()
+    public void DestroyItems()
     {
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         foreach (GameObject item in items)
         {
             Destroy(item);
+        }
+    }
+
+    public void ActivateGPCircuit()
+    {
+        foreach (Transform t in circuitGroup.transform)
+        {
+            t.gameObject.SetActive(t.GetSiblingIndex() == currentCircuit);
         }
     }
 }

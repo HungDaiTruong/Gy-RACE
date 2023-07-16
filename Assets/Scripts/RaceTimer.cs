@@ -16,6 +16,7 @@ public class RaceTimer : MonoBehaviour
     public TMP_Text speedText;
     public GameObject scoreboard;
 
+    private GameManager gameManager;
     private PlayerLocomotion playerLocomotion;
     private PlayerLapper playerLapper;
     [SerializeField]
@@ -36,6 +37,16 @@ public class RaceTimer : MonoBehaviour
         timerText.fontSize = 16;
 
         playerLapper = transform.parent.GetComponent<PlayerLapper>();
+        gameManager = FindObjectOfType<GameManager>();
+
+        if (MenuController.modeSelected == "GP")
+        {
+            scoreboard.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else if (MenuController.modeSelected == "TT")
+        {
+            scoreboard.transform.GetChild(1).gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -66,7 +77,6 @@ public class RaceTimer : MonoBehaviour
                     break;
                 }
             }
-            //GameIsDone();
 
             if(allFinished)
             {
@@ -202,5 +212,29 @@ public class RaceTimer : MonoBehaviour
         playerLapper.lap = 1;
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuScene");
+    }
+
+    public void NextRace()
+    {
+        if(!gameManager)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+        }
+
+        gameManager.currentCircuit++;
+        gameManager.DestroyItems();
+        gameManager.ActivateGPCircuit();
+
+        foreach (RaceTimer rT in FindObjectsOfType<RaceTimer>())
+        {
+            rT.time = 0;
+            rT.scoreboard.SetActive(false);
+            rT.playerLapper.checkpointIndex = 0;
+            rT.playerLapper.lap = 1;
+            rT.playerLocomotion.OnEnable();
+        }
+
+        Time.timeScale = 1;
+        GameManager.isPlayable = true;
     }
 }

@@ -30,8 +30,8 @@ Current features :
       
 To do features :
 
-  - Organize the Time Trial and Tournament modes
+  - Organize the Time Trial and Tournament modes - Time Trial 90% done, Tournament 50% done
   - AI difficulty
-  - Finish the Options screen
-  - Energy Systems mechanics
+  - Finish the Options screen - Controls (optional)
+  - Energy Systems mechanics - Optional
   

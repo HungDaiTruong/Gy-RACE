@@ -238,6 +238,10 @@ MonoBehaviour:
     m_Localized: Moyenne
     m_Metadata:
       m_Items: []
+  - m_Id: 2655165105532928
+    m_Localized: Course Suivante
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
