@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class CheckpointLayer : EditorWindow
+public class ObjectLayer : EditorWindow
 {
     private bool canPlaceObject;
     private float setDistance = 0f;
@@ -16,10 +16,10 @@ public class CheckpointLayer : EditorWindow
     private GameObject objectToSet;
 
     private string objectLabel = "None";
-    [MenuItem("Window/CheckpointLayer")]
+    [MenuItem("Window/ObjectLayer")]
     public static void ShowWindow()
     {
-        GetWindow<CheckpointLayer>();
+        GetWindow<ObjectLayer>();
     }
 
     private void OnEnable()

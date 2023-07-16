@@ -698,6 +698,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1990488497614739836, guid: b1ed6a139048ea64da598f104a18b643, type: 3}
+      propertyPath: isUsedInGP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1990488497614739836, guid: b1ed6a139048ea64da598f104a18b643, type: 3}
+      propertyPath: forPlayerOne
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1990488497614739836, guid: b1ed6a139048ea64da598f104a18b643, type: 3}
+      propertyPath: forPlayerOneGP
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1990488498049517183, guid: b1ed6a139048ea64da598f104a18b643, type: 3}
       propertyPath: m_SizeDelta.y
       value: -120.19876
@@ -3071,6 +3083,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5095590122206084338, guid: a066cfa8e2f00d94694167982fb399b9, type: 3}
+      propertyPath: isUsedInGP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095590122206084338, guid: a066cfa8e2f00d94694167982fb399b9, type: 3}
+      propertyPath: forPlayerTwo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095590122206084338, guid: a066cfa8e2f00d94694167982fb399b9, type: 3}
+      propertyPath: forPlayerTwoGP
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a066cfa8e2f00d94694167982fb399b9, type: 3}
 --- !u!224 &1806769333 stripped
@@ -3975,6 +3999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseCanvas: {fileID: 1724500363}
   circuitGroup: {fileID: 1178510632}
+  currentCircuit: 0
 --- !u!4 &543450652053564281 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9184733362506283580, guid: e9c0f04a4f3f5a3458052ecb722fa6f8, type: 3}

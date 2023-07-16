@@ -18,6 +18,7 @@ public class RaceTimer : MonoBehaviour
 
     private GameManager gameManager;
     private PlayerLocomotion playerLocomotion;
+    private PlayerItem playerItem;
     private PlayerLapper playerLapper;
     [SerializeField]
     private PlayerLapper[] playerLappers;
@@ -27,6 +28,7 @@ public class RaceTimer : MonoBehaviour
     private void Awake()
     {
         playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+        playerItem = GetComponentInParent<PlayerItem>();
     }
 
     // Start is called before the first frame update
@@ -52,8 +54,11 @@ public class RaceTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerLappers = FindObjectsOfType<PlayerLapper>();
-        raceTimers = FindObjectsOfType<RaceTimer>();
+        if (playerLappers.Length.Equals(0) || raceTimers.Length.Equals(0))
+        {
+            playerLappers = FindObjectsOfType<PlayerLapper>();
+            raceTimers = FindObjectsOfType<RaceTimer>();
+        }
 
         // Ends when the 4th lap is starting, for a total of 3 laps
         if (timerOn && !(playerLapper.lap >= 4 /*&& playerLapper.checkpointIndex == 0*/))
@@ -220,10 +225,14 @@ public class RaceTimer : MonoBehaviour
         {
             gameManager = FindObjectOfType<GameManager>();
         }
-
+        
         gameManager.currentCircuit++;
         gameManager.DestroyItems();
         gameManager.ActivateGPCircuit();
+        if(gameManager.currentCircuit == 4)
+        {
+            scoreboard.transform.GetChild(1).gameObject.SetActive(false);
+        }
 
         foreach (RaceTimer rT in FindObjectsOfType<RaceTimer>())
         {
@@ -231,6 +240,9 @@ public class RaceTimer : MonoBehaviour
             rT.scoreboard.SetActive(false);
             rT.playerLapper.checkpointIndex = 0;
             rT.playerLapper.lap = 1;
+            rT.playerItem.ClearItems();
+            rT.playerLocomotion.currentSpeed = 0;
+            rT.playerLocomotion.energy = rT.playerLocomotion.energyCapacity;
             rT.playerLocomotion.OnEnable();
         }
 
