@@ -20,7 +20,7 @@ public class PlayerLocomotion : MonoBehaviour
     private PlayerItem playerItem;
 
     private PlayerControls inputActions;
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     [Header("Vehicle Stats")]
     [SerializeField]
@@ -71,6 +71,8 @@ public class PlayerLocomotion : MonoBehaviour
     [Header("Vehicle Status")]
     [SerializeField]
     private bool isGrounded;
+    [SerializeField]
+    private float lastGroundedTime;
     [SerializeField]
     public bool isSlowed;
     [SerializeField]
@@ -290,12 +292,20 @@ public class PlayerLocomotion : MonoBehaviour
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.up * 2, hit.normal) * transform.rotation, 7.5f * Time.deltaTime);
             isGrounded = true;
+            lastGroundedTime = Time.time; // Update the last grounded time
         }
         // Else if the vehicle is airborne, then rotate the vehicle back to the vertical global axis
         else
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.up * 2, Vector3.up) * transform.rotation, 3f * Time.deltaTime);
             isGrounded = false;
+
+            // Check if the vehicle hasn't been grounded for X seconds
+            if (Time.time - lastGroundedTime >= 6f && FindObjectOfType<OutOfBounds>() != null)
+            {
+                lastGroundedTime = Time.time;
+                FindObjectOfType<OutOfBounds>().OnTriggerEnter(GetComponent<Collider>());
+            }
         }
         //Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0f), -transform.up, Color.red, 10f);
     }
@@ -313,7 +323,7 @@ public class PlayerLocomotion : MonoBehaviour
             yield return new WaitForSeconds(duration);
 
             isSlowed = false;
-            maxSpeed *= 2f;
+            maxSpeed = (int)wheelComponentHandler.speed;
         }
     }
 

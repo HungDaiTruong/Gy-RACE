@@ -28,6 +28,7 @@ public class OutOfBounds : MonoBehaviour
 
             playerLocomotion.realSpeed /= 2f;
             playerLocomotion.currentSpeed /= 2f;
+            playerLocomotion.rb.velocity = Vector3.zero;
         }
     }
 }

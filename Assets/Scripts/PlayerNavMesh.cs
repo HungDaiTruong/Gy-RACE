@@ -82,9 +82,9 @@ public class PlayerNavMesh : MonoBehaviour
 
     private void Move()
     {
-        if (maxSpeed != playerLocomotion.maxSpeed)
+        if (maxSpeed != playerLocomotion.maxSpeed * 0.65f)
         {
-            maxSpeed = playerLocomotion.maxSpeed;
+            maxSpeed = playerLocomotion.maxSpeed * 0.65f;
         }
 
         // Calculate desired velocity
@@ -232,7 +232,7 @@ public class PlayerNavMesh : MonoBehaviour
         }
 
         playerLocomotion.ApplyStats();
-        maxSpeed = playerLocomotion.maxSpeed;
+        maxSpeed = playerLocomotion.maxSpeed * 0.65f;
         acceleration = playerLocomotion.acceleration;
         handling = playerLocomotion.handling;
 
