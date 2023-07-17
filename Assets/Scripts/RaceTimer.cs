@@ -14,16 +14,21 @@ public class RaceTimer : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text scoreText;
     public TMP_Text speedText;
+    public TMP_Text rankingText;
     public GameObject scoreboard;
 
     private GameManager gameManager;
     private PlayerLocomotion playerLocomotion;
     private PlayerItem playerItem;
+    [SerializeField]
+    private CheckpointScript checkpointScript;
     private PlayerLapper playerLapper;
     [SerializeField]
     private PlayerLapper[] playerLappers;
     [SerializeField]
     private RaceTimer[] raceTimers;
+
+    private float distanceToNextCheckpoint;
 
     private void Awake()
     {
@@ -40,6 +45,7 @@ public class RaceTimer : MonoBehaviour
 
         playerLapper = transform.parent.GetComponent<PlayerLapper>();
         gameManager = FindObjectOfType<GameManager>();
+        checkpointScript = FindObjectOfType<CheckpointScript>();
 
         if (MenuController.modeSelected == "GP")
         {
@@ -59,6 +65,13 @@ public class RaceTimer : MonoBehaviour
             playerLappers = FindObjectsOfType<PlayerLapper>();
             raceTimers = FindObjectsOfType<RaceTimer>();
         }
+
+        if (checkpointScript == null)
+        {
+            checkpointScript = FindObjectOfType<CheckpointScript>();
+        }
+        distanceToNextCheckpoint = Vector3.Distance(transform.parent.position, checkpointScript.collectionObject.transform.GetChild((playerLapper.checkpointIndex + 1) % CheckpointScript.checkpointNumber).position);
+        rankingText.text = Ranking() + "/" + playerLappers.Length;
 
         // Ends when the 4th lap is starting, for a total of 3 laps
         if (timerOn && !(playerLapper.lap >= 4 /*&& playerLapper.checkpointIndex == 0*/))
@@ -219,6 +232,60 @@ public class RaceTimer : MonoBehaviour
         SceneManager.LoadScene("MenuScene");
     }
 
+    // Method to calculate the rank of the current GameObject
+    public int Ranking()
+    {
+        // Get the current player's lap, checkpoint index, and distance to next checkpoint
+        int currentPlayerLap = playerLapper.lap;
+        int currentPlayerCheckpointIndex = playerLapper.checkpointIndex;
+        float currentPlayerDistanceToNextCheckpoint = distanceToNextCheckpoint;
+
+        // Counter for keeping track of players with higher rank
+        int higherRankCount = 0;
+
+        // Compare the current player's rank with other players
+        for (int i = 0; i < playerLappers.Length; i++)
+        {
+            // Skip comparing with itself
+            if (playerLappers[i] == playerLapper)
+            {
+                continue;
+            }
+
+            // Compare the lap
+            if (playerLappers[i].lap > currentPlayerLap)
+            {
+                higherRankCount++;
+                continue;
+            }
+            else if (playerLappers[i].lap < currentPlayerLap)
+            {
+                continue;
+            }
+
+            // Compare the checkpoint index
+            if (playerLappers[i].checkpointIndex > currentPlayerCheckpointIndex)
+            {
+                higherRankCount++;
+                continue;
+            }
+            else if (playerLappers[i].checkpointIndex < currentPlayerCheckpointIndex)
+            {
+                continue;
+            }
+
+            // Compare the distance to next checkpoint
+            if (raceTimers[i].distanceToNextCheckpoint < currentPlayerDistanceToNextCheckpoint)
+            {
+                higherRankCount++;
+                continue;
+            }
+        }
+
+        // Return the overall rank of the current player
+        return higherRankCount + 1;
+    }
+
     public void NextRace()
     {
         if(!gameManager)
@@ -249,6 +316,7 @@ public class RaceTimer : MonoBehaviour
             rT.playerLocomotion.currentSpeed = 0;
             rT.playerLocomotion.energy = rT.playerLocomotion.energyCapacity;
             rT.playerLocomotion.OnEnable();
+            rT.checkpointScript = null;
         }
 
         Time.timeScale = 1;
