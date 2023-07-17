@@ -301,7 +301,7 @@ public class PlayerLocomotion : MonoBehaviour
             isGrounded = false;
 
             // Check if the vehicle hasn't been grounded for X seconds
-            if (Time.time - lastGroundedTime >= 6f && FindObjectOfType<OutOfBounds>() != null)
+            if (Time.time - lastGroundedTime >= 5f && FindObjectOfType<OutOfBounds>() != null)
             {
                 lastGroundedTime = Time.time;
                 FindObjectOfType<OutOfBounds>().OnTriggerEnter(GetComponent<Collider>());

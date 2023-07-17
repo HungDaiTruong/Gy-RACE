@@ -110,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b772fb447e9fa439a74b06f0021cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 4
+  duration: 5
   itemImage: {fileID: 21300000, guid: 6576025a1ef4f16488805806d5d4867d, type: 3}
