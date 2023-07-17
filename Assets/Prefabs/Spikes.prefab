@@ -111,6 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa7d9d5c4d5d5d4db7a805ec1258037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 600
+  duration: 90
   itemImage: {fileID: 21300000, guid: b0a65e384dff55b489f428b8fb56fd8a, type: 3}
   slowDuration: 4
