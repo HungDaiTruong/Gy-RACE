@@ -66,6 +66,11 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private bool isTurboing;
 
+    [SerializeField]
+    private float skippingInput1;
+    [SerializeField]
+    private float skippingInput2;
+
     [Space(10)]
 
     [Header("Vehicle Status")]
@@ -77,6 +82,8 @@ public class PlayerLocomotion : MonoBehaviour
     public bool isSlowed;
     [SerializeField]
     public bool isShielded;
+    [SerializeField]
+    public bool isSkipping;
 
     public void OnEnable()
     {
@@ -116,7 +123,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void Update()
     {
         // The Player 1 uses ZQSD Shift on default
-        if(gameObject.tag == "Player")
+        if(gameObject.CompareTag("Player"))
         {
             movementInput = inputActions.Player.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player.Drift.ReadValue<float>();
@@ -126,7 +133,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
         // The Player 2 uses ARROWS LeftCtrl on default
-        if (gameObject.tag == "Player2")
+        if (gameObject.CompareTag("Player2"))
         {
             movementInput = inputActions.Player2.Movement.ReadValue<Vector2>();
             driftInput = inputActions.Player2.Drift.ReadValue<float>();
@@ -136,11 +143,23 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
         ItemHandler();
+
+        skippingInput1 = inputActions.UI.Skip1.ReadValue<float>();
+        skippingInput2 = inputActions.UI.Skip2.ReadValue<float>();
+
+        if(skippingInput1 > 0 && skippingInput2 > 0 && (CompareTag("Player") || CompareTag("Player2")))
+        {
+            isSkipping = true;
+        }
+        else
+        {
+            isSkipping = false;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (gameObject.tag != "AI")
+        if (!gameObject.CompareTag("AI"))
         {
             Move();
             Steer();
