@@ -339,6 +339,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip1"",
+                    ""type"": ""Button"",
+                    ""id"": ""868e291f-bf98-4926-9554-92ec905c2f29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip2"",
+                    ""type"": ""Button"",
+                    ""id"": ""f05c25ba-01a9-4c65-8523-5f04d3d32c71"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -361,6 +379,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce116a27-57c4-45ab-9c5f-8c36192f0313"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39a88379-b3ad-4fef-b8fc-aa8c5aba6321"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -386,6 +426,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
+        m_UI_Skip1 = m_UI.FindAction("Skip1", throwIfNotFound: true);
+        m_UI_Skip2 = m_UI.FindAction("Skip2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -604,11 +646,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Pause;
+    private readonly InputAction m_UI_Skip1;
+    private readonly InputAction m_UI_Skip2;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
+        public InputAction @Skip1 => m_Wrapper.m_UI_Skip1;
+        public InputAction @Skip2 => m_Wrapper.m_UI_Skip2;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -621,6 +667,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Skip1.started += instance.OnSkip1;
+            @Skip1.performed += instance.OnSkip1;
+            @Skip1.canceled += instance.OnSkip1;
+            @Skip2.started += instance.OnSkip2;
+            @Skip2.performed += instance.OnSkip2;
+            @Skip2.canceled += instance.OnSkip2;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -628,6 +680,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Skip1.started -= instance.OnSkip1;
+            @Skip1.performed -= instance.OnSkip1;
+            @Skip1.canceled -= instance.OnSkip1;
+            @Skip2.started -= instance.OnSkip2;
+            @Skip2.performed -= instance.OnSkip2;
+            @Skip2.canceled -= instance.OnSkip2;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -664,5 +722,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         void OnPause(InputAction.CallbackContext context);
+        void OnSkip1(InputAction.CallbackContext context);
+        void OnSkip2(InputAction.CallbackContext context);
     }
 }

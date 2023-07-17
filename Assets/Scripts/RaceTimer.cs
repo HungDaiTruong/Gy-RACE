@@ -60,6 +60,11 @@ public class RaceTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerLocomotion.isSkipping)
+        {
+            GameIsDone();
+        }
+
         if (playerLappers.Length.Equals(0) || raceTimers.Length.Equals(0))
         {
             playerLappers = FindObjectsOfType<PlayerLapper>();
