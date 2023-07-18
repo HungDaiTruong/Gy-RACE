@@ -204,7 +204,13 @@ public class RaceTimer : MonoBehaviour
         Time.timeScale = 0;
         GameManager.isPlayable = false;
 
-        string filePath = "Assets/TextSite/Score.txt"; // Chemin du fichier texte
+        string filePath;
+
+        #if UNITY_EDITOR
+            filePath = "Assets/TextSite/Score.txt"; // Editor file path
+        #else
+            filePath = Application.persistentDataPath + "/Score.txt"; // Build file path
+        #endif
 
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
@@ -213,7 +219,7 @@ public class RaceTimer : MonoBehaviour
                 string nom = raceTimer.transform.parent.gameObject.name;
                 float temps = raceTimer.time;
 
-                string tempsFormate = FormatTemps(temps); // Appel de la méthode pour formater le temps
+                string tempsFormate = FormatTemps(temps); // Call the method to format the time
 
                 writer.WriteLine(nom + " " + tempsFormate);
             }
