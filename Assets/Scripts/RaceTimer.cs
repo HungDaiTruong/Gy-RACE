@@ -206,13 +206,21 @@ public class RaceTimer : MonoBehaviour
 
         string filePath;
 
-        #if UNITY_EDITOR
+    #if UNITY_EDITOR
             filePath = "Assets/TextSite/Score.txt"; // Editor file path
-        #else
-            filePath = Application.persistentDataPath + "/Score.txt"; // Build file path
-        #endif
+    #else
+        filePath = Path.Combine(Application.persistentDataPath, "Score.txt"); // Build file path
+    #endif
+
+    #if UNITY_EDITOR
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+    #else
+        // Copy the file to a writable location
+        string sourceFilePath = Path.Combine(Application.streamingAssetsPath, "Score.txt");
+        File.Copy(sourceFilePath, filePath, true);
 
         using (StreamWriter writer = new StreamWriter(filePath, true))
+    #endif
         {
             foreach (RaceTimer raceTimer in raceTimers)
             {
